@@ -1,0 +1,44 @@
+{
+    "products": [
+      {
+        "id": "2",
+        "name": "Computer",
+        "price": 10300,
+        "quantity": 700,
+        "selected": false,
+        "available": true
+      },
+      {
+        "id": "b55e",
+        "name": "test",
+        "price": 0,
+        "quantity": 0,
+        "available": true,
+        "selected": false
+      },
+      {
+        "id": "9909",
+        "name": "test",
+        "price": 0,
+        "quantity": 0,
+        "available": true,
+        "selected": true
+      },
+      {
+        "id": "122a",
+        "name": "uhiu",
+        "price": 0,
+        "quantity": 0,
+        "available": true,
+        "selected": true
+      },
+      {
+        "id": "4764",
+        "name": "mouad",
+        "price": 0,
+        "quantity": 0,
+        "available": true,
+        "selected": true
+      }
+    ]
+  }

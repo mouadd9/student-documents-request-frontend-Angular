@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently \"json-server --watch db.json\" \"ng serve\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -20,7 +20,16 @@
     "@angular/router": "^18.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.3"
+    "zone.js": "~0.14.3",
+    "@ngrx/effects": "^18.1.1",
+    "@ngrx/store": "^18.1.1",
+    "@ngrx/store-devtools": "^18.1.1",
+    "bootstrap": "^5.3.3",
+    "concurrently": "^9.0.1",
+    "font-awesome": "^4.7.0",
+    "http-proxy-middleware": "^3.0.3",
+    "jquery": "^3.7.1",
+    "json-server": "^1.0.0-beta.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.1.1",
@@ -33,6 +42,8 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.5.2"
+    "typescript": "~5.5.2",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20"
   }
 }
