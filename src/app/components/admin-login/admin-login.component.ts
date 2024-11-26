@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './admin-login.component.css'
 })
 export class AdminLoginComponent {
-
+// ici on utilise le service d'authentification 
 }
