@@ -8,6 +8,7 @@ export interface Reclamation {
   description: string; // Description de la réclamation
   status?: ReclamationStatus; // Statut de la réclamation
   submissionDate?: Date; 
+  response?: string; // the response from the admin
 
 // in case we are fetching the demandes related to the student then associating a reclamation to a demande
 // then well need a dropdown that shows all demandes 

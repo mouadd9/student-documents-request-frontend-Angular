@@ -1,10 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Reclamation } from '../models/reclamation';
+import { environment } from '../environments/environment.dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReclamationService {
+  private host: string = environment.backendHost;
 
   constructor(private http: HttpClient) { }
 
@@ -12,8 +16,23 @@ export class ReclamationService {
  // here we will send the following requests : 
   // - POST a reclamation (response : error , success) , saveReclamationAsync()
   // - GET all demandes ,fetchReclamationsAsync()
+  // - UPDATE a reclamation by adding a response
 
-  
+  public saveReclamationAsync(reclamation: Reclamation): Observable<Reclamation> {
+    return this.http.post<Reclamation>(this.host + "/reclamations", reclamation);
+  }
+  public updateReclamationAsync(reclamation: Reclamation): Observable<Reclamation> {
+    return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, reclamation);
+
+    // return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, reclamation.response);
+  }
+
+  public fetchAllReclamations() : Observable<Reclamation[]> {
+    return this.http.get<Reclamation[]>(this.host + "/reclamations" );
+
+  }
+
+
 
 
 }
