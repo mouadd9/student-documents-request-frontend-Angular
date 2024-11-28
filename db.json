@@ -20,7 +20,7 @@
       "cin": "AB123456",
       "apogeeNumber": "20180001",
       "documentType": "Attestation",
-      "status": "Pending",
+      "status": "Validated",
       "submissionDate": "2024-11-28"
     },
     {
@@ -40,6 +40,15 @@
       "documentType": "ReleveNotes",
       "status": "Refused",
       "submissionDate": "2024-11-26"
+    },
+    {
+      "id": "7",
+      "email": "student1@example.com",
+      "cin": "AB123456",
+      "apogeeNumber": "20180001",
+      "documentType": "Attestation",
+      "status": "Pending",
+      "submissionDate": "2024-11-28"
     }
   ],
   "reclamations": [
