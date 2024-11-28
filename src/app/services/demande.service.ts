@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class DemandeService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  // here we will send the following requests : 
+  // - POST a demande (response : error , success)
+  // - GET all demandes 
+  // - UPDATE : validate a demande (response : error , success)
+  // - UPDATE : refuse a demande (response : error , success)
+
 }

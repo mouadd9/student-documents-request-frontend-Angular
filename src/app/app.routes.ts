@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes} from '@angular/router';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { StudentComponent } from './components/student/student.component';
@@ -27,7 +26,7 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
 // "/admin/dashboard"
 // "/admin/demandes"
 
-const routes: Routes = [
+export const routes: Routes = [
   // lvl 1 home-login-student-admin are dynamic within AppComponent
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // blank URL
   { path: 'home', component: LandingPageComponent },
@@ -51,9 +50,3 @@ const routes: Routes = [
     ],
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
