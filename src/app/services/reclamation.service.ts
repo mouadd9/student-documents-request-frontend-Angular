@@ -21,10 +21,11 @@ export class ReclamationService {
   public saveReclamationAsync(reclamation: Reclamation): Observable<Reclamation> {
     return this.http.post<Reclamation>(this.host + "/reclamations", reclamation);
   }
-  public updateReclamationAsync(reclamation: Reclamation): Observable<Reclamation> {
-    return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, reclamation);
+  public updateReclamationAsync(reclamation: Reclamation ,response: string ): Observable<Reclamation> {
+    let updatedReclamation = {...reclamation, response: response};
+    return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, updatedReclamation);
 
-    // return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, reclamation.response);
+    // return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, response);
   }
 
   public fetchAllReclamations() : Observable<Reclamation[]> {
