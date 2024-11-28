@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
 import { StudentComponent } from './components/student/student.component';
 import { DemandeComponent } from './components/student/demande/demande.component';
 import { ReclamationComponent } from './components/student/reclamation/reclamation.component';
@@ -16,7 +15,9 @@ import { DemandesComponent } from './components/admin/demandes/demandes.componen
 import { DemandesListComponent } from './components/admin/demandes/demandes-list/demandes-list.component';
 import { DemandesNavBarComponent } from './components/admin/demandes/demandes-nav-bar/demandes-nav-bar.component';
 import { DemandeItemComponent } from './components/admin/demandes/demandes-list/demande-item/demande-item.component';
-import { RouterModule } from '@angular/router';
+import { provideRouter, RouterModule } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { routes } from './app.routes';
 
 
 @NgModule({
@@ -44,10 +45,12 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-    // other modules
+    RouterModule // this provides : <router-outlet></router-outlet> [routerLink] .....
   ],
-  providers: [], // Providing the service here
+  providers: [
+    provideHttpClient(), // this provides the httpClient service that will be injected to our services
+    provideRouter(routes) // this provides routes for the RouterModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
