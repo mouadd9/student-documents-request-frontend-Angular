@@ -18,6 +18,10 @@ import { DemandeItemComponent } from './components/admin/demandes/demandes-list/
 import { provideRouter, RouterModule } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
+import { StoreModule } from '@ngrx/store';
+import { demandeReducer } from './state/demandes-feature/demandes.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { DemandesEffects } from './state/demandes-feature/demandes.effects';
 
 
 @NgModule({
@@ -45,7 +49,16 @@ import { routes } from './app.routes';
   ],
   imports: [
     BrowserModule,
-    RouterModule // this provides : <router-outlet></router-outlet> [routerLink] .....
+    RouterModule, // this provides : <router-outlet></router-outlet> [routerLink] .....
+    StoreModule.forRoot({
+      demandes: demandeReducer, 
+      //reclamations: reclamationsReducer
+    }),
+    EffectsModule.forRoot([
+      DemandesEffects,
+      // ReclamationsEffects
+    ])
+  
   ],
   providers: [
     provideHttpClient(), // this provides the httpClient service that will be injected to our services
@@ -54,3 +67,34 @@ import { routes } from './app.routes';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
+
+// When the store is initialized, it creates an empty object for the global state.
+    // each registered reducer provides the store with an initial slice of state
+    /*store : 
+     {
+      demandes : {demandes: [], demandesState : state.INITIAL, errorMessage : "" }, // this is modified via its reducer , each time an action is dispatched we change this 
+      reclamations : {reclamations: [], reclamationsState : state.INITIAL, errorMessage : "" } // this is modified via its reducer
+     } 
+    */
+
+// Redux : 
+/*
+When an action is dispatched the following happens : 
+  - teh action is broadcasted to all reducers 
+  - each reducers passes the action and the current state in its parameters
+  - the reducer uses the dispatched action , and uses teh current state, each reducer is mapped to a slice of state 
+  - that slice of state in the store provides the reducer with the current state 
+
+*/
+
+/*
+so we should do the following : 
+ - we create reducers
+ - associate them to specific slices of state (the state affected by the reducer)
+ - declare an initial state in the reducer and pass it 
+ - and then create logic of how the state will change depending on the action types dispatched
+
+*/

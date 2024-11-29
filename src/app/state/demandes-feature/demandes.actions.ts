@@ -14,9 +14,7 @@ export const DemandeActions = createActionGroup({
 
         // 1 - actions related to getting demandes from the backend 
         fetchDemandes: emptyProps(),
-        // the action of type fetchDemandesSuccess will have a payload of type Demande[]
         fetchDemandesSuccess: props<{payload: Demande[]}>(), 
-        // the action of type fetchDemandesError will have a payload that will carry an error message
         fetchDemandesError: props<{payload: string}>(),
 
         // 2 - actions related to submitting a new demand 
@@ -28,6 +26,7 @@ export const DemandeActions = createActionGroup({
         validateDemande: props<{payload : Demande}>(),
         validateDemandeSuccess: props<{payload: Demande}>(),
         validateDemandeError: props<{payload: string}>(),
+        
         // 4 - actions related to refusing a demand
         refuseDemande: props<{payload: Demande}>(),
         refuseDemandeSuccess: props<{payload: Demande}>(),

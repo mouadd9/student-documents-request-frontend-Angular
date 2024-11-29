@@ -1,3 +1,4 @@
+import { Action } from "@ngrx/store";
 import { Demande } from "../../models/demande";
 import { STATE } from "../state";
 import { DemandeActions } from "./demandes.actions";
@@ -11,7 +12,7 @@ import { initialDemandeState } from "./demandes.state"
 // then the store will pass current state 
 export function demandeReducer(
     demandeState: demandeState = initialDemandeState, 
-    action: any
+    action: Action
  ): demandeState {
 
     // depending on the action.type we return a new state
@@ -25,12 +26,12 @@ export function demandeReducer(
 
        }
        case DemandeActions.fetchDemandesSuccess.type : {
-        return {...demandeState, demandeState : STATE.loaded, demandes : action.payload};
+        return {...demandeState, demandeState : STATE.loaded, demandes : (action as any).payload};
        }
 
        // if an action of type fetch demande error is dispatched, that action's payload contains the errormessage
        case DemandeActions.fetchDemandesError.type : {
-        return {...demandeState, demandeState : STATE.error, errorMessage : action.payload};
+        return {...demandeState, demandeState : STATE.error, errorMessage : (action as any).payload};
 
        }
 
@@ -42,12 +43,12 @@ export function demandeReducer(
        }
        case DemandeActions.saveDemandeSuccess.type: {
         // here will push the new demande recieved into the demandes array using the spread operator
-        return {...demandeState, demandeState : STATE.loaded , demandes: [action.payload,...demandeState.demandes]}
+        return {...demandeState, demandeState : STATE.loaded , demandes: [(action as any).payload,...demandeState.demandes]}
        }
 
        case DemandeActions.saveDemandeError.type: {
         // here will push the new demande recieved into the demandes array using the spread operator
-        return {...demandeState, demandeState : STATE.error , errorMessage: action.payload}
+        return {...demandeState, demandeState : STATE.error , errorMessage: (action as any).payload}
        }
 
        default: {
