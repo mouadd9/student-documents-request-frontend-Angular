@@ -20,7 +20,7 @@ export class ReclamationService {
 
   public saveReclamationAsync(reclamation: Reclamation): Observable<Reclamation> {
     return this.http.post<Reclamation>(this.host + "/reclamations", reclamation);
-  }
+  } // effects will use this Async Method when an action of type sendReclamation is dispatched 
   public updateReclamationAsync(reclamation: Reclamation ,response: string ): Observable<Reclamation> {
     let updatedReclamation = {...reclamation, response: response};
     return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, updatedReclamation);

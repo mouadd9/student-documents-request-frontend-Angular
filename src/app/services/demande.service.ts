@@ -20,7 +20,7 @@ export class DemandeService {
 
   public saveDemandeAsync(demande: Demande): Observable<Demande> {
     return this.http.post<Demande>(this.host +"/demandes", demande);
-  }
+  } // Effect will use this methods when we dispatch an action of type requestDemande
   
   public validateDemandeAsync(demande: Demande /*demandeId: number*/): Observable<Demande>{
     // for the purpose of demonstration we will change it here instead of doing it in the backend
