@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Historique - Portail des Services Étudiants</title>
+  <!-- Add Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles_dash.css">
+</head>
+<body>
+  <div class="flex">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2>Tableau de bord</h2>
+      </div>
+      <div class="sidebar-content">
+        <ul class="sidebar-menu">
+          <li>
+            <button class="sidebar-menu-button">
+              <img src="assets/icons/file-text.svg" alt="Demandes Icon" class="icon-svg">
+              <span>Demandes</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-menu-button">
+              <img src="assets/icons/message-square.svg" alt="Réclamations Icon" class="icon-svg">
+              <span>Réclamations</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-menu-button active">
+              <img src="assets/icons/history.svg" alt="Historique Icon" class="icon-svg">
+              <span>Historique</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-menu-button">
+              <img src="assets/icons/bar-chart.svg" alt="Statistiques Icon" class="icon-svg">
+              <span>Statistiques</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        <button class="btn destructive">
+          <img src="assets/icons/logout_white.svg" alt="Déconnexion Icon" class="icon-svg">
+          Déconnexion
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 overflow-auto">
+      <div class="header">
+        <h2>Espace Administrateur</h2>
+        <div class="user-info">
+          <p>Mouad bel9wad</p>
+          <div class="circle-container">
+            <img src="assets/icons/user.svg" alt="User Icon" class="icon-svg-user">
+          </div>
+        </div>
+      </div>
+      
+      <div class="container">
+        <!-- Section: Historique des Demandes -->
+        <section class="section">
+          <h1>Historique des Demandes</h1>
+          <div class="controls">
+            <input type="text" placeholder="Rechercher par nom, email ou N° apogée..." class="search-bar">
+            <select class="select">
+              <option>Toutes les demandes</option>
+              <option>Attestations</option>
+              <option>Relevés de notes</option>
+            </select>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Demandes Traitées</h3>
+              <p>Liste des demandes ayant reçu une action</p>
+            </div>
+            <div class="card-content">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>N° Apogée</th>
+                    <th>Document</th>
+                    <th>Statut</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>25/12/2023</td>
+                    <td>Fihl Touns</td>
+                    <td>fihl@mail.com</td>
+                    <td>11223344</td>
+                    <td>Attestation de scolarité</td>
+                    <td>
+                      <span class="status-badge status-approved">Approuvé</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>15/11/2023</td>
+                    <td>Dihl Souns</td>
+                    <td>dihl@mail.com</td>
+                    <td>55667788</td>
+                    <td>Relevé de notes</td>
+                    <td>
+                      <span class="status-badge status-rejected">Rejeté</span>
+                    </td>
+                  </tr>
+                  <!-- Ajouter d'autres lignes au besoin -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
