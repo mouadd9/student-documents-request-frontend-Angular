@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Statistiques - Portail des Services Étudiants</title>
+    <!-- Add Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles_dash.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="flex">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h2>Tableau de bord</h2>
+        </div>
+        <div class="sidebar-content">
+          <ul class="sidebar-menu">
+            <li>
+              <button class="sidebar-menu-button">
+                <img
+                  src="assets/icons/file-text.svg"
+                  alt="Demandes Icon"
+                  class="icon-svg"
+                />
+                <span>Demandes</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-menu-button">
+                <img
+                  src="assets/icons/message-square.svg"
+                  alt="Réclamations Icon"
+                  class="icon-svg"
+                />
+                <span>Réclamations</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-menu-button">
+                <img
+                  src="assets/icons/history.svg"
+                  alt="Historique Icon"
+                  class="icon-svg"
+                />
+                <span>Historique</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-menu-button active">
+                <img
+                  src="assets/icons/bar-chart.svg"
+                  alt="Statistiques Icon"
+                  class="icon-svg"
+                />
+                <span>Statistiques</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="sidebar-footer">
+          <button class="btn destructive">
+            <img
+              src="assets/icons/logout_white.svg"
+              alt="Déconnexion Icon"
+              class="icon-svg"
+            />
+            Déconnexion
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="flex-1 overflow-auto">
+        <div class="header">
+          <h2>Espace Administrateur</h2>
+          <div class="user-info">
+            <p>Mouad bel9wad</p>
+            <div class="circle-container">
+              <img
+                src="assets/icons/user.svg"
+                alt="User Icon"
+                class="icon-svg-user"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <!-- Section: Statistiques -->
+          <section class="section">
+            <h1>Statistiques</h1>
+
+            <div class="stats-cards">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-header-inline">
+                    <img
+                      src="assets/icons/approve_black.svg"
+                      alt="Demandes Approuvées Icon"
+                      class="icon-svg-bg"
+                    />
+                    <h3>Demandes Approuvées</h3>
+                  </div>
+                  <p class="stat-value">235</p>
+                  <p class="stat-change">+20.1% par rapport au mois dernier</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-header-inline">
+                    <img
+                      src="assets/icons/treat_black.svg"
+                      alt="Temps Moyen de Traitement Icon"
+                      class="icon-svg-bg"
+                    />
+                    <h3>Temps Moyen de Traitement</h3>
+                  </div>
+                  <p class="stat-value">2.4 jours</p>
+                  <p class="stat-change negative">
+                    -0.3 jours par rapport au mois dernier
+                  </p>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-header-inline">
+                    <img
+                      src="assets/icons/user.svg"
+                      alt="Taux de Satisfaction Icon"
+                      class="icon-svg-bg"
+                    />
+                    <h3>Taux de Satisfaction</h3>
+                  </div>
+                  <p class="stat-value">94.2%</p>
+                  <p class="stat-change">+2.4% par rapport au mois dernier</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="charts">
+              <div class="charts-inline">
+                <div class="chart-card">
+                  <h3>Aperçu Mensuel</h3>
+                  <canvas id="monthlyOverview"></canvas>
+                </div>
+                <div class="chart-card">
+                  <h3>Distribution par Statut</h3>
+                  <canvas id="statusDistribution"></canvas>
+                </div>
+                <div class="chart-card">
+                  <h3>Tendances Hebdomadaires</h3>
+                  <canvas id="weeklyTrends"></canvas>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Aperçu Mensuel Chart
+      const ctxMonthly = document
+        .getElementById("monthlyOverview")
+        .getContext("2d");
+      new Chart(ctxMonthly, {
+        type: "bar",
+        data: {
+          labels: ["Mar", "Avr", "Mai", "Juin"],
+          datasets: [
+            {
+              label: "Attestations",
+              data: [20, 30, 40, 50, 60, 70],
+              backgroundColor: "#3b82f6",
+            },
+            {
+              label: "Relevés de notes",
+              data: [15, 25, 35, 45, 55, 65],
+              backgroundColor: "#fbbf24",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { beginAtZero: true },
+          },
+        },
+      });
+
+      // Distribution par Statut Chart
+      const ctxStatus = document
+        .getElementById("statusDistribution")
+        .getContext("2d");
+      new Chart(ctxStatus, {
+        type: "pie",
+        data: {
+          labels: ["Approuvées", "En attente", "Rejetées"],
+          datasets: [
+            {
+              data: [57, 31, 11],
+              backgroundColor: ["#28a745", "#ffc107", "#dc3545"],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+        },
+      });
+
+      // Tendances Hebdomadaires Chart
+      const ctxWeekly = document
+        .getElementById("weeklyTrends")
+        .getContext("2d");
+      new Chart(ctxWeekly, {
+        type: "line",
+        data: {
+          labels: ["Lun", "Mar", "Mer", "Jeu", "Ven"],
+          datasets: [
+            {
+              label: "Demandes",
+              data: [20, 25, 30, 28, 35],
+              borderColor: "#10b981",
+              fill: false,
+            },
+            {
+              label: "Réclamations",
+              data: [5, 8, 17, 13, 10],
+              borderColor: "#f59e0b",
+              fill: false,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { beginAtZero: true },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,344 @@
+/* Base styles */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Layout */
+.container {
+  min-height: 100vh;
+  padding: 2rem;
+  width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container {
+  min-height: 100vh;
+  padding: 2rem;
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  max-width: 1024px;
+  width: 100%;
+}
+
+/* Typography */
+.text-center {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.text-center h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.text-center p {
+  color: #4b5563;
+  font-size: 1rem;
+}
+
+/* Card styles */
+
+.card-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  width: 100%;
+  max-width: 500px;
+  transition: box-shadow 0.2s ease, transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-header, .card-header-auth {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.card-header-auth {
+  padding-bottom: 0.5rem;
+}
+
+.card-header h2, .card-header-auth h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card-header p, .card-header-auth p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0.5rem;
+}
+
+.card-content, .card-content-auth {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content {
+  text-align: center;
+  align-items: center;
+}
+
+.card-content-auth {
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  align-items: stretch;
+}
+
+/* Form styles */
+.form {
+  max-width: 100%;
+  width: 100%;
+  margin: auto;
+}
+
+.form-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-header h2 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-header p {
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+.form-group,
+.form-group-student {
+  margin-bottom: 1.5rem;
+  width: 93%;
+}
+
+.form-group label,
+.form-group-student label {
+  display: block;
+  color: #374151;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+/* Input styles */
+.form-group input {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  color: #1f2937;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group-student input {
+  width: 575px;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  color: #1f2937;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:hover,
+.form-group input:focus,
+.form-group-student input:hover,
+.form-group-student input:focus {
+  outline: none;
+  border-color: #171717;
+  box-shadow: 0 0 0 1px #171717;
+}
+
+/* Select styles */
+.form-group select,
+.form-group-student select {
+  width: 600px; /* Adjusted width */
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  color: #1f2937;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group select:hover,
+.form-group select:focus,
+.form-group-student select:hover,
+.form-group-student select:focus {
+  outline: none;
+  border-color: #171717;
+  box-shadow: 0 0 0 1px #171717;
+}
+
+/* Add this to your styles.css */
+
+/* Textarea styles */
+.form-group-student textarea {
+    width: 575px;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    color: #1f2937;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.form-group-student textarea:hover,
+.form-group-student textarea:focus {
+    outline: none;
+    border-color: #171717;
+    box-shadow: 0 0 0 1px #171717;
+}
+
+.form-message {
+  margin-top: 0.375rem;
+  font-size: 0.875rem;
+  color: #dc2626;
+  display: none;
+}
+
+/* Button styles */
+.btn {
+  width: 100%;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #171717;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  line-height: 1.25;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #000000;
+}
+
+.btn:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+.btn:active {
+  background-color: #000000;
+}
+
+/* Icon styles */
+.icon-svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.25rem;
+}
+
+.icon-svg-user {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.icon-svg-bg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.25rem;
+}
+
+.icon-svg-bg-home {
+  width: 2rem;
+  height: 2rem;
+}
+
+.tab-container {
+  margin-bottom: 20px;
+  background-color: #f3f4f6;
+  padding: 4px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.tab-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+}
+
+.tab-button[aria-selected="true"] {
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content[data-active="true"] {
+  display: block;
+}
+
+.tab-wrapper {
+  position: fixed;
+  margin-top: 100px;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  z-index: 100;
+}
+
+.content {
+  margin-top: 80px;
+}
