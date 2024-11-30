@@ -18,11 +18,17 @@ import { DemandeItemComponent } from './components/admin/demandes/demandes-list/
 import { provideRouter, RouterModule } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
+import { ReactiveFormsModule } from '@angular/forms';
+
+// store dependencies
 import { StoreModule } from '@ngrx/store';
 import { demandeReducer } from './state/demandes-feature/demandes.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { DemandesEffects } from './state/demandes-feature/demandes.effects';
-import { ReactiveFormsModule } from '@angular/forms';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+
+
+
 
 
 @NgModule({
@@ -64,7 +70,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     provideHttpClient(), // this provides the httpClient service that will be injected to our services
-    provideRouter(routes) // this provides routes for the RouterModule
+    provideRouter(routes), // this provides routes for the RouterModule
+    provideStoreDevtools({}),
   ],
   bootstrap: [AppComponent]
 })

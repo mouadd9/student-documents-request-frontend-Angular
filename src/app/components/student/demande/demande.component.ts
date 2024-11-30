@@ -37,7 +37,7 @@ export class DemandeComponent implements OnInit{
   // after the creation of the component
   ngOnInit(): void { 
     this.demandeForm = this.formBuilder.group({ 
-          email: ['', Validators.required, Validators.email],
+          email: ['', [Validators.required, Validators.email]],
           cin: ['', Validators.required],
           apogeeNumber: ['', Validators.required],
           documentType: ['', Validators.required]
