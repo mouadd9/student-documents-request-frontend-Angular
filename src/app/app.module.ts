@@ -22,6 +22,7 @@ import { StoreModule } from '@ngrx/store';
 import { demandeReducer } from './state/demandes-feature/demandes.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { DemandesEffects } from './state/demandes-feature/demandes.effects';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { DemandesEffects } from './state/demandes-feature/demandes.effects';
   imports: [
     BrowserModule,
     RouterModule, // this provides : <router-outlet></router-outlet> [routerLink] .....
+    ReactiveFormsModule,
     StoreModule.forRoot({
       demandes: demandeReducer, 
       //reclamations: reclamationsReducer
