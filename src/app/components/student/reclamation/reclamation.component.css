@@ -1,0 +1,81 @@
+.tab-content {
+  margin-top: 150px; /* Add margin to push it below the fixed navbar */
+  width: 600px; /* Match the navbar and container width */
+  margin-left: auto;
+  margin-right: auto; /* Center horizontally */
+  box-sizing: border-box;
+}
+
+
+.form {
+  width: 600px; /* Match with tab content and navbar */
+  margin: 0 auto; /* Center horizontally */
+  box-sizing: border-box;
+}
+
+.form-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-header h2 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-header p {
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+.form-group-student {
+  margin-bottom: 1.5rem;
+  width: 100%; /* Make it responsive */
+}
+
+.form-group-student label {
+  display: block;
+  color: #374151;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-group-student input,
+.form-group-student select {
+  width: 100%; /* Make it responsive */
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  color: #1f2937;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group-student input:hover,
+.form-group-student input:focus,
+.form-group-student select:hover,
+.form-group-student select:focus {
+  outline: none;
+  border-color: #171717;
+  box-shadow: 0 0 0 1px #171717;
+}
+
+.btn {
+  width: 100%; /* Full width of the form */
+  max-width: 600px; /* Match form width */
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #171717;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #000000;
+}

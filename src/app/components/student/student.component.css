@@ -1,0 +1,11 @@
+.form-container {
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem;
+    width: 100%; /* Match the width across all components */
+    display: flex;
+    flex-direction: column; /* Stack navbar and content vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: flex-start; /* Align content to the top */
+    box-sizing: border-box;
+  }
