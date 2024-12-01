@@ -40,6 +40,9 @@ export class DemandesEffects {
         this.action$ = action$;
         this.demandeService = demandeService,
 
+
+        // effect 1 : 
+
         // now that we injected the stream of actions we will create our effects
         this.fetchDemandeEffect$ = createEffect(()=>
             // first we use pipe to operate on the actions in the stream 
@@ -64,6 +67,8 @@ export class DemandesEffects {
         );
 
 
+        // effect 2:
+
         this.saveDemandeEffect$ = createEffect(() =>
             this.action$.pipe(
                 ofType(DemandeActions.saveDemande),
@@ -75,6 +80,9 @@ export class DemandesEffects {
                 )
             )
         )
+
+
+        // i need to add effects for validating and refusing
         
     }
 }
@@ -82,7 +90,7 @@ export class DemandesEffects {
 
 
  /*
- so what happends exactly ? 
+ so what happened here exactly ? 
 
  actions$ this is an onservable when we subscribe to it we get all events that are emitted through 
  we filter out only events of a specific type, so now the stream only has specific events 
