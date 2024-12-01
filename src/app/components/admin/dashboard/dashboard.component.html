@@ -1,1 +1,79 @@
-<p>dashboard works!</p>
+<div class="container">
+  <!-- Section: Gestion des Demandes -->
+  <section class="section">
+    <h1>Gestion des Demandes</h1>
+    <div class="controls">
+      <input type="text" placeholder="Rechercher par nom, email ou N° apogée..." class="search-bar">
+      <select class="select">
+        <option>Toutes les demandes</option>
+        <option>Attestations</option>
+        <option>Relevés de notes</option>
+      </select>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h3>Demandes en attente</h3>
+        <p>Liste des demandes qui nécessitent une action</p>
+      </div>
+      <div class="card-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>N° Apogée</th>
+              <th>Document</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Example of pending demands -->
+            <tr>
+              <td>01/01/2024</td>
+              <td>Kihl Youns</td>
+              <td>kihlmail.com</td>
+              <td>12345678</td>
+              <td>Attestation de scolarité</td>
+              <td>
+                <span class="status-badge status-pending">En attente</span>
+              </td>
+              <td>
+                <button class="btn approve">
+                  <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
+                  Approuver
+                </button>
+                <button class="btn reject">
+                  <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
+                  Rejeter
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>01/01/2024</td>
+              <td>Youns Kihl</td>
+              <td>younsmail.com</td>
+              <td>87654321</td>
+              <td>Relevé de notes</td>
+              <td>
+                <span class="status-badge status-pending">En attente</span>
+              </td>
+              <td>
+                <button class="btn approve">
+                  <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
+                  Approuver
+                </button>
+                <button class="btn reject">
+                  <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
+                  Rejeter
+                </button>
+              </td>
+            </tr>
+            <!-- End of example pending demands -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
