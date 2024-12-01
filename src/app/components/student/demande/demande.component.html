@@ -1,47 +1,46 @@
-<main class="flex justify-center items-center min-h-screen bg-gray-50">
-    <div class="w-full max-w-xl p-6 bg-white rounded-lg shadow-md">
-      <h1 class="text-2xl font-semibold text-gray-800 mb-6">Faire une Demande</h1>
-  
-      <!-- Form -->
-      <form class="space-y-6">
-        <!-- Email Field -->
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Adresse e-mail *</label>
-          <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-600" required />
+<div class="tab-content">
+    <div class="form">
+        <div class="form-header">
+            <h2>Demande de Document</h2>
+            <p>Remplissez le formulaire pour faire votre demande</p>
         </div>
-  
-        <!-- Numéro Apogée Field -->
-        <div>
-          <label for="numApogee" class="block text-sm font-medium text-gray-700">Numéro Apogée *</label>
-          <input type="text" id="numApogee" name="numApogee" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-600" required />
+        <div class="form-content">
+            <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()">
+                <!-- Email Input -->
+                <div class="form-group-input">
+                    <label for="Email">Adresse email</label>
+                    <input type="email" formControlName="email" placeholder="votre@email.com">
+                    <div class="form-message"></div>
+                </div>
+
+                <!-- Apoge Number Input -->
+                <div class="form-group-input">
+                    <label for="apogeNumber">Numéro apogée</label>
+                    <input type="text" formControlName="apogeeNumber" placeholder="apogee">
+                    <div class="form-message"></div>
+                </div>
+
+                <!-- CIN Input -->
+                <div class="form-group-input">
+                    <label for="cin">CIN</label>
+                    <input type="text" formControlName="cin" placeholder="cin">
+                    <div class="form-message" id="cinError"></div>
+                </div>
+
+                <!-- Document Type Dropdown -->
+                <div class="form-group-input">
+                    <label for="documentType">Type de document</label>
+                    <select class="form-input" formControlName="documentType">
+                        <option value="" disabled selected>Sélectionnez un document</option>
+                        <option value="attestation">Attestation de scolarité</option>
+                        <option value="releve">Relevé de notes</option>
+                    </select>
+                    <div class="form-message" id="documentError"></div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn" [disabled]="!this.demandeForm.valid">Envoyer la demande</button>
+            </form>
         </div>
-  
-        <!-- CIN Field -->
-        <div>
-          <label for="cin" class="block text-sm font-medium text-gray-700">CIN *</label>
-          <input type="text" id="cin" name="cin" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-600" required />
-        </div>
-  
-        <!-- Type de document Field -->
-        <div>
-          <label for="documentType" class="block text-sm font-medium text-gray-700">Type de document à demander *</label>
-          <select id="documentType" name="documentType" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-600" required>
-            <option value="">Sélectionner un document</option>
-            <option value="convention_de_stage">Convention de Stage</option>
-            <option value="attestation_de_reussite">Attestation de réussite</option>
-            <option value="releve_de_note">Relevé de note</option>
-            <option value="attestation_de_scolarite">Attestation de scolarité</option>
-          </select>
-        </div>
-  
-        <!-- Submit Button -->
-        <div class="flex justify-end">
-            <!-- ajouter la logique de checker si donnees  vrai ou pas -->
-          <button type="submit" class="px-6 py-3 text-white bg-gray-800 rounded hover:bg-gray-700">
-            FAIRE UNE DEMANDE
-          </button>
-        </div>
-      </form>
     </div>
-  </main>
-  
+</div>

@@ -1,34 +1,13 @@
-<div class="flex items-center justify-between px-4 py-3 border-b bg-white">
-    <button 
-      routerLink="" 
-      class="flex items-center px-4 py-2 text-gray-800 bg-gray-200 rounded hover:bg-gray-300">
-      <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        fill="none" 
-        viewBox="0 0 24 24" 
-        stroke-width="2" 
-        stroke="currentColor" 
-        class="w-5 h-5 mr-2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-      </svg>
-      Retourner
-    </button>
-  
-    <div class="flex space-x-4">
-      <button 
-        routerLink="/student/demande" 
-        routerLinkActive="text-white bg-gray-800"
-        [routerLinkActiveOptions]="{exact: true}" 
-        class="px-6 py-2 text-gray-800 border border-gray-300 rounded hover:bg-gray-100">
-        Demande
-      </button>
-      <button 
-        routerLink="/student/reclamation"
-        routerLinkActive="text-white bg-gray-800"
-        [routerLinkActiveOptions]="{exact: true}" 
-        class="px-6 py-2 text-gray-800 border border-gray-300 rounded hover:bg-gray-100">
-        Réclamation
-      </button>
-    </div>
+
+<div class="tab-wrapper">
+  <div class="tab-container">
+    <button class="tab-button" type="button"
+      routerLink="/student/demande"
+      routerLinkActive="active-tab"
+      [routerLinkActiveOptions]="{ exact: true }">Demande de Document</button>
+    <button class="tab-button" type="button"
+      routerLink="/student/reclamation"
+      routerLinkActive="active-tab"
+      [routerLinkActiveOptions]="{ exact: true }">Réclamation</button>
   </div>
-  
+</div>

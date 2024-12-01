@@ -1,5 +1,5 @@
 import { Routes} from '@angular/router';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { HomeComponent } from './components/home/landing-page.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { StudentComponent } from './components/student/student.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -29,7 +29,7 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
 export const routes: Routes = [
   // lvl 1 home-login-student-admin are dynamic within AppComponent
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // blank URL
-  { path: 'home', component: LandingPageComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: AdminLoginComponent },
   // lvl 2.1 demande-reclamation are dynamic within StudentComponent
   {
