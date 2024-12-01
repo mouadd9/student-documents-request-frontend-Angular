@@ -2,11 +2,13 @@
 
 /*-----------------------Tab-------------------*/
 .tab-content {
-  margin-top: 100px; /* Add margin to push it below the fixed navbar */
+  padding-top: 100px; /* Add margin to push it below the fixed navbar */
+  margin-bottom: 30px;
   width: 600px; /* Match the navbar and container width */
   margin-left: auto;
   margin-right: auto; /* Center horizontally */
   box-sizing: border-box;
+  
 }
 
 /*-----------------------Form-------------------*/
