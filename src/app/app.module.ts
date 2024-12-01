@@ -20,12 +20,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { ReactiveFormsModule } from '@angular/forms';
 
-// store dependencies
-import { StoreModule } from '@ngrx/store';
-import { demandeReducer } from './state/demandes-feature/demandes.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { DemandesEffects } from './state/demandes-feature/demandes.effects';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
+// store
+import { StoreModuleConfig } from './store/store.module'; // we defined the store in a separate module
 
 
 
@@ -58,20 +54,12 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
     BrowserModule,
     RouterModule, // this provides : <router-outlet></router-outlet> [routerLink] .....
     ReactiveFormsModule,
-    StoreModule.forRoot({
-      demandes: demandeReducer, 
-      //reclamations: reclamationsReducer
-    }),
-    EffectsModule.forRoot([
-      DemandesEffects,
-      // ReclamationsEffects
-    ])
+    StoreModuleConfig
   
   ],
   providers: [
     provideHttpClient(), // this provides the httpClient service that will be injected to our services
-    provideRouter(routes), // this provides routes for the RouterModule
-    provideStoreDevtools({}),
+    provideRouter(routes) // this provides routes for the RouterModule
   ],
   bootstrap: [AppComponent]
 })
