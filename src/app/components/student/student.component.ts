@@ -4,10 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-student',
   standalone: false,
   templateUrl: './student.component.html',
-  styleUrl: './student.component.css'
+  styleUrl: '../../../assets/styles/student-component.css'
 })
 export class StudentComponent {
-
-  
-
+  // here we will subscribe to the state and pass it as input to the reclamation and demande
 }

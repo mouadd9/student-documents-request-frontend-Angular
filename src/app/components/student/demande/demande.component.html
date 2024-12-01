@@ -1,34 +1,34 @@
-<div id="content-demande" class="tab-content">
+<div class="tab-content">
     <div class="form">
         <div class="form-header">
             <h2>Demande de Document</h2>
             <p>Remplissez le formulaire pour faire votre demande</p>
         </div>
         <div class="form-content">
-            <form id="studentForm" [formGroup]="demandeForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()">
                 <!-- Email Input -->
-                <div class="form-group-student">
-                    <label for="email">Adresse email</label>
+                <div class="form-group-input">
+                    <label for="Email">Adresse email</label>
                     <input type="email" formControlName="email" placeholder="votre@email.com">
-                    <div class="form-message" id="emailError"></div>
+                    <div class="form-message"></div>
                 </div>
 
                 <!-- Apoge Number Input -->
-                <div class="form-group-student">
+                <div class="form-group-input">
                     <label for="apogeNumber">Numéro apogée</label>
                     <input type="text" formControlName="apogeeNumber" placeholder="apogee">
-                    <div class="form-message" id="apogeError"></div>
+                    <div class="form-message"></div>
                 </div>
 
                 <!-- CIN Input -->
-                <div class="form-group-student">
+                <div class="form-group-input">
                     <label for="cin">CIN</label>
                     <input type="text" formControlName="cin" placeholder="cin">
                     <div class="form-message" id="cinError"></div>
                 </div>
 
                 <!-- Document Type Dropdown -->
-                <div class="form-group-student">
+                <div class="form-group-input">
                     <label for="documentType">Type de document</label>
                     <select class="form-input" formControlName="documentType">
                         <option value="" disabled selected>Sélectionnez un document</option>

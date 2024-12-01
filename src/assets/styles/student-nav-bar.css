@@ -1,0 +1,43 @@
+
+/*----------wrapper */
+.tab-wrapper {
+    margin-top: 30px;
+    position: fixed; /* Make it fixed on the screen */
+    top: 20px; /* Space between the top of the screen and the navbar */
+    width: 600px; /* Match the width of the form */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    z-index: 100; /* Keep it above other content */
+    padding: 10px 0; /* Add padding inside the navbar */
+  }
+  
+  /*----------container */
+  .tab-wrapper .tab-container {
+    background-color: #efefef;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two buttons of equal width */
+    gap: 4px; /* Space between the buttons */
+    width: 100%; /* Match the navbar width */
+    padding: 4px;
+    border-radius: 8px;
+  }
+  
+  /*----------buttons */
+  .tab-wrapper .tab-container .tab-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    background-color: #efefef;
+  }
+  
+  /*this is used with the router, when click on a button that uses the router we will activate this style*/
+  .active-tab {
+    background-color: white !important;
+  }
+  
+  

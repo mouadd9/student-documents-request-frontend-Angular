@@ -1,36 +1,45 @@
-<div id="content-reclamation" class="tab-content">
+<div class="tab-content">
   <div class="form">
       <div class="form-header">
           <h2>Réclamation</h2>
           <p>Remplissez le formulaire pour faire votre réclamation</p>
       </div>
       <div class="form-content">
-          <form id="complaintForm">
-              <div class="form-group-student">
-                  <label for="emailComplaint">Adresse email</label>
-                  <input type="email" id="emailComplaint" name="email" placeholder="votre@email.com" required>
-                  <div class="form-message" id="emailComplaintError"></div>
+          <form>
+              <!-- Email Input -->
+              <div class="form-group-input">
+                  <label for="Email">Adresse email</label>
+                  <input type="email" formControlName="email" placeholder="votre@email.com">
+                  <div class="form-message"></div>
               </div>
 
-              <div class="form-group-student">
-                  <label for="apogeNumberComplaint">Numéro apogée</label>
-                  <input type="text" id="apogeNumberComplaint" name="apogeNumber" placeholder="12345678" minlength="8" required>
-                  <div class="form-message" id="apogeComplaintError"></div>
+              <!-- Apoge Number Input -->
+              <div class="form-group-input">
+                  <label for="apogeNumber">Numéro apogée</label>
+                  <input type="text" formControlName="apogeeNumber" placeholder="apogee">
+                  <div class="form-message"></div>
               </div>
 
-              <div class="form-group-student">
+              <!-- CIN Input -->
+              <div class="form-group-input">
+                  <label for="cin">CIN</label>
+                  <input type="text" formControlName="cin" placeholder="cin">
+                  <div class="form-message" id="cinError"></div>
+              </div>
+
+              <div class="form-group-input">
                   <label for="complaintSubject">Sujet</label>
-                  <input type="text" id="complaintSubject" name="subject" placeholder="Sujet de votre réclamation" required>
-                  <div class="form-message" id="subjectError"></div>
+                  <input type="text" formControlName="sujet" placeholder="Sujet de votre réclamation">
+                  <div class="form-message"></div>
               </div>
 
-              <div class="form-group-student">
+              <div class="form-group-input">
                   <label for="complaintText">Message</label>
-                  <textarea id="complaintText" name="complaint" rows="4" placeholder="Détaillez votre réclamation..." required></textarea>
+                  <textarea formControlName="sujet" rows="4" placeholder="Détaillez votre réclamation..."></textarea>
                   <div class="form-message" id="complaintError"></div>
               </div>
 
-              <button type="submit" class="btn" id="submitComplaintBtn">
+              <button type="submit" class="btn">
                   Envoyer la réclamation
               </button>
           </form>

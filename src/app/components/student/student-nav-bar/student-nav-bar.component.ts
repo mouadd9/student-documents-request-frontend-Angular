@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-student-nav-bar',
   standalone: false,
   templateUrl: './student-nav-bar.component.html',
-  styleUrl: './student-nav-bar.component.css'
+  styleUrl: '../../../../assets/styles/student-nav-bar.css'
 })
 export class StudentNavBarComponent {
 

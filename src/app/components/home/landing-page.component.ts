@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-landing-page',
   standalone: false,
   templateUrl: './landing-page.component.html',
-  styleUrl: './landing-page.component.css'
+  styleUrl: '../../../assets/styles/home.css'
 })
-export class LandingPageComponent {
+export class HomeComponent {
 
 }
