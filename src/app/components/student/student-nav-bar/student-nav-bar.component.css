@@ -3,12 +3,12 @@
 .tab-wrapper {
     position: fixed; /* Fixed on the screen */
     top: 0; /* Align with the top of the screen */
-    width: 600px; /* Match the width of the form */
+    width: 640px; /* Match the width of the form */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Adjust for centering */
     z-index: 100; /* Keep it above other content */
     padding: 60px 10px 10px; /* Extend padding to cover 20px space at the top */
-    background: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
+    background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
     backdrop-filter: blur(10px); /* Apply blur effect */
     border-radius: 0 0 8px 8px; /* Rounded corners only at the bottom */
     border: 1.5px solid rgba(239, 239, 239, 0.6); /* Subtle border using #efefef */
@@ -31,7 +31,7 @@
       padding: 8px 16px;
       border: none;
       border-radius: 6px;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
