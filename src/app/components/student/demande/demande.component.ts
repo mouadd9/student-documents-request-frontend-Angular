@@ -4,6 +4,13 @@ import { Demande } from '../../../models/demande';
 import { DocumentType } from '../../../models/enums/document-type';
 import { Store } from '@ngrx/store';
 import { DemandeActions } from '../../../store/demandes-feature/demandes.actions';
+// this is the state enum
+import { STATE } from '../../../store/state';
+// we import the state for the slice of state "demandes"
+import { demandeState } from '../../../store/demandes-feature/demandes.state';
+import { Observable } from 'rxjs';
+import { selectDemandesState } from '../../../store/demandes-feature/demandes.selectors';
+
 
 @Component({
   selector: 'app-demande',
@@ -12,12 +19,15 @@ import { DemandeActions } from '../../../store/demandes-feature/demandes.actions
   styleUrl: 'demande.component.css'
 })
 export class DemandeComponent implements OnInit{
-
+  // making the state enum accessible to the template 
+  public STATE = STATE;
+  public stateEnum: STATE = STATE.loading; // Current state
   // property declarations
   private formBuilder : FormBuilder;
   private store : Store;
   public demandeForm!: FormGroup;
   private demande: Demande;
+  public demandesState$! : Observable<demandeState>;
 
   public constructor(
     formBuilder : FormBuilder,
@@ -36,6 +46,9 @@ export class DemandeComponent implements OnInit{
 
   // after the creation of the component
   ngOnInit(): void { 
+    // here we will collect an Observable that will emit demandeState
+    this.demandesState$ = this.store.select(selectDemandesState);
+    
     this.demandeForm = this.formBuilder.group({ 
           email: ['', [Validators.required, Validators.email]],
           cin: ['', Validators.required],

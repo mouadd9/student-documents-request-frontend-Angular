@@ -39,8 +39,18 @@
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn" [disabled]="!this.demandeForm.valid">Envoyer la demande</button>
+                <ng-container *ngIf="demandesState$ | async as state">
+                    <button type="submit" class="btn" [disabled]="!demandeForm.valid || state.demandeState === STATE.loading">
+                      <div *ngIf="state.demandeState === STATE.initial">Envoyer la demande</div>
+                      <div class="spinner" *ngIf="state.demandeState === STATE.loading"></div>
+                      <div *ngIf="state.demandeState === STATE.loaded">Envoyé</div>
+                    </button>
+                  </ng-container>
+                  
             </form>
         </div>
     </div>
 </div>
+
+
+  
