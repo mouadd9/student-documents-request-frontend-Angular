@@ -4,6 +4,13 @@ import { Demande } from '../../../models/demande';
 import { DocumentType } from '../../../models/enums/document-type';
 import { Store } from '@ngrx/store';
 import { DemandeActions } from '../../../store/demandes-feature/demandes.actions';
+// this is the state enum
+import { STATE } from '../../../store/state';
+// we import the state for the slice of state "demandes"
+import { demandeState } from '../../../store/demandes-feature/demandes.state';
+import { Observable } from 'rxjs';
+import { selectDemandesState } from '../../../store/demandes-feature/demandes.selectors';
+
 
 @Component({
   selector: 'app-demande',
@@ -12,12 +19,14 @@ import { DemandeActions } from '../../../store/demandes-feature/demandes.actions
   styleUrl: 'demande.component.css'
 })
 export class DemandeComponent implements OnInit{
-
+  // making the state enum accessible to the template 
+  public STATE = STATE;
   // property declarations
   private formBuilder : FormBuilder;
   private store : Store;
   public demandeForm!: FormGroup;
   private demande: Demande;
+  public demandesState$! : Observable<demandeState>;
 
   public constructor(
     formBuilder : FormBuilder,
@@ -36,6 +45,8 @@ export class DemandeComponent implements OnInit{
 
   // after the creation of the component
   ngOnInit(): void { 
+    this.store.dispatch(DemandeActions.resetDemandeStateEnum()); // here we turn the state to INITIAL to change the template 
+    this.demandesState$ = this.store.select(selectDemandesState); // here we fetch the observable that emits the state changes
     this.demandeForm = this.formBuilder.group({ 
           email: ['', [Validators.required, Validators.email]],
           cin: ['', Validators.required],
@@ -44,18 +55,21 @@ export class DemandeComponent implements OnInit{
     })
   }
 
-  // when the user clicks on submit
+
   onSubmit(): void {
-    console.log("valid or not : " + this.demandeForm.valid); 
     if(this.demandeForm.valid) {
       this.demande = this.demandeForm.value;
-      console.log("demande collected: ");
-      console.log(this.demandeForm.value);
-      // Note : 
-      // the here we dispatch an action, the action is received by the reducer, the reducer passes the latest Demande state
-      // then returns a new state : {demandes : [same as the latest], demandeState: LOADING, errorMessage: ""}
-      // concurrently the action is processed by the effect, it returns dispatched either an action of type saveDemandeSuccess or saveDemandeError 
-      this.store.dispatch(DemandeActions.saveDemande({payload: this.demande})); // we dispatch an action to the store
+      this.store.dispatch(DemandeActions.saveDemande({payload: this.demande}));
+      this.demandesState$.subscribe({
+        next: (data) => {
+          if(data.demandeState === STATE.loaded) {
+            setTimeout(() => {
+              this.store.dispatch(DemandeActions.resetDemandeStateEnum());
+            }, 3000);
+          }
+        }
+      })
+      
     }
   }
 
