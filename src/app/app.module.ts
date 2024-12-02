@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { StudentComponent } from './components/student/student.component';
 import { DemandeComponent } from './components/student/demande/demande.component';
 import { ReclamationComponent } from './components/student/reclamation/reclamation.component';
-import { HomeComponent } from './components/home/landing-page.component';
+import { HomeComponent } from './components/home/home.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { StudentNavBarComponent } from './components/student/student-nav-bar/student-nav-bar.component';
