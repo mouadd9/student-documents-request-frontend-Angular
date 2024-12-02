@@ -9,7 +9,7 @@ import { DemandeActions } from '../../../store/demandes-feature/demandes.actions
   selector: 'app-demande',
   standalone: false,
   templateUrl: './demande.component.html',
-  styleUrl: '../../../../assets/styles/student-demande-reclamation-form.css'
+  styleUrl: 'demande.component.css'
 })
 export class DemandeComponent implements OnInit{
 
