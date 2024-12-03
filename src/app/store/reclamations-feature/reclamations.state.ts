@@ -4,7 +4,7 @@ import { Reclamation } from "../../models/reclamation";
 import { STATE } from "../state";
 
 export interface reclamationState {
-    declarations : Reclamation[],
+    reclamations : Reclamation[],
     state : STATE,
     errorMessage : string
 }
@@ -12,7 +12,7 @@ export interface reclamationState {
 
 // when we first load our app no action is dispatched so we define an initial state and pass it ot the reducer
 export const initialStateReclamation: reclamationState = {
-    declarations : [],
+    reclamations : [],
     state : STATE.initial,
     errorMessage : ''
 }

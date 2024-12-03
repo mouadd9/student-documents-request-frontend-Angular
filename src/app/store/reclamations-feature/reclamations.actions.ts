@@ -4,7 +4,7 @@
 // saveReclamationSuccess : this is an action dispatched by the effects after the dispatch of save
 // it will change the state to LOADED and create a new array with the new created Reclamation
 
-import { createActionGroup, props } from "@ngrx/store";
+import { createActionGroup, emptyProps, props } from "@ngrx/store";
 import { Reclamation } from "../../models/reclamation";
 
 
@@ -16,8 +16,10 @@ import { Reclamation } from "../../models/reclamation";
 export const reclamationActions = createActionGroup({
     source : 'Reclamation', 
     events : { // here we will declare actions
+        // actions 1
         saveReclamation: props<{payload : Reclamation}>(), // { type : "[Reclamation] save reclamation", payload : { /*reclamation object*/ } }
         saveReclamationSuccess: props<{payload : Reclamation}>(),
-        saveReclamationError: props<{payload : string}>()
+        saveReclamationError: props<{payload : string}>(),
+        resetReclamation: emptyProps() // this is really important, when an action of type success is dispatched we will use effects to reset the state to initial
     }
 })
