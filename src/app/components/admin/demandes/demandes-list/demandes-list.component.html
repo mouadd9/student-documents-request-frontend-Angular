@@ -1,9 +1,42 @@
-<app-demande-item></app-demande-item>
-<app-demande-item></app-demande-item>
-<app-demande-item></app-demande-item>
-<app-demande-item></app-demande-item>
-<app-demande-item></app-demande-item>
-<app-demande-item></app-demande-item>
-<app-demande-item></app-demande-item>
-<app-demande-item></app-demande-item>
-<app-demande-item></app-demande-item>
+<!-- src/app/demandes-list/demandes-list.component.html -->
+
+<div>
+    <div class="card-header">
+        <h3>Demandes</h3>
+        <p>Liste des demandes qui nécessitent une action</p>
+      </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>CIN</th>
+          <th>Apogee Number</th>
+          <th>Document Type</th>
+          <th>Status</th>
+          <th>Submission Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demande of demands">
+          <td>{{ demande.email }}</td>
+          <td>{{ demande.cin }}</td>
+          <td>{{ demande.apogeeNumber }}</td>
+          <td>{{ demande.documentType }}</td>
+          <td><span class="status-badge status-pending">{{ demande.status }}</span></td>
+          <td>{{ demande.submissionDate | date: 'shortDate' }}</td> <!-- Date formatting -->
+          <td>
+            <button class="btn approve">
+                <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
+                Approuver
+            </button>
+            <button class="btn reject">
+                <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
+                Rejeter
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -11,9 +11,9 @@ body, html {
 /* Dashboard Layout */
 .dashboard-container {
   display: flex;
-  height: 100vh; /* Full height of the viewport */
-  width: 100vw; /* Full width of the viewport */
-  overflow: hidden;
+  height: 100%; /* Full height of the viewport */
+  width: 100%; /* Full width of the viewport */
+  overflow: auto;
 }
 
 
@@ -41,9 +41,9 @@ app-admin-side-bar {
   margin-left: 250px; /* Matches the sidebar width */
   display: flex;
   flex-direction: column;
-  width: calc(100% - 250px); /* Adjusts width based on sidebar */
+  width: 100%; /* Adjusts width based on sidebar */
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
   background-color: #f9fafb;
   transition: margin-left 0.3s, width 0.3s;
 }
@@ -59,10 +59,10 @@ app-admin-side-bar {
 app-admin-nav-bar {
   flex-shrink: 0;
   height: 4rem; /* Fixed height for the header */
-  width: fit-content;
+  width: 100%;
   background-color: #ffffff;
   border-bottom: 1px solid #e5e7eb;
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -73,6 +73,6 @@ app-admin-nav-bar {
 app-dashboard {
   flex: 1;
   overflow-y: auto;
-  padding: 1.5rem;
+  /* padding: 1.5rem; */
   background-color: #f9fafb;
 }

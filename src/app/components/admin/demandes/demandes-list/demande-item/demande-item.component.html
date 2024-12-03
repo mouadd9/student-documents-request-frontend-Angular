@@ -1,1 +1,17 @@
-<p>demande-item works!</p>
+<!-- app-demande-item.component.html -->
+<div class="demande-item">
+    <div class="demande-header">
+      <h4>{{ demande.name }}</h4>
+      <span>{{ demande.documentType }}</span>
+    </div>
+    <div class="demande-details">
+      <p><strong>Email:</strong> {{ demande.email }}</p>
+      <p><strong>Date:</strong> {{ demande.date }}</p>
+      <p><strong>Status:</strong> <span class="status-badge" [ngClass]="getStatusClass(demande.status)">{{ demande.status }}</span></p>
+    </div>
+    <div class="demande-actions">
+      <button (click)="approveDemande(demande)">Approuver</button>
+      <button (click)="rejectDemande(demande)">Rejeter</button>
+    </div>
+  </div>
+  

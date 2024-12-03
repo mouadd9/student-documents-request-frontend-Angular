@@ -9,7 +9,7 @@
   padding: 0 1.5rem;
   height: 4rem;
   z-index: 10;
-  width: 83vw; /* Ensures the header takes full viewport width */
+  width: 100%; /* Ensures the header takes full viewport width */
   box-sizing: border-box; /* Includes padding in the width calculation */
 }
 
@@ -22,7 +22,7 @@
 .user-info {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  /* gap: 0.5rem; */
   font-size: 13px;
 }
 
