@@ -1,8 +1,10 @@
 /* Base styles */
-body, html {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+.container1 {
+  display: flex;
+  align-items: center ;
+  justify-content: center ;
+  height: 100vh; /* Ensure the container has a height */
+
 }
   /*card*/
   .card {

@@ -60,19 +60,8 @@ export class DemandeComponent implements OnInit{
     if(this.demandeForm.valid) {
       this.demande = this.demandeForm.value;
       this.store.dispatch(DemandeActions.saveDemande({payload: this.demande}));
-      this.demandesState$.subscribe({
-        next: (data) => {
-          if(data.demandeState === STATE.loaded) {
-            setTimeout(() => {
-              this.store.dispatch(DemandeActions.resetDemandeStateEnum());
-            }, 3000);
-          }
-        }
-      })
-      
     }
   }
-
 
 
 
@@ -97,3 +86,14 @@ Updating the State: The effect dispatches success or error actions based on the 
 UI Updates: Components subscribed to the store react to state changes and update the UI accordingly.
 */
 
+/*
+How to work with [ngClass] directive 
+- ngClass switches css classes based on typeScript viariables
+
+Example : 
+public active : boolean = true;
+
+<div [ngClass]="{ 'class1': active, 'class2': !active }" ></div>
+
+
+*/
