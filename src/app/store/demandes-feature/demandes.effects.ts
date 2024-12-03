@@ -91,7 +91,7 @@ export class DemandesEffects {
         // we should reset the state so that he can resend it again 
             this.action$.pipe(
                 ofType(DemandeActions.saveDemandeSuccess),
-                delay(4000),
+                delay(3000),
                 mergeMap(() => of(DemandeActions.resetDemandeStateEnum()))
             )
         )
