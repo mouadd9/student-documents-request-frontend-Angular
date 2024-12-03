@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-reclamation',
   standalone: false,
   templateUrl: './reclamation.component.html',
-  styleUrl: '../../../../assets/styles/student-demande-reclamation-form.css'
+  styleUrl: 'reclamation.component.css'
 })
 export class ReclamationComponent {
 // here i need to do the same thing i did in the demande form

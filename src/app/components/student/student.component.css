@@ -1,4 +1,11 @@
-.container {
+/* Base styles */
+.container1 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.container2 {
     height: 100vh;
     padding : 2rem;
     width: 100%; /* Match the width across all components */

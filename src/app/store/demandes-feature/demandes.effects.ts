@@ -7,7 +7,7 @@
 
 import { Injectable } from "@angular/core";
 import { Action } from "@ngrx/store";
-import { catchError, map, mergeMap, Observable, of } from "rxjs";
+import { catchError, delay, map, mergeMap, Observable, of } from "rxjs";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { DemandeActions } from "./demandes.actions";
 import { DemandeService } from "../../services/demande.service";
@@ -35,6 +35,7 @@ export class DemandesEffects {
     // it does an asynchronious operation with side effects (fetching data)
     fetchDemandeEffect$ : Observable<Action>;
     saveDemandeEffect$ : Observable<Action>;
+    resetStateDemandeEffect$ : Observable<Action>;
 
     constructor(action$ : Actions, demandeService: DemandeService ) { // here we will inject the stream of Actions
         this.action$ = action$;
@@ -80,6 +81,21 @@ export class DemandesEffects {
                 )
             )
         )
+
+        // effect 3: 
+        // if an action of type saveDemandeSuccess is dispatched we should dispatch action of type saveDemandeReset
+        // so that the user can know he's allowed to dispatch a saveDemand Action
+
+        this.resetStateDemandeEffect$ = createEffect(() => 
+        // so each time a user clicks on a button "Envoyer une demande" and the action is successful
+        // we should reset the state so that he can resend it again 
+            this.action$.pipe(
+                ofType(DemandeActions.saveDemandeSuccess),
+                delay(4000),
+                mergeMap(() => of(DemandeActions.resetDemandeStateEnum()))
+            )
+        )
+
 
 
         // i need to add effects for validating and refusing
