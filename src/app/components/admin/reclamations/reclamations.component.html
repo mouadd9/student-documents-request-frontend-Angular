@@ -1,1 +1,18 @@
-<p>reclamations works!</p>
+<div class="reclamations-container">
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+      <app-reclamations-nav-bar
+      (searchChanged)="onSearchChanged($event)" 
+      
+      >
+    </app-reclamations-nav-bar>
+    </div>
+  
+    <!-- Demand List -->
+    <div class="reclamations-list">
+
+<app-reclamations-list [reclamations]="filteredReclamations"></app-reclamations-list>
+
+    </div>
+  </div>
+  

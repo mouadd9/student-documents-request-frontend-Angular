@@ -1,16 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { Reclamation } from '../../../models/reclamation';
-import { ReclamationService } from '../../../services/reclamation.service';
-import { ReclamationsNavBarComponent } from './reclamations-nav-bar/reclamations-nav-bar.component';
-import { ReclamationsListComponent } from './reclamations-list/reclamations-list.component';
+import { ReclamationService } from '../../../../services/reclamation.service';
+import { Reclamation } from '../../../../models/reclamation';
 
 @Component({
-  selector: 'app-reclamations',
-
-  templateUrl: './reclamations.component.html',
-  styleUrl: './reclamations.component.css'
+  selector: 'app-reclamations-list',
+  templateUrl: './reclamations-list.component.html',
+  styleUrl: './reclamations-list.component.css'
 })
-export class ReclamationsComponent {
+export class ReclamationsListComponent {
   @Input() reclamations: Reclamation[] = [];
 
   // demands: Demande[] = [];
@@ -56,4 +53,27 @@ export class ReclamationsComponent {
       return matchesSearch;
     });
   }
+  // approveDemande(demande: any): void {
+  //   // Update the status locally
+  //   this.demandeService.validateDemandeAsync(demande).subscribe(
+  //     (updatedDemande) => {
+  //       demande.status = updatedDemande.status; // Update status locally after success
+  //     },
+  //     (error) => {
+  //       console.error('Error approving demande:', error);
+  //     }
+  //   );
+  // }
+  // rejectDemande(demande: any): void {
+  //   // Update the status locally
+  //   this.demandeService.refuseDemandeAsync(demande).subscribe(
+  //     (updatedDemande) => {
+  //       demande.status = updatedDemande.status; // Update status locally after success
+  //     },
+  //     (error) => {
+  //       console.error('Error rejecting demande:', error);
+  //     }
+  //   );
+  // }
+ 
 }

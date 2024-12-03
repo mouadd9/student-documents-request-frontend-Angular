@@ -4,8 +4,15 @@
   <td>{{ demande.cin }}</td>
   <td>{{ demande.apogeeNumber }}</td>
   <td>{{ demande.documentType }}</td>
-  <td><span class="status-badge status-pending">{{ demande.status }}</span></td>
-  <td>{{ demande.submissionDate | date: 'shortDate' }}</td>
+  <td>
+    <span class="status-badge" [class.status-pending]="demande.status === 'Pending'" 
+        [class.status-approved]="demande.status === 'Approved'" 
+        [class.status-rejected]="demande.status === 'Rejected'">
+        {{ demande.status }}
+    </span>
+  </td>
+  <td>{{ demande.submissionDate  }}</td>
+  <!-- | date: 'shortDate' -->
   <td>
     <button class="btn approve">
       <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">

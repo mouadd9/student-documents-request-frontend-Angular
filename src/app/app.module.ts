@@ -23,6 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 // store
 import { StoreModuleConfig } from './store/store.module'; // we defined the store in a separate module
 import { HistoriqueComponent } from './components/admin/historique/historique.component';
+import { ReclamationsListComponent } from './components/admin/reclamations/reclamations-list/reclamations-list.component';
+import { ReclamationsNavBarComponent } from './components/admin/reclamations/reclamations-nav-bar/reclamations-nav-bar.component';
+import { ReclamationsComponent } from './components/admin/reclamations/reclamations.component';
 
 
 
@@ -49,12 +52,18 @@ import { HistoriqueComponent } from './components/admin/historique/historique.co
     DemandesNavBarComponent,
     DemandesListComponent,
     DemandeItemComponent,  
+    ReclamationComponent,
+    ReclamationsComponent,
+    ReclamationsNavBarComponent,
+    ReclamationsListComponent
   ],
   imports: [
     BrowserModule,
     RouterModule, // this provides : <router-outlet></router-outlet> [routerLink] .....
     ReactiveFormsModule,
     StoreModuleConfig,  
+    
+
   ],
   providers: [
     provideHttpClient(), // this provides the httpClient service that will be injected to our services

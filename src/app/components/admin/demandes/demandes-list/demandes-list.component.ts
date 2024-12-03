@@ -29,6 +29,7 @@ export class DemandesListComponent {
     });
   }
 
+
   onSearchChanged(searchTerm: string): void {
     this.searchTerm = searchTerm.toLowerCase();
     this.applyFilters();
@@ -55,6 +56,27 @@ export class DemandesListComponent {
       return matchesSearch && matchesCategory;
     });
   }
-  
+  approveDemande(demande: any): void {
+    // Update the status locally
+    this.demandeService.validateDemandeAsync(demande).subscribe(
+      (updatedDemande) => {
+        demande.status = updatedDemande.status; // Update status locally after success
+      },
+      (error) => {
+        console.error('Error approving demande:', error);
+      }
+    );
+  }
+  rejectDemande(demande: any): void {
+    // Update the status locally
+    this.demandeService.refuseDemandeAsync(demande).subscribe(
+      (updatedDemande) => {
+        demande.status = updatedDemande.status; // Update status locally after success
+      },
+      (error) => {
+        console.error('Error rejecting demande:', error);
+      }
+    );
+  }
  
 }
