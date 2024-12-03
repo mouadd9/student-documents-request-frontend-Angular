@@ -1,17 +1,19 @@
-<!-- app-demande-item.component.html -->
-<div class="demande-item">
-    <div class="demande-header">
-      <h4>{{ demande.name }}</h4>
-      <span>{{ demande.documentType }}</span>
-    </div>
-    <div class="demande-details">
-      <p><strong>Email:</strong> {{ demande.email }}</p>
-      <p><strong>Date:</strong> {{ demande.date }}</p>
-      <p><strong>Status:</strong> <span class="status-badge" [ngClass]="getStatusClass(demande.status)">{{ demande.status }}</span></p>
-    </div>
-    <div class="demande-actions">
-      <button (click)="approveDemande(demande)">Approuver</button>
-      <button (click)="rejectDemande(demande)">Rejeter</button>
-    </div>
-  </div>
-  
+<!-- src/app/demande-item/demande-item.component.html -->
+<tr>
+  <td>{{ demande.email }}</td>
+  <td>{{ demande.cin }}</td>
+  <td>{{ demande.apogeeNumber }}</td>
+  <td>{{ demande.documentType }}</td>
+  <td><span class="status-badge status-pending">{{ demande.status }}</span></td>
+  <td>{{ demande.submissionDate | date: 'shortDate' }}</td>
+  <td>
+    <button class="btn approve">
+      <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
+      Approuver
+    </button>
+    <button class="btn reject">
+      <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
+      Rejeter
+    </button>
+  </td>
+</tr>

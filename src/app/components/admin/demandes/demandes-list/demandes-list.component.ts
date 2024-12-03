@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Demande } from '../../../../models/demande';
 import { DemandeService } from '../../../../services/demande.service';
 
@@ -9,7 +9,9 @@ import { DemandeService } from '../../../../services/demande.service';
   styleUrl: './demandes-list.component.css'
 })
 export class DemandesListComponent {
-  demands: Demande[] = [];
+  @Input() demands: Demande[] = [];
+
+  // demands: Demande[] = [];
   filteredDemands: Demande[] = [];
   searchTerm: string = '';
   selectedCategory: string = 'Toutes les demandes';
@@ -39,17 +41,20 @@ export class DemandesListComponent {
 
   applyFilters(): void {
     this.filteredDemands = this.demands.filter(demande => {
+      const searchTermLower = this.searchTerm.toLowerCase().trim();
+      const selectedCategoryLower = this.selectedCategory.toLowerCase().trim();
+  
       const matchesSearch = 
-        demande.email.toLowerCase().includes(this.searchTerm) ||
-        demande.cin.toLowerCase().includes(this.searchTerm) ||
-        demande.apogeeNumber.toLowerCase().includes(this.searchTerm);
-
+        demande.email.toLowerCase().includes(searchTermLower) ||
+        demande.cin.toLowerCase().includes(searchTermLower) ||
+        demande.apogeeNumber.toLowerCase().includes(searchTermLower);
+  
       const matchesCategory = 
-        this.selectedCategory === 'Toutes les demandes' || 
-        demande.documentType === this.selectedCategory;
-
+        selectedCategoryLower === 'toutes les demandes' || 
+        demande.documentType.toLowerCase().trim() === selectedCategoryLower;
       return matchesSearch && matchesCategory;
     });
   }
+  
  
 }

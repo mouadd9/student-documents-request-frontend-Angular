@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DemandeService } from '../../../services/demande.service';
 import { Demande } from '../../../models/demande';
 
@@ -9,7 +9,9 @@ import { Demande } from '../../../models/demande';
   styleUrl: './demandes.component.css'
 })
 export class DemandesComponent {
-  demands: Demande[] = [];
+  @Input() demands: any[] = [];
+
+  // demands: Demande[] = [];
   filteredDemands: Demande[] = [];
   searchTerm: string = '';
   selectedCategory: string = 'Toutes les demandes';
