@@ -25,7 +25,6 @@ export class DemandeComponent implements OnInit{
   private formBuilder : FormBuilder;
   private store : Store;
   public demandeForm!: FormGroup;
-  private demande: Demande;
   public demandesState$! : Observable<demandeState>;
 
   public constructor(
@@ -35,12 +34,6 @@ export class DemandeComponent implements OnInit{
     // dependency injection
     this.formBuilder = formBuilder; 
     this.store = store;
-    this.demande = {
-      email : '',
-      cin : '',
-      apogeeNumber : '',
-      documentType : DocumentType.Attestation
-    }
   }
 
   // after the creation of the component
@@ -53,13 +46,19 @@ export class DemandeComponent implements OnInit{
           apogeeNumber: ['', Validators.required],
           documentType: ['', Validators.required]
     })
+
+    // React to state changes to reset the form when state is LOADED
+    this.demandesState$.subscribe(state => {
+      if (state.demandeState === STATE.loaded) {
+        this.demandeForm.reset(); // Reset the form only when the state is LOADED
+      }
+    });
   }
 
 
   onSubmit(): void {
     if(this.demandeForm.valid) {
-      this.demande = this.demandeForm.value;
-      this.store.dispatch(DemandeActions.saveDemande({payload: this.demande}));
+      this.store.dispatch(DemandeActions.saveDemande({payload: this.demandeForm.value}));
     }
   }
 
