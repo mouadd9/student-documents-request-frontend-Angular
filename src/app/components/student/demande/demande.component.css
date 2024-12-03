@@ -84,11 +84,6 @@
 
   /*error handling*/
 
-  /* Label with error */
-.tab-content .form .form-content form .form-group-input.error label {
-  color: #dc2626; /* Red color for error */
-  font-weight: 600;
-}
 
 /* Input or select with error */
 .tab-content .form .form-content form .form-group-input.error input,
@@ -177,6 +172,7 @@
 
 
 
+  
   /*btn loading*/
 
   .loading {
@@ -185,7 +181,7 @@
     font-size: 0.875rem;
     font-weight: 500;
     color: #ffffff;
-    background-color: #746b05;
+    background-color: #e3d000;
     border: none;
     border-radius: 0.375rem;
     cursor: pointer;
@@ -198,16 +194,17 @@
    
   }
   .loading:hover {
-    background-color: #4f4904;
+    background-color:  #c3b301;
   }
   .loading:focus-visible {
-    outline: 2px solid  #4f4904;
+    outline: 2px solid  #c3b301;
     outline-offset: 2px;
   }
   
   .loading:active {
-    background-color: #4f4904;
+    background-color: #c3b301;
   }
+  
   
 
     /*btn loaded*/
