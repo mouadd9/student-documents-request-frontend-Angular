@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Demande } from '../../../models/demande';
-import { DocumentType } from '../../../models/enums/document-type';
+import { TypeDocument } from '../../../models/enums/document-type';
 import { Store } from '@ngrx/store';
 import { DemandeActions } from '../../../store/demandes-feature/demandes.actions';
 // this is the state enum
@@ -10,7 +10,6 @@ import { STATE } from '../../../store/state';
 import { demandeState } from '../../../store/demandes-feature/demandes.state';
 import { Observable } from 'rxjs';
 import { selectDemandesState } from '../../../store/demandes-feature/demandes.selectors';
-
 
 @Component({
   selector: 'app-demande',
@@ -26,6 +25,12 @@ export class DemandeComponent implements OnInit{
   private store : Store;
   public demandeForm!: FormGroup;
   public demandesState$! : Observable<demandeState>;
+
+  // Define options for the TypeDocument select input
+  public typeDocumentOptions = [
+    { value: TypeDocument.ATTESTATION_SCOLARITE, label: 'Attestation de Scolarité' },
+    { value: TypeDocument.RELEVE_NOTES, label: 'Relevé de Notes' },
+  ];
 
   public constructor(
     formBuilder : FormBuilder,
@@ -43,8 +48,8 @@ export class DemandeComponent implements OnInit{
     this.demandeForm = this.formBuilder.group({ 
           email: ['', [Validators.required, Validators.email]],
           cin: ['', Validators.required],
-          apogeeNumber: ['', Validators.required],
-          documentType: ['', Validators.required]
+          numApogee: ['', Validators.required],
+          typeDocument: ['', Validators.required]
     })
 
     // React to state changes to reset the form when state is LOADED
@@ -55,23 +60,15 @@ export class DemandeComponent implements OnInit{
     });
   }
 
-
   onSubmit(): void {
     if(this.demandeForm.valid) {
       this.store.dispatch(DemandeActions.saveDemande({payload: this.demandeForm.value}));
     }
   }
 
-
-
   // Note in other cases we need to fetch some kind of data before initializing the form 
   // so in this case we need to dispatch an action of type new demande that will fetch data for us and change the store's state to new
   // and us we should react to the store's state when its new then we use the data in the state to initialize the form
-
-
-
-
-
 }
 
 

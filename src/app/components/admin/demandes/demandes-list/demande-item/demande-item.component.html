@@ -2,8 +2,8 @@
 <tr>
   <td>{{ demande.email }}</td>
   <td>{{ demande.cin }}</td>
-  <td>{{ demande.apogeeNumber }}</td>
-  <td>{{ demande.documentType }}</td>
+  <td>{{ demande.numApogee }}</td>
+  <td>{{ demande.typeDocument }}</td>
   <td>
     <span class="status-badge" [class.status-pending]="demande.status === 'Pending'" 
         [class.status-approved]="demande.status === 'Approved'" 

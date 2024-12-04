@@ -53,8 +53,8 @@ export class ReclamationComponent implements OnInit {
     this.reclamationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       cin: ['', Validators.required],
-      apogeeNumber: ['', Validators.required],
-      subject: ['', Validators.required],
+      numApogee: ['', Validators.required],
+      sujet: ['', Validators.required],
       message: ['', Validators.required]
     });
     // React to state changes to reset the form when state is LOADED

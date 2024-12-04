@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Demande } from '../../../../models/demande';
 import { DemandeService } from '../../../../services/demande.service';
+import { DemandeStatus } from '../../../../models/enums/document-status';
 
 @Component({
   selector: 'app-demandes-list',
@@ -9,6 +10,7 @@ import { DemandeService } from '../../../../services/demande.service';
   styleUrl: './demandes-list.component.css'
 })
 export class DemandesListComponent {
+  DemandeStatus = DemandeStatus;
   @Input() demands: Demande[] = [];
 
   // demands: Demande[] = [];
@@ -46,13 +48,13 @@ export class DemandesListComponent {
       const selectedCategoryLower = this.selectedCategory.toLowerCase().trim();
   
       const matchesSearch = 
-        demande.email.toLowerCase().includes(searchTermLower) ||
-        demande.cin.toLowerCase().includes(searchTermLower) ||
-        demande.apogeeNumber.toLowerCase().includes(searchTermLower);
+        demande.email?.toLowerCase().includes(searchTermLower) ||
+        demande.cin?.toLowerCase().includes(searchTermLower) ||
+        demande.numApogee?.toLowerCase().includes(searchTermLower);
   
       const matchesCategory = 
         selectedCategoryLower === 'toutes les demandes' || 
-        demande.documentType.toLowerCase().trim() === selectedCategoryLower;
+        demande.typeDocument.toLowerCase().trim() === selectedCategoryLower;
       return matchesSearch && matchesCategory;
     });
   }

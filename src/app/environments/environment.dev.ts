@@ -1,3 +1,5 @@
+// environment.ts
 export const environment = {
-    backendHost: 'http://localhost:3000'  // your local backend
-  };
+  production: false,
+  backendHost: 'http://localhost:8088/api'
+};

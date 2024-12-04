@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ReclamationService } from '../../../../services/reclamation.service';
 import { Reclamation } from '../../../../models/reclamation';
+import { ReclamationService } from '../../../../services/reclamation.service';
 
 @Component({
   selector: 'app-reclamations-list',
@@ -45,9 +45,9 @@ export class ReclamationsListComponent {
       // const selectedCategoryLower = this.selectedCategory.toLowerCase().trim();
   
       const matchesSearch = 
-        r.email.toLowerCase().includes(searchTermLower) ||
-        r.cin.toLowerCase().includes(searchTermLower) ||
-        r.apogeeNumber.toLowerCase().includes(searchTermLower);
+        r.email?.toLowerCase().includes(searchTermLower) ||
+        r.cin?.toLowerCase().includes(searchTermLower) ||
+        r.numApogee?.toLowerCase().includes(searchTermLower);
   
       
       return matchesSearch;

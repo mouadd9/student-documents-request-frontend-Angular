@@ -21,31 +21,28 @@
         <tr *ngFor="let reclamation of reclamations">
           <td>{{ reclamation.email }}</td>
           <td>{{ reclamation.cin }}</td>
-          <td>{{ reclamation.apogeeNumber }}</td>
-          <td><textarea type="text" readonly value="{{ reclamation.description }}"></textarea></td>
+          <td>{{ reclamation.numApogee }}</td>
+          <td><textarea type="text" readonly>{{ reclamation.message }}</textarea></td>
           <td>
-            <span class="status-badge" [class.status-pending]="reclamation.status === 'Pending'" 
-              [class.status-approved]="reclamation.status === 'Resolved'" 
-              [class.status-rejected]="reclamation.status === 'Rejected'"
-              [class.status-in-progress]="reclamation.status === 'In Progress'">
-
+            <span class="status-badge" 
+              [class.status-en-attente]="reclamation.status === 'EN_ATTENTE'" 
+              [class.status-traitee]="reclamation.status === 'TRAITEE'">
               {{ reclamation.status }}
-          </span>
+            </span>
           </td>
           <td>
             <button class="btn approve">
-                <!-- (click)="approveDemande(demande)" -->
+                <!-- (click)="approveReclamation(reclamation)" -->
                 <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
                 Traiter
             </button>
-            <button class="btn reject" >
-                <!-- (click)="rejectDemande(demande)" -->
+            <button class="btn reject">
+                <!-- (click)="rejectReclamation(reclamation)" -->
                 <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
-                Ignoner
+                Ignorer
             </button>
           </td>
         </tr>
       </tbody>
     </table>
-  </div>
-  
+</div>

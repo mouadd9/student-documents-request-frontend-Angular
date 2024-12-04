@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DemandeService } from '../../../services/demande.service';
 import { Demande } from '../../../models/demande';
+import { DemandeService } from '../../../services/demande.service';
 
 @Component({
   selector: 'app-demandes',
@@ -43,11 +43,11 @@ export class DemandesComponent {
       const matchesSearch = 
         demande.email.toLowerCase().includes(this.searchTerm) ||
         demande.cin.toLowerCase().includes(this.searchTerm) ||
-        demande.apogeeNumber.toLowerCase().includes(this.searchTerm);
+        demande.numApogee.toLowerCase().includes(this.searchTerm);
 
       const matchesCategory = 
         this.selectedCategory === 'Toutes les demandes' || 
-        demande.documentType === this.selectedCategory;
+        demande.typeDocument === this.selectedCategory;
 
       return matchesSearch && matchesCategory;
     });

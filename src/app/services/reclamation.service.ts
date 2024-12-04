@@ -20,19 +20,19 @@ export class ReclamationService {
 
   public saveReclamationAsync(reclamation: Reclamation): Observable<Reclamation> {
     return timer(4000).pipe(
-      switchMap(() => this.http.post<Reclamation>(this.host + "/reclamations", reclamation))
+      switchMap(() => this.http.post<Reclamation>(this.host + "/public/reclamations", reclamation))
     );
   
   } // effects will use this Async Method when an action of type sendReclamation is dispatched 
   public updateReclamationAsync(reclamation: Reclamation ,response: string ): Observable<Reclamation> {
     let updatedReclamation = {...reclamation, response: response};
-    return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, updatedReclamation);
+    return this.http.put<Reclamation>(this.host + "/public/reclamations/${reclamation.id}/treat" , updatedReclamation);
 
     // return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, response);
   }
 
   public fetchAllReclamations() : Observable<Reclamation[]> {
-    return this.http.get<Reclamation[]>(this.host + "/reclamations" );
+    return this.http.get<Reclamation[]>(this.host + "/admin/reclamations" );
 
   }
 
