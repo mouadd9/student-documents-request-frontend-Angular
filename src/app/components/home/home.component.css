@@ -1,12 +1,12 @@
 /* Base styles */
-body, html {
+.container1 {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
 /* Layout */
-.container {
+.container2 {
     min-height: 100vh;
     padding: 2rem;
     width: 800px;

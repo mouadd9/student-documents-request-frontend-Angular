@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Demande } from '../models/demande';
-import { Observable } from 'rxjs';
+import { Observable, switchMap, timer } from 'rxjs';
 import { environment } from '../environments/environment.dev';
 import { DemandeStatus } from '../models/enums/document-status';
 
@@ -19,13 +19,18 @@ export class DemandeService {
   }
 
   public saveDemandeAsync(demande: Demande): Observable<Demande> {
-    return this.http.post<Demande>(this.host +"/demandes", demande);
+    return timer(4000).pipe(
+      switchMap(() => this.http.post<Demande>(this.host + "/demandes", demande))
+    );
   } // Effect will use this methods when we dispatch an action of type requestDemande
   
   public validateDemandeAsync(demande: Demande /*demandeId: number*/): Observable<Demande>{
     // for the purpose of demonstration we will change it here instead of doing it in the backend
     let updatedDemande = {...demande, status:DemandeStatus.Validated}
-    return this.http.put<Demande>(this.host + "/demandes/"+ demande.id ,updatedDemande); 
+    return this.http.put<Demande>(
+      `${this.host}/demandes/${demande.id}`,
+      updatedDemande
+    );
 
     // Production
     // return this.http.put<Demande>(this.host + "/demandes/validate/" + demandeId,{}); 
@@ -33,8 +38,10 @@ export class DemandeService {
 
   public refuseDemandeAsync(demande: Demande /*demandeId: number*/): Observable<Demande>{
     let updatedDemande = {...demande, status:DemandeStatus.Refused}
-    return this.http.put<Demande>(this.host + "/demandes/" + demande.id ,updatedDemande);
-
+    return this.http.put<Demande>(
+      `${this.host}/demandes/${demande.id}`,
+      updatedDemande
+    );
     // Production
     // return this.http.put<Demande>(this.host + "/demandes/refuse/" + demandeId,{});
   }

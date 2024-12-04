@@ -1,0 +1,51 @@
+<!-- src/app/demandes-list/demandes-list.component.html -->
+
+<div>
+    <div class="card-header">
+        <h3>Reclamations</h3>
+        <p>Liste des Reclamations qui nécessitent une action</p>
+      </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>CIN</th>
+          <th>Apogee Number</th>
+          <th>Description</th>
+          <th>Status</th>
+          <!-- <th>Submission Date</th> -->
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reclamation of reclamations">
+          <td>{{ reclamation.email }}</td>
+          <td>{{ reclamation.cin }}</td>
+          <td>{{ reclamation.apogeeNumber }}</td>
+          <td><textarea type="text" readonly value="{{ reclamation.description }}"></textarea></td>
+          <td>
+            <span class="status-badge" [class.status-pending]="reclamation.status === 'Pending'" 
+              [class.status-approved]="reclamation.status === 'Resolved'" 
+              [class.status-rejected]="reclamation.status === 'Rejected'"
+              [class.status-in-progress]="reclamation.status === 'In Progress'">
+
+              {{ reclamation.status }}
+          </span>
+          </td>
+          <td>
+            <button class="btn approve">
+                <!-- (click)="approveDemande(demande)" -->
+                <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
+                Traiter
+            </button>
+            <button class="btn reject" >
+                <!-- (click)="rejectDemande(demande)" -->
+                <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
+                Ignoner
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

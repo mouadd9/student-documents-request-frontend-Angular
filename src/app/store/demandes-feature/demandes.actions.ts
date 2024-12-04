@@ -30,7 +30,11 @@ export const DemandeActions = createActionGroup({
         // 4 - actions related to refusing a demand
         refuseDemande: props<{payload: Demande}>(),
         refuseDemandeSuccess: props<{payload: Demande}>(),
-        refuseDemandeError: props<{payload: string}>()
+        refuseDemandeError: props<{payload: string}>(),
+
+
+        // 5 - an action to reset to state to initial
+        resetDemandeStateEnum: emptyProps()
 
     }
 });

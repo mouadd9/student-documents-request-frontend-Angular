@@ -1,3 +1,42 @@
-<p>admin-side-bar works!</p>
-<button routerLink="/admin/dashboard">Dashboard</button>
-<button routerLink="/admin/demandes">Demandes</button>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>Tableau de bord</h2>
+  </div>
+  <div class="sidebar-content">
+    <ul class="sidebar-menu">
+        <li>
+            <button class="sidebar-menu-button" routerLink="/admin/dashboard" routerLinkActive="active">
+              <img src="../assets/icons/bar-chart.svg" alt="Statistiques Icon" class="icon-svg">
+              <span>Dashboard</span>
+            </button>
+          </li>
+      <li>
+        <!-- there is an active class in the css that indicates which option is currently open -->
+        <button class="sidebar-menu-button" routerLink="/admin/demandes" routerLinkActive="active">
+          <img src="../assets/icons/file-text.svg" alt="Demandes Icon" class="icon-svg">
+          <span>Demandes</span>
+        </button>
+      </li>
+      <li>
+        <button class="sidebar-menu-button"  routerLink="/admin/reclamations" routerLinkActive="active">
+          <img src="../assets/icons/message-square.svg" alt="Réclamations Icon" class="icon-svg">
+          <span>Réclamations</span>
+        </button>
+      </li>
+      <li>
+        <button class="sidebar-menu-button" routerLink="/admin/historique" routerLinkActive="active">
+          <img src="../assets/icons/history.svg" alt="Historique Icon" class="icon-svg">
+          <span>Historique</span>
+        </button>
+      </li>
+      
+    </ul>
+  </div>
+  <div class="sidebar-footer">
+    <button class="btn destructive" routerLink="/">
+      <img src="../assets/icons/logout_white.svg" alt="Déconnexion Icon" class="icon-svg"
+>
+      Déconnexion
+    </button>
+  </div>
+</div>

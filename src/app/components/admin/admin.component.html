@@ -1,3 +1,15 @@
-<app-admin-nav-bar></app-admin-nav-bar>
-<app-admin-side-bar></app-admin-side-bar>
-<router-outlet></router-outlet>
+<div class="dashboard-container">
+  <!-- Sidebar -->
+   <div class="header">
+    <app-admin-side-bar></app-admin-side-bar>
+   </div>
+
+  <!-- Main Content Area -->
+  <div class="dashboard-main">
+    <!-- Header -->
+    <app-admin-nav-bar></app-admin-nav-bar>
+
+    <!-- Page Content -->
+    <router-outlet></router-outlet>
+  </div>
+</div>

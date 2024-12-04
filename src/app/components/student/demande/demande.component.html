@@ -5,42 +5,65 @@
             <p>Remplissez le formulaire pour faire votre demande</p>
         </div>
         <div class="form-content">
+            <ng-container *ngIf="demandesState$ | async as state">
             <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()">
                 <!-- Email Input -->
-                <div class="form-group-input">
+                <div class="form-group-input" [ngClass]="{'error': state.demandeState === STATE.error}">
                     <label for="Email">Adresse email</label>
                     <input type="email" formControlName="email" placeholder="votre@email.com">
-                    <div class="form-message"></div>
+                    <div class="form-message" *ngIf="demandeForm.get('email')?.hasError('required') && (demandeForm.get('email')?.touched || demandeForm.get('email')?.dirty)">Email is required.</div>
+                    <div class="form-message" *ngIf="demandeForm.get('email')?.hasError('email') && (demandeForm.get('email')?.touched || demandeForm.get('email')?.dirty)">Invalid email format.</div>
+
                 </div>
 
                 <!-- Apoge Number Input -->
-                <div class="form-group-input">
+                <div class="form-group-input" [ngClass]="{'error': state.demandeState === STATE.error}">
                     <label for="apogeNumber">Numéro apogée</label>
                     <input type="text" formControlName="apogeeNumber" placeholder="apogee">
-                    <div class="form-message"></div>
+                    <div class="form-message" *ngIf="demandeForm.get('apogeeNumber')?.hasError('required') && (demandeForm.get('apogeeNumber')?.touched || demandeForm.get('apogeeNumber')?.dirty)">apogée is required.</div>
                 </div>
 
                 <!-- CIN Input -->
-                <div class="form-group-input">
+                <div class="form-group-input" [ngClass]="{'error': state.demandeState === STATE.error}">
                     <label for="cin">CIN</label>
                     <input type="text" formControlName="cin" placeholder="cin">
-                    <div class="form-message" id="cinError"></div>
+                    <div class="form-message" *ngIf="this.demandeForm.get('cin')?.hasError('required') && (demandeForm.get('cin')?.touched || demandeForm.get('cin')?.dirty) ">CIN is required.</div>
                 </div>
 
                 <!-- Document Type Dropdown -->
-                <div class="form-group-input">
+                <div class="form-group-input" [ngClass]="{'error': state.demandeState === STATE.error}" >
                     <label for="documentType">Type de document</label>
                     <select class="form-input" formControlName="documentType">
                         <option value="" disabled selected>Sélectionnez un document</option>
                         <option value="attestation">Attestation de scolarité</option>
                         <option value="releve">Relevé de notes</option>
                     </select>
-                    <div class="form-message" id="documentError"></div>
+                    <div class="form-message" *ngIf=" this.demandeForm.get('documentType')?.hasError('required')  && (demandeForm.get('documentType')?.touched || demandeForm.get('documentType')?.dirty) ">documentType is required.</div>
+                </div>
+
+                <div class="onError" *ngIf="state.demandeState === STATE.error">
+                    <div class="icon">
+                        <img
+                          src="assets/icons/danger.svg"
+                          alt="Admin Icon"
+                          class="icon-danger" />
+                      </div>
+                    Invalid identifiers.
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn" [disabled]="!this.demandeForm.valid">Envoyer la demande</button>
+
+                    <button [ngClass]="{'loading': state.demandeState === STATE.loading, 'loaded': state.demandeState === STATE.loaded, 'disabeled-btn': (state.demandeState === STATE.initial) && demandeForm.invalid  , 'btn': (state.demandeState === STATE.initial) || (state.demandeState === STATE.error)}" type="submit" [disabled]=" state.demandeState === STATE.loading || state.demandeState === STATE.loaded">
+                      <div *ngIf="(state.demandeState === STATE.initial) || (state.demandeState === STATE.error)">Envoyer la demande</div>
+                      <div class="spinner" *ngIf="state.demandeState === STATE.loading"></div>
+                      <div *ngIf="state.demandeState === STATE.loaded">Envoyée</div>
+                    </button>
+                  
             </form>
+        </ng-container>
         </div>
     </div>
 </div>
+
+
+  

@@ -38,6 +38,10 @@ export function demandeReducer(
         return {...demandeState, demandeState : STATE.error , errorMessage: (action as any).payload}
        }
 
+       case DemandeActions.resetDemandeStateEnum.type: {
+        return {...demandeState, demandeState : STATE.initial , errorMessage: ''}
+       }
+
        // i need to add validate and refuse
 
        default: {

@@ -8,6 +8,8 @@ import { demandeReducer } from './demandes-feature/demandes.reducer';
 
 // effects 
 import { DemandesEffects } from './demandes-feature/demandes.effects';
+import { reclamationsReducer } from './reclamations-feature/reclamations.reducer';
+import { reclamationsEffects } from './reclamations-feature/reclamations.effects';
 
 
 @NgModule({
@@ -15,11 +17,11 @@ import { DemandesEffects } from './demandes-feature/demandes.effects';
   imports: [
     StoreModule.forRoot({
       demandes: demandeReducer, 
-      //reclamations: reclamationsReducer
+      reclamations: reclamationsReducer
     }),
     EffectsModule.forRoot([
       DemandesEffects,
-      // ReclamationsEffects
+      reclamationsEffects
     ])
   ],
   providers: [

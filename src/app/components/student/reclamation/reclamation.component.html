@@ -5,44 +5,62 @@
           <p>Remplissez le formulaire pour faire votre réclamation</p>
       </div>
       <div class="form-content">
-          <form>
+        <ng-container *ngIf="reclamationState$ | async as state" > <!-- here we will subscribe to the observable using async -->
+          <form [formGroup]="reclamationForm" (ngSubmit)="onSubmit()">
               <!-- Email Input -->
-              <div class="form-group-input">
+              <div class="form-group-input" [ngClass]="{'error': state.state === STATE.error}">
                   <label for="Email">Adresse email</label>
                   <input type="email" formControlName="email" placeholder="votre@email.com">
-                  <div class="form-message"></div>
+                  <div class="form-message" *ngIf="reclamationForm.get('email')?.hasError('required') && (reclamationForm.get('email')?.touched || reclamationForm.get('email')?.dirty)">Email is required.</div>
+                  <div class="form-message" *ngIf="reclamationForm.get('email')?.hasError('email') && (reclamationForm.get('email')?.touched || reclamationForm.get('email')?.dirty)">Invalid email format.</div>
               </div>
 
               <!-- Apoge Number Input -->
-              <div class="form-group-input">
+              <div class="form-group-input" [ngClass]="{'error': state.state === STATE.error}">
                   <label for="apogeNumber">Numéro apogée</label>
                   <input type="text" formControlName="apogeeNumber" placeholder="apogee">
-                  <div class="form-message"></div>
-              </div>
+                  <div class="form-message" *ngIf="reclamationForm.get('apogeeNumber')?.hasError('required') && (reclamationForm.get('apogeeNumber')?.touched || reclamationForm.get('apogeeNumber')?.dirty)">apogée is required.</div>
+                </div>
 
               <!-- CIN Input -->
-              <div class="form-group-input">
+              <div class="form-group-input" [ngClass]="{'error': state.state === STATE.error}">
                   <label for="cin">CIN</label>
                   <input type="text" formControlName="cin" placeholder="cin">
-                  <div class="form-message" id="cinError"></div>
-              </div>
+                  <div class="form-message" *ngIf="this.reclamationForm.get('cin')?.hasError('required') && (reclamationForm.get('cin')?.touched || reclamationForm.get('cin')?.dirty) ">CIN is required.</div>
+                </div>
 
-              <div class="form-group-input">
+              <div class="form-group-input" [ngClass]="{'error': state.state === STATE.error}">
                   <label for="complaintSubject">Sujet</label>
-                  <input type="text" formControlName="sujet" placeholder="Sujet de votre réclamation">
-                  <div class="form-message"></div>
+                  <input type="text" formControlName="subject" placeholder="Sujet de votre réclamation">
+                  <div class="form-message" *ngIf="this.reclamationForm.get('subject')?.hasError('required') && (reclamationForm.get('subject')?.touched || reclamationForm.get('subject')?.dirty) ">subject is required.</div>
               </div>
 
-              <div class="form-group-input">
+              <div class="form-group-input" [ngClass]="{'error': state.state === STATE.error}">
                   <label for="complaintText">Message</label>
-                  <textarea formControlName="sujet" rows="4" placeholder="Détaillez votre réclamation..."></textarea>
-                  <div class="form-message" id="complaintError"></div>
+                  <textarea formControlName="message" rows="4" placeholder="Détaillez votre réclamation..."></textarea>
+                  <div class="form-message" *ngIf="this.reclamationForm.get('message')?.hasError('required') && (reclamationForm.get('message')?.touched || reclamationForm.get('message')?.dirty) ">description is required.</div>
               </div>
 
-              <button type="submit" class="btn">
-                  Envoyer la réclamation
+              <div class="onError" *ngIf="state.state === STATE.error">
+                <div class="icon">
+                    <img
+                      src="assets/icons/danger.svg"
+                      alt="Admin Icon"
+                      class="icon-danger" />
+                  </div>
+                Invalid identifiers.
+            </div>
+
+              <button [ngClass]="{'loading': state.state === STATE.loading, 'loaded': state.state === STATE.loaded, 'disabeled-btn': (state.state === STATE.initial) && reclamationForm.invalid  , 'btn': (state.state === STATE.initial) || (state.state === STATE.error)}" type="submit" [disabled]=" state.state === STATE.loading || state.state === STATE.loaded">
+                <div *ngIf="(state.state === STATE.initial) || (state.state === STATE.error)">Envoyer la réclamation</div>
+                <div class="spinner" *ngIf="state.state === STATE.loading"></div>
+                <div *ngIf="state.state === STATE.loaded">Envoyée</div>
               </button>
+
           </form>
+        </ng-container>
+        
+
       </div>
   </div>
 </div>

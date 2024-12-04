@@ -22,58 +22,17 @@
       "documentType": "Attestation",
       "status": "Validated",
       "submissionDate": "2024-11-28"
-    },
-    {
-      "id": "2",
-      "email": "student2@example.com",
-      "cin": "CD789012",
-      "apogeeNumber": "20180002",
-      "documentType": "ReleveNotes",
-      "status": "Validated",
-      "submissionDate": "2024-11-27"
-    },
-    {
-      "id": "3",
-      "email": "student1@example.com",
-      "cin": "AB123456",
-      "apogeeNumber": "20180001",
-      "documentType": "ReleveNotes",
-      "status": "Refused",
-      "submissionDate": "2024-11-26"
-    },
-    {
-      "id": "7",
-      "email": "student1@example.com",
-      "cin": "AB123456",
-      "apogeeNumber": "20180001",
-      "documentType": "Attestation",
-      "status": "Pending",
-      "submissionDate": "2024-11-28"
-    },
-    {
-      "id": "96a6",
-      "email": "mouad@gmail.com",
-      "cin": "testtest",
-      "apogeeNumber": "testtest",
-      "documentType": "attestation"
     }
   ],
   "reclamations": [
+   
     {
-      "id": "1",
-      "email": "student1@example.com",
-      "cin": "AB123456",
-      "apogeeNumber": "20180001",
-      "description": "Issue with Attestation request",
-      "status": "Pending"
-    },
-    {
-      "id": "2",
-      "email": "student2@example.com",
-      "cin": "CD789012",
-      "apogeeNumber": "20180002",
-      "description": "Wrong document received",
-      "status": "In Progress"
+      "id": "0b9a",
+      "email": "gyugoo@hjk",
+      "cin": "dfghjk",
+      "apogeeNumber": "(-è_ç",
+      "subject": "hjkl",
+      "message": "fghvgh"
     }
   ]
 }
