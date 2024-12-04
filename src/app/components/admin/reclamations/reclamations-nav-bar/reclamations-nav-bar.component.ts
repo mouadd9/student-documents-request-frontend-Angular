@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-demandes-nav-bar',
-  standalone: false,
-  templateUrl: './demandes-nav-bar.component.html',
-  styleUrl: './demandes-nav-bar.component.css'
+  selector: 'app-reclamations-nav-bar',
+  templateUrl: './reclamations-nav-bar.component.html',
+  styleUrl: './reclamations-nav-bar.component.css'
 })
-export class DemandesNavBarComponent {
+export class ReclamationsNavBarComponent {
   @Output() searchChanged = new EventEmitter<string>(); // Emits search term changes
   @Output() categoryChanged = new EventEmitter<string>(); // Emits category filter changes
 
@@ -15,8 +14,8 @@ export class DemandesNavBarComponent {
     this.searchChanged.emit(inputElement.value); // Emit the search term
   }
 
-  onCategoryChanged(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.categoryChanged.emit(selectElement.value); // Emit the selected category
-  }
+  // onCategoryChanged(event: Event): void {
+  //   const selectElement = event.target as HTMLSelectElement;
+  //   this.categoryChanged.emit(selectElement.value); // Emit the selected category
+  // }
 }

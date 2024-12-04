@@ -27,7 +27,10 @@ export class DemandeService {
   public validateDemandeAsync(demande: Demande /*demandeId: number*/): Observable<Demande>{
     // for the purpose of demonstration we will change it here instead of doing it in the backend
     let updatedDemande = {...demande, status:DemandeStatus.Validated}
-    return this.http.put<Demande>(this.host + "/demandes/"+ demande.id ,updatedDemande); 
+    return this.http.put<Demande>(
+      `${this.host}/demandes/${demande.id}`,
+      updatedDemande
+    );
 
     // Production
     // return this.http.put<Demande>(this.host + "/demandes/validate/" + demandeId,{}); 
@@ -35,8 +38,10 @@ export class DemandeService {
 
   public refuseDemandeAsync(demande: Demande /*demandeId: number*/): Observable<Demande>{
     let updatedDemande = {...demande, status:DemandeStatus.Refused}
-    return this.http.put<Demande>(this.host + "/demandes/" + demande.id ,updatedDemande);
-
+    return this.http.put<Demande>(
+      `${this.host}/demandes/${demande.id}`,
+      updatedDemande
+    );
     // Production
     // return this.http.put<Demande>(this.host + "/demandes/refuse/" + demandeId,{});
   }

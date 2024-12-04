@@ -7,7 +7,7 @@
   .section {
     margin-bottom: 2rem;
   }
-
+  
   .section h1 {
     font-size: 2rem;
     font-weight: 700;
@@ -81,19 +81,14 @@
   
   table th,
   table td {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    text-align: center;
+    padding: 0.75rem;
+    text-align: left;
     border-bottom: 1px solid #e5e7eb;
-    border-left: 1px solid #e5e7eb;
-    border-right: 1px solid #e5e7eb;
-
   }
   
   table th {
     background-color: #f9fafb;
     font-weight: 600;
-    text-wrap:nowrap;
   }
   
   table tbody tr:hover {
@@ -165,22 +160,59 @@
     width: 1rem;
     height: 1rem;
   }
-  .status-badge {
-    padding: 0.3em 0.6em;
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
+  .reclamations-container {
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add space around the content */
+    background-color: #f9f9f9; /* Light background for contrast */
+    border: 1px solid #ddd; /* Subtle border for structure */
+    border-radius: 10px; /* Smooth rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Professional shadow effect */
   }
   
-  .status-pending {
-    background-color: #fef3c7;
-    color: #92400e;  }
-  
-  .status-approved {
-    background-color: #218838;
+  .nav-bar {
+    margin-bottom: 20px; /* Space below navigation bar */
   }
   
-  .status-rejected {
-    background-color: #dc3545;
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; /* Add space between controls */
+    margin-bottom: 20px; /* Space below controls */
+  }
+  
+  .search-bar {
+    flex: 2; /* Search bar takes more space */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle inset shadow */
+  }
+  
+  .select {
+    flex: 1; /* Select box takes less space */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .reclamations-list {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .controls {
+      flex-direction: column;
+      align-items: stretch; /* Full width for items */
+      gap: 15px; /* Larger gap for stacked layout */
+    }
+  
+    .search-bar, .select {
+      flex: none;
+      width: 100%; /* Take full width in smaller viewports */
+    }
   }
   

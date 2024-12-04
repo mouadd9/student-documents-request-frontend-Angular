@@ -7,6 +7,8 @@ import { DemandeComponent } from './components/student/demande/demande.component
 import { ReclamationComponent } from './components/student/reclamation/reclamation.component';
 import { DemandesComponent } from './components/admin/demandes/demandes.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { HistoriqueComponent } from './components/admin/historique/historique.component';
+import { ReclamationsComponent } from './components/admin/reclamations/reclamations.component';
 
 // the paths we have
 //---------level 1
@@ -47,6 +49,8 @@ export const routes: Routes = [
     children: [
       { path: 'demandes', component: DemandesComponent },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'reclamations', component: ReclamationsComponent },
+      { path: 'historique', component: HistoriqueComponent },
     ],
   },
 ];

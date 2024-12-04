@@ -183,4 +183,7 @@
   .status-rejected {
     background-color: #dc3545;
   }
-  
+  .status-in-progress{
+    background-color: #96da01;
+    color:#1a1a1a;
+  }

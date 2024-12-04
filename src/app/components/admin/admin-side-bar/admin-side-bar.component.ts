@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './admin-side-bar.component.css'
 })
 export class AdminSideBarComponent {
+  activeButton: string = 'dashboard'; // Set default active button
 
+  setActiveButton(buttonName: string) {
+    this.activeButton = buttonName;
+  }
 }
