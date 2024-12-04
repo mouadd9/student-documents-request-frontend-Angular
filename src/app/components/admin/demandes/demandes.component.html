@@ -1,17 +1,9 @@
 <div class="demandes-container">
-    <!-- Navigation Bar -->
-    <div class="nav-bar">
-      <app-demandes-nav-bar 
-      (searchChanged)="onSearchChanged($event)" 
-      (categoryChanged)="onCategoryChanged($event)">
-    </app-demandes-nav-bar>
-    </div>
-  
-    <!-- Demand List -->
-    <div class="demandes-list">
-
-<app-demandes-list [demands]="filteredDemands"></app-demandes-list>
-
-    </div>
-  </div>
-  
+  <!-- Navigation Bar -->
+  <app-demandes-nav-bar></app-demandes-nav-bar>
+  <!-- Demand List -->
+  <!-- we will pass the Observable we collected in this component to app-demandes-list -->
+  <!-- we will pass the observable from this component to the child component using this tag -->
+  <!-- [ the @input property (child component) ] = " the property we want to pass (defined in the parent-component) " -->
+  <app-demandes-list [demandeState$]="combined$"></app-demandes-list>
+</div>

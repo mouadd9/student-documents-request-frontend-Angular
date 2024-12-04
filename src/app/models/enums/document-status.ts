@@ -1,5 +1,5 @@
 export enum DemandeStatus {
-    Pending = 'Pending', // Default status when demande is created
-    Validated = 'Validated', 
-    Refused = 'Refused' 
+    EN_ATTENTE = 'EN_ATTENTE',
+    APPROVEE = 'APPROVEE',
+    REFUSEE = 'REFUSEE'
 }

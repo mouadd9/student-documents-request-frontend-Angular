@@ -170,9 +170,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Professional shadow effect */
   }
   
-  .nav-bar {
-    margin-bottom: 20px; /* Space below navigation bar */
-  }
+
   
   .controls {
     display: flex;
@@ -199,9 +197,7 @@
     border-radius: 5px;
   }
   
-  .demandes-list {
-    margin-top: 20px;
-  }
+
   
   @media (max-width: 768px) {
     .controls {

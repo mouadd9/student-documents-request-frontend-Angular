@@ -1,12 +1,15 @@
 import { DemandeStatus } from "./enums/document-status";
-import { DocumentType } from "./enums/document-type";
+import { TypeDocument } from "./enums/document-type";
+import { Etudiant } from "./Etudiant";
 
 export interface Demande {
     id?: number; 
-    email: string;
-    cin: string;
-    apogeeNumber: string;
-    documentType: DocumentType;
+    email?: string;
+    cin?: string;
+    numApogee?: string;
+    typeDocument: TypeDocument;
     status?: DemandeStatus; 
-    submissionDate?: Date;
+    dateCreation?: Date;
+    dateTraitement?: Date | null;
+    etudiant?: Etudiant;
 }

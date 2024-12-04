@@ -16,29 +16,28 @@
 
                 </div>
 
-                <!-- Apoge Number Input -->
+                <!-- Num Apogee Input -->
                 <div class="form-group-input" [ngClass]="{'error': state.demandeState === STATE.error}">
                     <label for="apogeNumber">Numéro apogée</label>
-                    <input type="text" formControlName="apogeeNumber" placeholder="apogee">
-                    <div class="form-message" *ngIf="demandeForm.get('apogeeNumber')?.hasError('required') && (demandeForm.get('apogeeNumber')?.touched || demandeForm.get('apogeeNumber')?.dirty)">apogée is required.</div>
+                    <input type="text" formControlName="numApogee" placeholder="Numéro apogée">
+                    <div class="form-message" *ngIf="demandeForm.get('numApogee')?.hasError('required') && (demandeForm.get('numApogee')?.touched || demandeForm.get('numApogee')?.dirty)">Numéro apogée is required.</div>
                 </div>
 
                 <!-- CIN Input -->
                 <div class="form-group-input" [ngClass]="{'error': state.demandeState === STATE.error}">
                     <label for="cin">CIN</label>
                     <input type="text" formControlName="cin" placeholder="cin">
-                    <div class="form-message" *ngIf="this.demandeForm.get('cin')?.hasError('required') && (demandeForm.get('cin')?.touched || demandeForm.get('cin')?.dirty) ">CIN is required.</div>
+                    <div class="form-message" *ngIf="demandeForm.get('cin')?.hasError('required') && (demandeForm.get('cin')?.touched || demandeForm.get('cin')?.dirty) ">CIN is required.</div>
                 </div>
 
                 <!-- Document Type Dropdown -->
                 <div class="form-group-input" [ngClass]="{'error': state.demandeState === STATE.error}" >
-                    <label for="documentType">Type de document</label>
-                    <select class="form-input" formControlName="documentType">
+                    <label for="typeDocument">Type de document</label>
+                    <select class="form-input" formControlName="typeDocument">
                         <option value="" disabled selected>Sélectionnez un document</option>
-                        <option value="attestation">Attestation de scolarité</option>
-                        <option value="releve">Relevé de notes</option>
+                        <option *ngFor="let doc of typeDocumentOptions" [value]="doc.value">{{ doc.label }}</option>
                     </select>
-                    <div class="form-message" *ngIf=" this.demandeForm.get('documentType')?.hasError('required')  && (demandeForm.get('documentType')?.touched || demandeForm.get('documentType')?.dirty) ">documentType is required.</div>
+                    <div class="form-message" *ngIf=" this.demandeForm.get('typeDocument')?.hasError('required')  && (demandeForm.get('typeDocument')?.touched || demandeForm.get('typeDocument')?.dirty) ">Type de document is required.</div>
                 </div>
 
                 <div class="onError" *ngIf="state.demandeState === STATE.error">
@@ -48,7 +47,7 @@
                           alt="Admin Icon"
                           class="icon-danger" />
                       </div>
-                    Invalid identifiers.
+                    Identifiants invalides.
                 </div>
 
                 <!-- Submit Button -->

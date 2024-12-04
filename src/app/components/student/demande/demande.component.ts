@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Demande } from '../../../models/demande';
-import { DocumentType } from '../../../models/enums/document-type';
 import { Store } from '@ngrx/store';
 import { DemandeActions } from '../../../store/demandes-feature/demandes.actions';
 // this is the state enum
@@ -10,6 +8,7 @@ import { STATE } from '../../../store/state';
 import { demandeState } from '../../../store/demandes-feature/demandes.state';
 import { Observable } from 'rxjs';
 import { selectDemandesState } from '../../../store/demandes-feature/demandes.selectors';
+import { TypeDocument } from '../../../models/enums/document-type';
 
 
 @Component({
@@ -21,6 +20,10 @@ import { selectDemandesState } from '../../../store/demandes-feature/demandes.se
 export class DemandeComponent implements OnInit{
   // making the state enum accessible to the template 
   public STATE = STATE;
+  public typeDocumentOptions = [
+    { value: TypeDocument.ATTESTATION_SCOLARITE, label: 'Attestation de Scolarité' },
+    { value: TypeDocument.RELEVE_NOTES, label: 'Relevé de Notes' },
+  ];
   // property declarations
   private formBuilder : FormBuilder;
   private store : Store;
@@ -43,8 +46,8 @@ export class DemandeComponent implements OnInit{
     this.demandeForm = this.formBuilder.group({ 
           email: ['', [Validators.required, Validators.email]],
           cin: ['', Validators.required],
-          apogeeNumber: ['', Validators.required],
-          documentType: ['', Validators.required]
+          numApogee: ['', Validators.required],
+          typeDocument: ['', Validators.required]
     })
 
     // React to state changes to reset the form when state is LOADED
