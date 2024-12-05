@@ -71,9 +71,7 @@ export class HistoriqueComponent implements OnInit {
     this.store.dispatch(DemandeActions.fetchDemandes());
     this.status = status;
     this.initializeCombinedObservable();
-
   }
-
 
 
 }
