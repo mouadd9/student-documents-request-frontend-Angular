@@ -1,13 +1,18 @@
-import { Component } from '@angular/core';
-import { HistoriqueItemComponent } from "./historique-item/historique-item.component";
+import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Demande } from '../../../../models/demande';
+import { STATE } from '../../../../store/state';
 
 @Component({
   selector: 'app-historique-list',
-  standalone: true,
-  imports: [HistoriqueItemComponent],
+  standalone: false,
   templateUrl: './historique-list.component.html',
   styleUrl: './historique-list.component.css'
 })
 export class HistoriqueListComponent {
-
+  @Input() demandeState$!: Observable<{
+    demandes: Demande[];
+    state: STATE;
+    errorMessage: string;
+  }> ;
 }

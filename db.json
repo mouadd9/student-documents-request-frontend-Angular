@@ -37,7 +37,7 @@
       "cin": "C345678",
       "numApogee": "34567890",
       "typeDocument": "ATTESTATION_SCOLARITE",
-      "status": "EN_ATTENTE",
+      "status": "APPROVEE",
       "dateCreation": "2023-12-03T11:15:00.000Z",
       "dateTraitement": "2023-12-05T10:00:00.000Z",
       "etudiant": {
@@ -67,7 +67,7 @@
       "cin": "E567890",
       "numApogee": "56789012",
       "typeDocument": "ATTESTATION_SCOLARITE",
-      "status": "EN_ATTENTE",
+      "status": "REFUSEE",
       "dateCreation": "2023-12-05T14:45:00.000Z",
       "dateTraitement": null,
       "etudiant": {

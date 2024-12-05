@@ -26,6 +26,9 @@ import { HistoriqueComponent } from './components/admin/historique/historique.co
 import { ReclamationsListComponent } from './components/admin/reclamations/reclamations-list/reclamations-list.component';
 import { ReclamationsNavBarComponent } from './components/admin/reclamations/reclamations-nav-bar/reclamations-nav-bar.component';
 import { ReclamationsComponent } from './components/admin/reclamations/reclamations.component';
+import { HistoriqueListComponent } from './components/admin/historique/historique-list/historique-list.component';
+import { HistoriqueItemComponent } from './components/admin/historique/historique-list/historique-item/historique-item.component';
+import { HistoriqueNavBarComponent } from './components/admin/historique/historique-nav-bar/historique-nav-bar.component';
 
 
 
@@ -55,7 +58,11 @@ import { ReclamationsComponent } from './components/admin/reclamations/reclamati
     ReclamationComponent,
     ReclamationsComponent,
     ReclamationsNavBarComponent,
-    ReclamationsListComponent
+    ReclamationsListComponent,
+    HistoriqueComponent,
+    HistoriqueListComponent,
+    HistoriqueItemComponent,
+    HistoriqueNavBarComponent
   ],
   imports: [
     BrowserModule,

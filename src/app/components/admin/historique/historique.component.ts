@@ -10,8 +10,7 @@ import { DemandeStatus } from '../../../models/enums/document-status';
 
 @Component({
   selector: 'app-historique',
-  standalone: true,
-  imports: [],
+  standalone: false,
   templateUrl: './historique.component.html',
   styleUrl: './historique.component.css'
 })
