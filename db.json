@@ -2,12 +2,12 @@
   "students": [],
   "demandes": [
     {
-      "id": 1,
+      "id": "1",
       "email": "student1@example.com",
       "cin": "A123456",
       "numApogee": "12345678",
       "typeDocument": "ATTESTATION_SCOLARITE",
-      "status": "EN_ATTENTE",
+      "status": "APPROVEE",
       "dateCreation": "2023-12-01T08:00:00.000Z",
       "dateTraitement": null,
       "etudiant": {
@@ -17,12 +17,12 @@
       }
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "student2@example.com",
       "cin": "B234567",
       "numApogee": "23456789",
       "typeDocument": "RELEVE_NOTES",
-      "status": "EN_ATTENTE",
+      "status": "APPROVEE",
       "dateCreation": "2023-12-02T09:30:00.000Z",
       "dateTraitement": null,
       "etudiant": {
@@ -32,7 +32,7 @@
       }
     },
     {
-      "id": 3,
+      "id": "3",
       "email": "student3@example.com",
       "cin": "C345678",
       "numApogee": "34567890",
@@ -47,7 +47,7 @@
       }
     },
     {
-      "id": 4,
+      "id": "4",
       "email": "student4@example.com",
       "cin": "D456789",
       "numApogee": "45678901",
@@ -62,7 +62,7 @@
       }
     },
     {
-      "id": 5,
+      "id": "5",
       "email": "student5@example.com",
       "cin": "E567890",
       "numApogee": "56789012",

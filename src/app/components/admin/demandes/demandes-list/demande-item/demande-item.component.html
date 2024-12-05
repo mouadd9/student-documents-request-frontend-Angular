@@ -1,5 +1,5 @@
  
- <td>{{ demande.dateCreation }}</td>
+  <td>{{ demande.dateCreation }}</td>
   <td>{{ demande.etudiant?.nom }}</td>
   <td>{{ demande.email }}</td>
   <td>{{ demande.numApogee }}</td>
@@ -10,11 +10,11 @@
     </span>
   </td>
   <td>
-    <button class="btn approve">
+    <button class="btn approve" (click)="onApprove(demande)">
       <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
       Approuver
     </button>
-    <button class="btn reject">
+    <button class="btn reject" (click)="onReject(demande)">
       <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
       Rejeter
     </button>

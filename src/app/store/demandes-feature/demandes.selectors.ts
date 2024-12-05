@@ -48,7 +48,7 @@ export const selectAllDemandes = createSelector(selectDemandesState, (state) => 
 export const selectPendingDemandes = createSelector(selectAllDemandes, (demandes) => demandes.filter(demande => demande.status === DemandeStatus.EN_ATTENTE));
 
 export const selectDemandesByType = (type: TypeDocument) =>
-    createSelector(selectAllDemandes, (demandes) =>
+    createSelector(selectPendingDemandes, (demandes) =>
       demandes.filter((demande) => demande.typeDocument === type)
     );
 
