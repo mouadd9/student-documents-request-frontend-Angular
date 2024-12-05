@@ -1,5 +1,4 @@
 import { Action } from "@ngrx/store";
-import { Demande } from "../../models/demande";
 import { STATE } from "../state";
 import { DemandeActions } from "./demandes.actions";
 import { demandeState } from "./demandes.state"

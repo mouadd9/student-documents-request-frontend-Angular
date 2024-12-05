@@ -11,7 +11,7 @@ import { Demande } from '../../../../models/demande';
 })
 
 
-// this component will Subscribe to the demandeState Observale in its template
+// this component will Subscribe to the demandeState Observable in its template
 export class DemandesListComponent {
 
   // we use @Input to declare a property that will receive data from the parent component.
