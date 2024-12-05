@@ -8,5 +8,4 @@ import { Component } from '@angular/core';
   styleUrl: './historique.component.css'
 })
 export class HistoriqueComponent {
-
 }
