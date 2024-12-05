@@ -67,7 +67,7 @@
       "cin": "E567890",
       "numApogee": "56789012",
       "typeDocument": "ATTESTATION_SCOLARITE",
-      "status": "REFUSEE",
+      "status": "EN_ATTENTE",
       "dateCreation": "2023-12-05T14:45:00.000Z",
       "dateTraitement": null,
       "etudiant": {
@@ -75,7 +75,53 @@
         "nom": "Sarah Johnson",
         "email": "sarahjohnson@example.com"
       }
+    },
+    {
+      "id": "89",
+      "email": "student5@example.com",
+      "cin": "E567890",
+      "numApogee": "56789012",
+      "typeDocument": "ATTESTATION_SCOLARITE",
+      "status": "EN_ATTENTE",
+      "dateCreation": "2023-12-05T14:45:00.000Z",
+      "dateTraitement": null,
+      "etudiant": {
+        "id": 98,
+        "nom": "Sarah Johnson",
+        "email": "sarahjohnson@example.com"
+      }
+    },
+    {
+      "id": "90",
+      "email": "student5@example.com",
+      "cin": "E567890",
+      "numApogee": "56789012",
+      "typeDocument": "ATTESTATION_SCOLARITE",
+      "status": "EN_ATTENTE",
+      "dateCreation": "2023-12-05T14:45:00.000Z",
+      "dateTraitement": null,
+      "etudiant": {
+        "id": 0,
+        "nom": "Sarah Johnson",
+        "email": "sarahjohnson@example.com"
+      }
+    },
+    {
+      "id": "9",
+      "email": "student5@example.com",
+      "cin": "E567890",
+      "numApogee": "56789012",
+      "typeDocument": "ATTESTATION_SCOLARITE",
+      "status": "EN_ATTENTE",
+      "dateCreation": "2023-12-05T14:45:00.000Z",
+      "dateTraitement": null,
+      "etudiant": {
+        "id": 78,
+        "nom": "Sarah Johnson",
+        "email": "sarahjohnson@example.com"
+      }
     }
-  ],
+  ]
+  ,
   "reclamations": []
 }

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Demande } from '../../../../../models/demande';
+import { DemandeStatus } from '../../../../../models/enums/document-status';
 
 @Component({
   selector: '[app-historique-item]',
@@ -9,4 +10,5 @@ import { Demande } from '../../../../../models/demande';
 })
 export class HistoriqueItemComponent {
   @Input() demande!: Demande;
+  public DemandeStatus = DemandeStatus;
 }

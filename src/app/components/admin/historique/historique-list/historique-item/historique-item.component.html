@@ -1,11 +1,14 @@
    
-    <td>25/12/2023</td>
-    <td>Fihl Touns</td>
-    <td>fihl.com</td>
-    <td>11223344</td>
-    <td>Attestation de scolarité</td>
+    <td>{{demande.dateCreation}}</td>
+    <td>{{demande.etudiant?.nom}}</td>
+    <td>{{demande.email}}</td>
+    <td>{{demande.numApogee}}</td>
+    <td>{{demande.typeDocument}}</td>
     <td>
-      <span class="status-badge status-approved">Approuvé</span>
+      <span class="status-badge" [ngSwitch]="demande.status">
+        <div class="status-badge status-approved" *ngSwitchCase="this.DemandeStatus.APPROVEE">Approuvée</div>
+        <div class="status-badge status-rejected" *ngSwitchCase="this.DemandeStatus.REFUSEE">Refusée</div>
+      </span>
     </td>
 
   <!--<tr>
