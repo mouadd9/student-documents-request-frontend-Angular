@@ -19,15 +19,15 @@ export class DemandesListComponent {
   constructor(private demandeService: DemandeService) {}
 
   ngOnInit(): void {
-    this.fetchDemandes();
+    // this.fetchDemandes();
   }
 
-  fetchDemandes(): void {
-    this.demandeService.fetchDemandesAsync().subscribe((data: Demande[]) => {
-      this.demands = data;
-      this.filteredDemands = data; // Initially show all demandes
-    });
-  }
+  // fetchDemandes(): void {
+  //   this.demandeService.fetchDemandesAsync().subscribe((data: Demande[]) => {
+  //     this.demands = data;
+  //     this.filteredDemands = data; // Initially show all demandes
+  //   });
+  // }
 
 
   onSearchChanged(searchTerm: string): void {
