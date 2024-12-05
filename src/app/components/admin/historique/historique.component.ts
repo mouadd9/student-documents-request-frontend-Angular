@@ -7,13 +7,11 @@ import { Store } from '@ngrx/store';
 import { TypeDocument } from '../../../models/enums/document-type';
 import { selectDataState, selectErrorMessage, selectNonPendingDemandes, selectNonPendingDemandesByStatus, selectNonPendingDemandesByType, selectNonPendingDemandesByTypeAndStatus } from '../../../store/demandes-feature/demandes.selectors';
 import { DemandeStatus } from '../../../models/enums/document-status';
-import { HistoriqueNavBarComponent } from "./historique-nav-bar/historique-nav-bar.component";
-import { HistoriqueListComponent } from "./historique-list/historique-list.component";
 
 @Component({
   selector: 'app-historique',
   standalone: true,
-  imports: [HistoriqueNavBarComponent, HistoriqueListComponent],
+  imports: [],
   templateUrl: './historique.component.html',
   styleUrl: './historique.component.css'
 })
