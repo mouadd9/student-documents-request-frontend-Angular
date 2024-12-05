@@ -1,13 +1,10 @@
 <!--here we subscribe to the observable using the pipe and async-->
 <div class="demandes-list">
-
   <div class="card-header">
     <h3>Demandes</h3>
     <p>Liste des demandes qui nécessitent une action</p>
   </div>
-
   <table>
-
     <!-- this holds the column headers (fixed) -->
     <thead>
       <tr>
@@ -20,7 +17,6 @@
         <th>Actions</th>
       </tr>
     </thead>
-
     <!-- this tbody will hold rows, for each demande there will be one a <tr></tr> -->
      <!-- each tr will have data associated to the headers we defined -->
     <tbody>
@@ -28,11 +24,8 @@
       <!-- then it will subscribe to teh state and then store it in a variable -->
       <ng-container *ngIf="demandeState$ | async as state"> <!-- for each state we have an array of demands Demande[] each array has items of type Demande -->
         <!-- we will use ngFor to iterate over the items we have, and create a row with the data in our item (demande) -->
-        
           <tr app-demande-item *ngFor="let demande of state.demandes" [demande]="demande"></tr>
-        
       </ng-container>
     </tbody>
-
   </table>
 </div>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { TypeDocument } from '../../../../models/enums/document-type';
 
 @Component({
   selector: 'app-demandes-nav-bar',
@@ -10,19 +11,34 @@ import { Component, EventEmitter, Output } from '@angular/core';
 // this component will help us filter our demands
 
 export class DemandesNavBarComponent {
-  @Output() searchChanged = new EventEmitter<string>(); // Emits search term changes
-  @Output() categoryChanged = new EventEmitter<string>(); // Emits category filter changes
 
-  onSearchChanged(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    this.searchChanged.emit(inputElement.value); // Emit the search term
+  // we will send events from this component to the parent component
+  // we will react to this event in parent component by changing the selected state to show 
+  // WE ARE NOT DISPATCHING AN ACTION !!!!
+  // the only dispatched action regarding fetching demandes is dispatched when the parent component is created
+  // but we use selectors to only and ONLY select state that is stored in the store 
+  
+  // this is an event called categoryChanged that holds data of type string
+  @Output() categoryChanged = new EventEmitter<TypeDocument | null>();
+
+  onCategoryChange(event: Event): void {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+
+    let selectedCategory: TypeDocument | null = null;
+
+    switch (selectedValue) {
+      case TypeDocument.ATTESTATION_SCOLARITE:
+        selectedCategory = TypeDocument.ATTESTATION_SCOLARITE;
+        break;
+      case TypeDocument.RELEVE_NOTES:
+        selectedCategory = TypeDocument.RELEVE_NOTES;
+        break;
+      default:
+        selectedCategory = null; // Represents "ALL" categories
+        break;
+    }
+
+    this.categoryChanged.emit(selectedCategory);
+    }
   }
 
-  onCategoryChanged(event: Event): void {
-    // here we should dispatch an action that will have in its payload the type of document
-    // the reducer will take in that return a new state that has only the documents of that type
-    // this.store.dispatch(demandeActions.filterOutdemandes({payload : type}))
-    const selectElement = event.target as HTMLSelectElement;
-    this.categoryChanged.emit(selectElement.value); // Emit the selected category
-  }
-}

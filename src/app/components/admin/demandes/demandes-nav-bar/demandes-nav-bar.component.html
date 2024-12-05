@@ -9,11 +9,11 @@
 
 <div class="nav-bar">
   <div class="controls">
-    <input class="search-bar" type="text" placeholder="Rechercher par nom, email ou N° apogée..." (input)="onSearchChanged($event)" />
-    <select class="select" (change)="onCategoryChanged($event)">
-      <option value="Toutes les demandes">Toutes les demandes</option>
-      <option value="Attestation">Attestations</option>
-      <option value="ReleveNotes">Relevés de notes</option>
+    <input class="search-bar" type="text" placeholder="Rechercher par nom, email ou N° apogée..."/>
+    <select class="select" (change)="onCategoryChange($event)">
+      <option value="ALL">Toutes les demandes</option>
+      <option value="ATTESTATION_SCOLARITE">Attestations</option>
+      <option value="RELEVE_NOTES">Relevés de notes</option>
     </select>
   </div>
 </div>
