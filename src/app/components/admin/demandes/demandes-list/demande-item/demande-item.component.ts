@@ -1,25 +1,22 @@
 import { Component, Input } from '@angular/core';
+import { Demande } from '../../../../../models/demande';
+import { Store } from '@ngrx/store';
+import { DemandeActions } from '../../../../../store/demandes-feature/demandes.actions';
 
 @Component({
-  selector: 'app-demande-item',
+  selector: '[app-demande-item]',
   standalone: false,
   templateUrl: './demande-item.component.html',
   styleUrl: './demande-item.component.css'
 })
 export class DemandeItemComponent {
-  @Input() demande: any;
-
-  // getStatusClass(status: string) {
-  //   return status === 'En attente' ? 'status-pending' : status === 'Approuvé' ? 'status-approved' : 'status-rejected';
-  // }
-
-  // approveDemande(demande: any) {
-  //   // Logic to approve the demand
-  //   console.log('Approuver:', demande);
-  // }
-
-  // rejectDemande(demande: any) {
-  //   // Logic to reject the demand
-  //   console.log('Rejeter:', demande);
-  // }
+  @Input() demande!: Demande;
+  constructor(private store:Store){}
+  // we will dispatch actions from here , approve and reject
+  onApprove(demande: Demande): void { 
+    this.store.dispatch(DemandeActions.validateDemande({payload:demande}))
+  }
+  onReject(demande: Demande): void {
+    this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
+  }
 }

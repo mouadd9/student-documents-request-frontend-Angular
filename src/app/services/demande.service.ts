@@ -14,10 +14,12 @@ export class DemandeService {
 
   constructor(private http: HttpClient) { }
 
+  // this is used by the Demande Component to fetch data to populate the store
   public fetchDemandesAsync(): Observable<Demande[]> {
     return this.http.get<Demande[]>(this.host + "/demandes");
   }
 
+  // this is used by the student/demande component to post a new Demande
   public saveDemandeAsync(demande: Demande): Observable<Demande> {
     return timer(4000).pipe(
       switchMap(() => this.http.post<Demande>(this.host + "/demandes", demande))
@@ -26,7 +28,7 @@ export class DemandeService {
   
   public validateDemandeAsync(demande: Demande /*demandeId: number*/): Observable<Demande>{
     // for the purpose of demonstration we will change it here instead of doing it in the backend
-    let updatedDemande = {...demande, status:DemandeStatus.Validated}
+    let updatedDemande = {...demande, status:DemandeStatus.APPROVEE}
     return this.http.put<Demande>(
       `${this.host}/demandes/${demande.id}`,
       updatedDemande
@@ -37,7 +39,7 @@ export class DemandeService {
   }
 
   public refuseDemandeAsync(demande: Demande /*demandeId: number*/): Observable<Demande>{
-    let updatedDemande = {...demande, status:DemandeStatus.Refused}
+    let updatedDemande = {...demande, status:DemandeStatus.REFUSEE}
     return this.http.put<Demande>(
       `${this.host}/demandes/${demande.id}`,
       updatedDemande

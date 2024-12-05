@@ -1,49 +1,31 @@
-<!-- src/app/demandes-list/demandes-list.component.html -->
-
-<div>
-    <div class="card-header">
-        <h3>Demandes</h3>
-        <p>Liste des demandes qui nécessitent une action</p>
-      </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Email</th>
-          <th>CIN</th>
-          <th>Apogee Number</th>
-          <th>Document Type</th>
-          <th>Status</th>
-          <th>Submission Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let demande of demands">
-          <td>{{ demande.email }}</td>
-          <td>{{ demande.cin }}</td>
-          <td>{{ demande.apogeeNumber }}</td>
-          <td>{{ demande.documentType }}</td>
-          <td>
-            <!-- <span class="status-badge status-pending">{{ demande.status }}</span> -->
-            <span class="status-badge" [class.status-pending]="demande.status === 'Pending'" 
-              [class.status-approved]="demande.status === 'Validated'" 
-              [class.status-rejected]="demande.status === 'Refused'">
-              {{ demande.status }}
-          </span>
-          </td>
-          <td>{{ demande.submissionDate | date: 'shortDate' }}</td> <!-- Date formatting -->
-          <td>
-            <button class="btn approve" (click)="approveDemande(demande)">
-                <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
-                Approuver
-            </button>
-            <button class="btn reject" (click)="rejectDemande(demande)">
-                <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
-                Rejeter
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<!--here we subscribe to the observable using the pipe and async-->
+<div class="demandes-list">
+  <div class="card-header">
+    <h3>Demandes</h3>
+    <p>Liste des demandes qui nécessitent une action</p>
   </div>
-  
+  <table>
+    <!-- this holds the column headers (fixed) -->
+    <thead>
+      <tr>
+        <th>Date de Soumission</th>
+        <th>Etudiant</th>
+        <th>Email</th>
+        <th>N°Apogée</th>
+        <th>Document</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <!-- this tbody will hold rows, for each demande there will be one a <tr></tr> -->
+     <!-- each tr will have data associated to the headers we defined -->
+    <tbody>
+      <!-- this ng-container will be shown if the @input property is initialzed -->
+      <!-- then it will subscribe to teh state and then store it in a variable -->
+      <ng-container *ngIf="demandeState$ | async as state"> <!-- for each state we have an array of demands Demande[] each array has items of type Demande -->
+        <!-- we will use ngFor to iterate over the items we have, and create a row with the data in our item (demande) -->
+          <tr app-demande-item *ngFor="let demande of state.demandes" [demande]="demande"></tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

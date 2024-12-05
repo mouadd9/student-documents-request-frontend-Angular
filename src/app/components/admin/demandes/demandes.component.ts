@@ -1,55 +1,66 @@
-import { Component, Input } from '@angular/core';
-import { DemandeService } from '../../../services/demande.service';
+import { Component } from '@angular/core';
+import { combineLatest, map, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import {
+  selectDataState,
+  selectDemandesByType,
+  selectErrorMessage,
+  selectPendingDemandes,
+} from '../../../store/demandes-feature/demandes.selectors';
 import { Demande } from '../../../models/demande';
+import { STATE } from '../../../store/state';
+import { TypeDocument } from '../../../models/enums/document-type';
+import { DemandeActions } from '../../../store/demandes-feature/demandes.actions';
 
 @Component({
   selector: 'app-demandes',
   standalone: false,
   templateUrl: './demandes.component.html',
-  styleUrl: './demandes.component.css'
+  styleUrl: './demandes.component.css',
 })
+
+// this component will get the demandeState Observale from the store
 export class DemandesComponent {
-  @Input() demands: any[] = [];
+  // Observable that combines demandes, state, and errorMessage
+  combined$!: Observable<{
+    demandes: Demande[];
+    state: STATE;
+    errorMessage: string;
+  }>;
 
-  // demands: Demande[] = [];
-  filteredDemands: Demande[] = [];
-  searchTerm: string = '';
-  selectedCategory: string = 'Toutes les demandes';
-
-  constructor(private demandeService: DemandeService) {}
+  // Holds the currently selected category
+  selectedCategory: TypeDocument | null = null;
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.fetchDemandes();
+    // Dispatch an action to fetch demandes when the component initializes
+    this.store.dispatch(DemandeActions.fetchDemandes());
+
+    // Initialize the combined observable
+    this.initializeCombinedObservable();
   }
 
-  fetchDemandes(): void {
-    this.demandeService.fetchDemandesAsync().subscribe((data: Demande[]) => {
-      this.demands = data;
-      this.filteredDemands = data; // Initially show all demandes
-    });
+  private initializeCombinedObservable(): void {
+    const demandes$ = this.selectedCategory // this is the selected category
+      ? this.store.select(selectDemandesByType(this.selectedCategory))
+      : this.store.select(selectPendingDemandes);
+
+    const state$ = this.store.select(selectDataState);
+    const errorMessage$ = this.store.select(selectErrorMessage);
+
+    // we update our observable
+    this.combined$ = combineLatest([demandes$, state$, errorMessage$]).pipe(
+      map(([demandes, state, errorMessage]) => ({
+        demandes,
+        state,
+        errorMessage,
+      }))
+    );
   }
 
-  onSearchChanged(searchTerm: string): void {
-    this.searchTerm = searchTerm.toLowerCase();
-    this.applyFilters();
-  }
-
-  onCategoryChanged(category: string): void {
+  // Handle category change events
+  onCategoryChanged(category: TypeDocument | null): void {
     this.selectedCategory = category;
-    this.applyFilters();
-  }
-  applyFilters(): void {
-    this.filteredDemands = this.demands.filter(demande => {
-      const matchesSearch = 
-        demande.email.toLowerCase().includes(this.searchTerm) ||
-        demande.cin.toLowerCase().includes(this.searchTerm) ||
-        demande.apogeeNumber.toLowerCase().includes(this.searchTerm);
-
-      const matchesCategory = 
-        this.selectedCategory === 'Toutes les demandes' || 
-        demande.documentType === this.selectedCategory;
-
-      return matchesSearch && matchesCategory;
-    });
+    this.initializeCombinedObservable();
   }
 }

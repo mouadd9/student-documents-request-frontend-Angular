@@ -1,26 +1,21 @@
-<!-- src/app/demande-item/demande-item.component.html -->
-<tr>
+ 
+  <td>{{ demande.dateCreation }}</td>
+  <td>{{ demande.etudiant?.nom }}</td>
   <td>{{ demande.email }}</td>
-  <td>{{ demande.cin }}</td>
-  <td>{{ demande.apogeeNumber }}</td>
-  <td>{{ demande.documentType }}</td>
+  <td>{{ demande.numApogee }}</td>
+  <td>{{ demande.typeDocument }}</td>
   <td>
-    <span class="status-badge" [class.status-pending]="demande.status === 'Pending'" 
-        [class.status-approved]="demande.status === 'Approved'" 
-        [class.status-rejected]="demande.status === 'Rejected'">
+    <span class="status-badge" [class.status-pending]="demande.status === 'EN_ATTENTE'">
         {{ demande.status }}
     </span>
   </td>
-  <td>{{ demande.submissionDate  }}</td>
-  <!-- | date: 'shortDate' -->
   <td>
-    <button class="btn approve">
+    <button class="btn approve" (click)="onApprove(demande)">
       <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
       Approuver
     </button>
-    <button class="btn reject">
+    <button class="btn reject" (click)="onReject(demande)">
       <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
       Rejeter
     </button>
   </td>
-</tr>
