@@ -21,6 +21,10 @@ import { DemandeActions } from '../../../store/demandes-feature/demandes.actions
 
 // this component will get the demandeState Observale from the store
 export class DemandesComponent {
+  
+  state$ : Observable<STATE>;
+  errorMessage$: Observable<string>;
+  demandes$!: Observable<Demande[]>;
   // Observable that combines demandes, state, and errorMessage
   combined$!: Observable<{
     demandes: Demande[];
@@ -30,26 +34,24 @@ export class DemandesComponent {
 
   // Holds the currently selected category
   selectedCategory: TypeDocument | null = null;
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+    this.state$ = this.store.select(selectDataState);
+    this.errorMessage$ = this.store.select(selectErrorMessage);
+  }
 
   ngOnInit(): void {
     // Dispatch an action to fetch demandes when the component initializes
     this.store.dispatch(DemandeActions.fetchDemandes());
-
     // Initialize the combined observable
     this.initializeCombinedObservable();
   }
 
   private initializeCombinedObservable(): void {
-    const demandes$ = this.selectedCategory // this is the selected category
+    this.demandes$ = this.selectedCategory // we will reselect each time an event is emited by the demande nav bar
       ? this.store.select(selectDemandesByType(this.selectedCategory))
       : this.store.select(selectPendingDemandes);
-
-    const state$ = this.store.select(selectDataState);
-    const errorMessage$ = this.store.select(selectErrorMessage);
-
     // we update our observable
-    this.combined$ = combineLatest([demandes$, state$, errorMessage$]).pipe(
+    this.combined$ = combineLatest([this.demandes$, this.state$, this.errorMessage$]).pipe(
       map(([demandes, state, errorMessage]) => ({
         demandes,
         state,
@@ -60,6 +62,7 @@ export class DemandesComponent {
 
   // Handle category change events
   onCategoryChanged(category: TypeDocument | null): void {
+    this.store.dispatch(DemandeActions.fetchDemandes());
     this.selectedCategory = category;
     this.initializeCombinedObservable();
   }

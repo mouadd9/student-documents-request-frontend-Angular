@@ -46,17 +46,33 @@ export const selectAllDemandes = createSelector(selectDemandesState, (state) => 
 
 // if used with the store it will return an Observable of type Demande[] with only specific demandes
 export const selectPendingDemandes = createSelector(selectAllDemandes, (demandes) => demandes.filter(demande => demande.status === DemandeStatus.EN_ATTENTE));
+export const selectNonPendingDemandes = createSelector(selectAllDemandes, (demandes) => demandes.filter(demande => demande.status !== DemandeStatus.EN_ATTENTE) );
 
 export const selectDemandesByType = (type: TypeDocument) =>
     createSelector(selectPendingDemandes, (demandes) =>
       demandes.filter((demande) => demande.typeDocument === type)
     );
 
+export const selectNonPendingDemandesByType = (type: TypeDocument) => 
+  createSelector(selectNonPendingDemandes, (demandes) => 
+  demandes.filter((demande) => demande.typeDocument === type)
+  ); // this will select non pending demandes of a specific, when the user choses a document type
 
-// now we will create a selector that will select data State 
+export const selectNonPendingDemandesByStatus = (type: DemandeStatus ) => 
+  createSelector(selectNonPendingDemandes, (demandes) => 
+  demandes.filter((demande)=> demande.status === type)
+);
+
+export const selectNonPendingDemandesByTypeAndStatus = (type: TypeDocument, status: DemandeStatus) => 
+  createSelector(selectNonPendingDemandes, (demandes) => 
+    demandes.filter((demande) => demande.typeDocument === type && demande.status === status)
+  );
+
+
 export const selectDataState = createSelector(selectDemandesState, (state) => state.demandeState);
-
 export const selectErrorMessage = createSelector(selectDemandesState, (state) => state.errorMessage);
+
+// i need a selector that gets all non pending demandes
 
 
 // insight : 
