@@ -1,7 +1,7 @@
 <div class="container">
     <!-- Section: Historique des Demandes -->
     <section class="section">
-      <app-historique-nav-bar></app-historique-nav-bar>
-      <app-historique-list></app-historique-list>
+      <app-historique-nav-bar (categoryChanged)="this.onChangedCategory($event)" (statusChanged)="this.onChangedStatus($event)"></app-historique-nav-bar>
+      <app-historique-list [demandeState$]="combined$"></app-historique-list>
     </section>
 </div>

@@ -13,7 +13,7 @@
   }
   
   .search-bar {
-    width: 300px;
+    width: 400px;
     padding: 0.5rem 1rem;
     border: 1px solid #e5e7eb;
     border-radius: 0.375rem;
@@ -21,7 +21,7 @@
   }
   
   .select {
-    width: 200px;
+    width: 300px;
     padding: 0.5rem 1rem;
     border: 1px solid #e5e7eb;
     border-radius: 0.375rem;

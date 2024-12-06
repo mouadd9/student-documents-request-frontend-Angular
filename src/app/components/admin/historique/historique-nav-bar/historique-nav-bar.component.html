@@ -2,9 +2,16 @@
 <div class="controls">
     <input type="text" placeholder="Rechercher par nom, email ou N° apogée..."
         class="search-bar">
-    <select class="select">
-        <option>Toutes les demandes</option>
-        <option>Attestations</option>
-        <option>Relevés de notes</option>
+    <select class="select" (change)="onCategoryChange($event)">
+        <option value="" disabled selected>Filtrer par type de demande</option>
+        <option value="ALL">Toutes les demandes</option>
+        <option value="ATTESTATION_SCOLARITE">Attestations</option>
+        <option value="RELEVE_NOTES">Relevés de notes</option>
+      </select>
+    <select class="select" (change)="onStatusChange($event)">
+        <option value="" disabled selected>Filtrer par status</option>
+        <option value="ALL">Toutes les demandes (Approuvées, refusées)</option>
+        <option value="APPROVEE" >Approuvées</option>
+        <option value="REFUSEE">refusées</option>
     </select>
 </div>

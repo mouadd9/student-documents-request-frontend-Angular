@@ -4,11 +4,6 @@ import { DemandeActions } from './demandes.actions';
 import { demandeState } from './demandes.state';
 import { initialDemandeState } from './demandes.state';
 
-// this function will take an initial state and an Action
-// then it will return a new state
-
-// when the first action is dispatched we pass in the initial state
-// then the store will pass current state
 export function demandeReducer(
   demandeState: demandeState = initialDemandeState,
   action: Action
@@ -57,7 +52,6 @@ export function demandeReducer(
       return { ...demandeState, demandeState: STATE.initial, errorMessage: '' };
     }
 
-    // i need to add validate and refuse
     case DemandeActions.validateDemande.type: {
       return { ...demandeState, demandeState: STATE.loading };
     }
@@ -78,12 +72,10 @@ export function demandeReducer(
         return {...demandeState, errorMessage:(action as any).payload, demandeState:STATE.error};
     }
 
-
-
     case DemandeActions.refuseDemande.type: {
         return { ...demandeState, demandeState: STATE.loading };
-      }
-      case DemandeActions.refuseDemandeSuccess.type: {
+    }
+    case DemandeActions.refuseDemandeSuccess.type: {
         return {
           ...demandeState,
           demandeState: STATE.loaded,
@@ -95,10 +87,10 @@ export function demandeReducer(
             }
           }),
         };
-      }
-      case DemandeActions.refuseDemandeError.type: {
+    }
+    case DemandeActions.refuseDemandeError.type: {
           return {...demandeState, errorMessage:(action as any).payload, demandeState:STATE.error};
-      }
+    }
 
     default: {
       return demandeState;

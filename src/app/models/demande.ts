@@ -9,7 +9,7 @@ export interface Demande {
     numApogee?: string;
     typeDocument: TypeDocument;
     status?: DemandeStatus; 
-    dateCreation?: Date;
-    dateTraitement?: Date | null;
+    dateCreation?: string | null;
+    dateTraitement?: string | null;
     etudiant?: Etudiant;
 }

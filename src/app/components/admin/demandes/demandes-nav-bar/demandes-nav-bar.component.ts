@@ -11,14 +11,7 @@ import { TypeDocument } from '../../../../models/enums/document-type';
 // this component will help us filter our demands
 
 export class DemandesNavBarComponent {
-
-  // we will send events from this component to the parent component
-  // we will react to this event in parent component by changing the selected state to show 
-  // WE ARE NOT DISPATCHING AN ACTION !!!!
-  // the only dispatched action regarding fetching demandes is dispatched when the parent component is created
-  // but we use selectors to only and ONLY select state that is stored in the store 
   
-  // this is an event called categoryChanged that holds data of type string
   @Output() categoryChanged = new EventEmitter<TypeDocument | null>();
 
   onCategoryChange(event: Event): void {

@@ -22,11 +22,6 @@ export class DemandesListComponent {
     state: STATE;
     errorMessage: string;
   }> ;
-
-  constructor() {}
-
-  ngOnInit(): void {
-  }
  
 }
 
