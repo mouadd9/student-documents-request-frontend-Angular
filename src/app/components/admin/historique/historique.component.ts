@@ -5,7 +5,7 @@ import { STATE } from '../../../store/state';
 import { DemandeActions } from '../../../store/demandes-feature/demandes.actions';
 import { Store } from '@ngrx/store';
 import { TypeDocument } from '../../../models/enums/document-type';
-import { selectDataState, selectErrorMessage, selectNonPendingDemandes, selectNonPendingDemandesByStatus, selectNonPendingDemandesByType, selectNonPendingDemandesByTypeAndStatus } from '../../../store/demandes-feature/demandes.selectors';
+import { selectDataState, selectErrorMessage, selectNonPendingDemandes, selectNonPendingDemandesByStatus, selectNonPendingDemandesByType, selectNonPendingDemandesByTypeAndStatus, selectSortedNonPendingDemandes } from '../../../store/demandes-feature/demandes.selectors';
 import { DemandeStatus } from '../../../models/enums/document-status';
 
 @Component({
@@ -40,7 +40,6 @@ export class HistoriqueComponent implements OnInit {
   }
 
   private initializeCombinedObservable(): void {
-    // if the status and category are selected , then we will use a combined selector 
      if (this.category && this.status) {
       this.demandes$ = this.store.select(selectNonPendingDemandesByTypeAndStatus(this.category, this.status));
      } else if (this.category) {
@@ -48,7 +47,7 @@ export class HistoriqueComponent implements OnInit {
      } else if (this.status) {
       this.demandes$ = this.store.select(selectNonPendingDemandesByStatus(this.status))
      } else {
-      this.demandes$ = this.store.select(selectNonPendingDemandes)
+      this.demandes$ = this.store.select(selectSortedNonPendingDemandes)
      }
     this.combined$ = combineLatest([this.demandes$, this.state$, this.errorMessage$]).pipe(
       map(([demandes, state, errorMessage]) => ({
@@ -59,7 +58,6 @@ export class HistoriqueComponent implements OnInit {
     );
   }
 
-  // this is the method that will react to the Changing Category Event 
   public onChangedCategory( category : TypeDocument | null ){
     this.store.dispatch(DemandeActions.fetchDemandes());
     this.category = category;
@@ -71,6 +69,5 @@ export class HistoriqueComponent implements OnInit {
     this.status = status;
     this.initializeCombinedObservable();
   }
-
 
 }

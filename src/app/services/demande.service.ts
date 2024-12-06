@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Demande } from '../models/demande';
-import { Observable, switchMap, timer } from 'rxjs';
+import { map, Observable, switchMap, timer } from 'rxjs';
 import { environment } from '../environments/environment.dev';
 import { DemandeStatus } from '../models/enums/document-status';
 
@@ -16,7 +16,9 @@ export class DemandeService {
 
   // this is used by the Demande Component to fetch data to populate the store
   public fetchDemandesAsync(): Observable<Demande[]> {
-    return this.http.get<Demande[]>(this.host + "/demandes");
+    return this.http.get<Demande[]>(this.host + "/demandes").pipe(
+      map(demandes => demandes.slice().reverse()) // Reverses the array
+    );
   }
 
   // this is used by the student/demande component to post a new Demande
@@ -26,32 +28,52 @@ export class DemandeService {
     );
   } // Effect will use this methods when we dispatch an action of type requestDemande
   
-  public validateDemandeAsync(demande: Demande /*demandeId: number*/): Observable<Demande>{
+  public validateDemandeAsync(demande: Demande): Observable<Demande>{
     // for the purpose of demonstration we will change it here instead of doing it in the backend
-    let updatedDemande = {...demande, status:DemandeStatus.APPROVEE}
+    const nowFormatted = formatCurrentDate();
+    const updatedDemande = {
+      ...demande,
+      status: DemandeStatus.APPROVEE,
+      dateTraitement: nowFormatted
+    };
+    
     return this.http.put<Demande>(
       `${this.host}/demandes/${demande.id}`,
       updatedDemande
     );
-
-    // Production
-    // return this.http.put<Demande>(this.host + "/demandes/validate/" + demandeId,{}); 
   }
 
-  public refuseDemandeAsync(demande: Demande /*demandeId: number*/): Observable<Demande>{
-    let updatedDemande = {...demande, status:DemandeStatus.REFUSEE}
+  public refuseDemandeAsync(demande: Demande): Observable<Demande>{
+
+    const nowFormatted = formatCurrentDate();
+  const updatedDemande = {
+    ...demande,
+    status: DemandeStatus.REFUSEE,
+    dateTraitement: nowFormatted
+  };
     return this.http.put<Demande>(
       `${this.host}/demandes/${demande.id}`,
       updatedDemande
     );
-    // Production
-    // return this.http.put<Demande>(this.host + "/demandes/refuse/" + demandeId,{});
   }
 
 
 }
 
 
+function formatCurrentDate(): string {
+  const now = new Date();
+  
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // months are zero-indexed
+  const year = now.getFullYear();
+
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+}
 
 
 

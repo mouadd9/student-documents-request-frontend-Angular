@@ -2,126 +2,80 @@
   "students": [],
   "demandes": [
     {
-      "id": "1",
-      "email": "student1@example.com",
-      "cin": "A123456",
-      "numApogee": "12345678",
+      "id": "10",
+      "email": "student10@example.com",
+      "cin": "I901234",
+      "numApogee": "90123456",
       "typeDocument": "ATTESTATION_SCOLARITE",
       "status": "APPROVEE",
-      "dateCreation": "2023-12-01T08:00:00.000Z",
+      "dateCreation": "2023-12-09T10:00:00.000Z",
+      "dateTraitement": "06-12-2024 02:33:17",
+      "etudiant": {
+        "id": 10,
+        "nom": "Isla Fisher",
+        "email": "islafisher@example.com"
+      }
+    },
+    {
+      "id": "11",
+      "email": "student11@example.com",
+      "cin": "J012345",
+      "numApogee": "01234567",
+      "typeDocument": "RELEVE_NOTES",
+      "status": "EN_ATTENTE",
+      "dateCreation": "2023-12-10T11:30:00.000Z",
       "dateTraitement": null,
       "etudiant": {
-        "id": 1,
+        "id": 11,
         "nom": "John Doe",
         "email": "johndoe@example.com"
       }
     },
     {
-      "id": "2",
-      "email": "student2@example.com",
-      "cin": "B234567",
-      "numApogee": "23456789",
-      "typeDocument": "RELEVE_NOTES",
-      "status": "APPROVEE",
-      "dateCreation": "2023-12-02T09:30:00.000Z",
+      "id": "12",
+      "email": "student12@example.com",
+      "cin": "K123456",
+      "numApogee": "12345678",
+      "typeDocument": "CERTIFICAT_STAGE",
+      "status": "EN_ATTENTE",
+      "dateCreation": "2023-12-11T14:15:00.000Z",
       "dateTraitement": null,
       "etudiant": {
-        "id": 2,
-        "nom": "Jane Smith",
-        "email": "janesmith@example.com"
+        "id": 12,
+        "nom": "Kylie Jenner",
+        "email": "kyliejenner@example.com"
       }
     },
     {
-      "id": "3",
-      "email": "student3@example.com",
-      "cin": "C345678",
-      "numApogee": "34567890",
+      "id": "13",
+      "email": "student13@example.com",
+      "cin": "L234567",
+      "numApogee": "23456789",
       "typeDocument": "ATTESTATION_SCOLARITE",
       "status": "APPROVEE",
-      "dateCreation": "2023-12-03T11:15:00.000Z",
-      "dateTraitement": "2023-12-05T10:00:00.000Z",
+      "dateCreation": "2023-12-12T16:45:00.000Z",
+      "dateTraitement": "06-12-2024 02:34:36",
       "etudiant": {
-        "id": 3,
-        "nom": "Michael Brown",
-        "email": "michaelbrown@example.com"
+        "id": 13,
+        "nom": "Liam Neeson",
+        "email": "liamneeson@example.com"
       }
     },
     {
-      "id": "4",
-      "email": "student4@example.com",
-      "cin": "D456789",
-      "numApogee": "45678901",
+      "id": "14",
+      "email": "student14@example.com",
+      "cin": "M345678",
+      "numApogee": "34567890",
       "typeDocument": "RELEVE_NOTES",
       "status": "REFUSEE",
-      "dateCreation": "2023-12-04T13:00:00.000Z",
-      "dateTraitement": "2023-12-06T15:30:00.000Z",
+      "dateCreation": "2023-12-13T18:30:00.000Z",
+      "dateTraitement": "06-12-2024 02:33:27",
       "etudiant": {
-        "id": 4,
-        "nom": "Emily Davis",
-        "email": "emilydavis@example.com"
-      }
-    },
-    {
-      "id": "5",
-      "email": "student5@example.com",
-      "cin": "E567890",
-      "numApogee": "56789012",
-      "typeDocument": "ATTESTATION_SCOLARITE",
-      "status": "EN_ATTENTE",
-      "dateCreation": "2023-12-05T14:45:00.000Z",
-      "dateTraitement": null,
-      "etudiant": {
-        "id": 5,
-        "nom": "Sarah Johnson",
-        "email": "sarahjohnson@example.com"
-      }
-    },
-    {
-      "id": "89",
-      "email": "student5@example.com",
-      "cin": "E567890",
-      "numApogee": "56789012",
-      "typeDocument": "ATTESTATION_SCOLARITE",
-      "status": "EN_ATTENTE",
-      "dateCreation": "2023-12-05T14:45:00.000Z",
-      "dateTraitement": null,
-      "etudiant": {
-        "id": 98,
-        "nom": "Sarah Johnson",
-        "email": "sarahjohnson@example.com"
-      }
-    },
-    {
-      "id": "90",
-      "email": "student5@example.com",
-      "cin": "E567890",
-      "numApogee": "56789012",
-      "typeDocument": "ATTESTATION_SCOLARITE",
-      "status": "EN_ATTENTE",
-      "dateCreation": "2023-12-05T14:45:00.000Z",
-      "dateTraitement": null,
-      "etudiant": {
-        "id": 0,
-        "nom": "Sarah Johnson",
-        "email": "sarahjohnson@example.com"
-      }
-    },
-    {
-      "id": "9",
-      "email": "student5@example.com",
-      "cin": "E567890",
-      "numApogee": "56789012",
-      "typeDocument": "ATTESTATION_SCOLARITE",
-      "status": "EN_ATTENTE",
-      "dateCreation": "2023-12-05T14:45:00.000Z",
-      "dateTraitement": null,
-      "etudiant": {
-        "id": 78,
-        "nom": "Sarah Johnson",
-        "email": "sarahjohnson@example.com"
+        "id": 14,
+        "nom": "Mila Kunis",
+        "email": "milakunis@example.com"
       }
     }
-  ]
-  ,
+  ],
   "reclamations": []
 }
