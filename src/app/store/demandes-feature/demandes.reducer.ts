@@ -4,13 +4,13 @@ import { DemandeActions } from './demandes.actions';
 import { demandeState } from './demandes.state';
 import { initialDemandeState } from './demandes.state';
 
-export function demandeReducer(
-  demandeState: demandeState = initialDemandeState,
-  action: Action
-): demandeState {
-  // depending on the action.type we return a new state
+// Whenever an action related to demands is dispatched either from a component or Effects
+// the reducer is evoked in order to create a new state and return it to the store
+
+export function demandeReducer( demandeState: demandeState = initialDemandeState, action: Action ): demandeState {
   switch (action.type) {
-    //1- here we treat the state changes by the fetchDemandes actions
+
+    //1- fetchDemandes actions
     case DemandeActions.fetchDemandes.type: {
       return { ...demandeState, demandeState: STATE.loading };
     }
@@ -29,7 +29,7 @@ export function demandeReducer(
       };
     }
 
-    //2- here we treat the state changes by the saveDemande actions
+    //2- saveDemande actions
     case DemandeActions.saveDemande.type: {
       return { ...demandeState, demandeState: STATE.loading };
     }
@@ -48,10 +48,12 @@ export function demandeReducer(
       };
     }
 
+    //3- resetDemande action
     case DemandeActions.resetDemandeStateEnum.type: {
       return { ...demandeState, demandeState: STATE.initial, errorMessage: '' };
     }
 
+    //4- validateDemande actions
     case DemandeActions.validateDemande.type: {
       return { ...demandeState, demandeState: STATE.loading };
     }
@@ -72,6 +74,7 @@ export function demandeReducer(
         return {...demandeState, errorMessage:(action as any).payload, demandeState:STATE.error};
     }
 
+    //5- refuseDemande actions
     case DemandeActions.refuseDemande.type: {
         return { ...demandeState, demandeState: STATE.loading };
     }

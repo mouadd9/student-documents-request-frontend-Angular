@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Demande } from '../models/demande';
 import { map, Observable, switchMap, timer } from 'rxjs';
-import { environment } from '../environments/environment.dev';
+import { environment } from '../environments/environment';
 import { DemandeStatus } from '../models/enums/document-status';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { DemandeStatus } from '../models/enums/document-status';
 })
 export class DemandeService {
 
-  private host: string = environment.backendHost;
+  private host: string = environment.devHost;
 
   constructor(private http: HttpClient) { }
 

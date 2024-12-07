@@ -1,5 +1,3 @@
-// here we will create the actions that will be dispatched 
-
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
 import { Demande } from "../../models/demande";
 
@@ -18,7 +16,7 @@ export const DemandeActions = createActionGroup({
         fetchDemandesError: props<{payload: string}>(),
 
         // 2 - actions related to submitting a new demand 
-        saveDemande: props<{payload: Demande}>(),// when the student submits a demande this action is dispatched to the store
+        saveDemande: props<{payload: Demande}>(),
         saveDemandeSuccess: props<{payload: Demande}>(),
         saveDemandeError: props<{payload: string}>(),
 
@@ -31,7 +29,6 @@ export const DemandeActions = createActionGroup({
         refuseDemande: props<{payload: Demande}>(),
         refuseDemandeSuccess: props<{payload: Demande}>(),
         refuseDemandeError: props<{payload: string}>(),
-
 
         // 5 - an action to reset to state to initial
         resetDemandeStateEnum: emptyProps()

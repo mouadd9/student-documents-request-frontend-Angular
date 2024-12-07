@@ -2,40 +2,82 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { demandeState } from './demandes.state';
 import { DemandeStatus } from '../../models/enums/document-status';
 import { TypeDocument } from '../../models/enums/document-type';
+// insight :
+/*
+these selectors will be used by the store to return specific observables
+that will be subscribed to in the template 
+example : 
+ - let us say we have a list and a nav bar
+ - the nav bar controls the elements shown in the list 
+ - meaning we will first collect an observable using the selector that gets all demandes
+ - then we will switch the demandes shown using the selectors following the user's actions
+ - we will also subscribe to the Data State and use it to know if the data is loading
 
-// if used with the store store.select(featureSelector); it will return an Observable of type demandesState
+*/
+
+// NOTE !!!!! :
+// in our service we reversed the demandes table that we got from the backend
+// so that the latest demande is put in the top of the table not the end
+
+// ------------------- Selectors used globally : 
 export const selectDemandesState =
-  createFeatureSelector<demandeState>('demandes');
+  createFeatureSelector<demandeState>('demandes'); // used to select the entire demandes state
 
-// if used with the store it will return an Observable of type Demande[]
 export const selectAllDemandes = createSelector(
   selectDemandesState,
   (state) => state.demandes
-);
+); // used to select all demandes from the demandes state
 
-// if used with the store it will return an Observable of type Demande[] with only specific demandes
+export const selectDataState = createSelector(
+  selectDemandesState,
+  (state) => state.demandeState
+); // used to select the state of our demandesState (used to show a loader when transitioning from INITIAL to LOADED or an error when its ERROR)
+
+export const selectErrorMessage = createSelector(
+  selectDemandesState,
+  (state) => state.errorMessage
+); // used to select an errorMessage 
+
+
+
+// ------------------- Selectors used in the Demandes Component (we only show pending demands) :
 export const selectPendingDemandes = createSelector(
   selectAllDemandes,
   (demandes) =>
     demandes.filter((demande) => demande.status === DemandeStatus.EN_ATTENTE)
-);
-export const selectNonPendingDemandes = createSelector(
-  selectAllDemandes,
-  (demandes) =>
-    demandes.filter((demande) => demande.status !== DemandeStatus.EN_ATTENTE)
-);
+); // used to select pending demandes
 
 export const selectDemandesByType = (type: TypeDocument) =>
   createSelector(selectPendingDemandes, (demandes) =>
     demandes.filter((demande) => demande.typeDocument === type)
-  );
+  ); // used to select pending demandes by type
+
+
+
+// ------------------- Selectors used in the Historique Component (we only show pending demands) :
+export const selectNonPendingDemandes = createSelector(
+  selectAllDemandes,
+  (demandes) =>
+    demandes.filter((demande) => demande.status !== DemandeStatus.EN_ATTENTE)
+); // used to select non pending demandes (approved/declined)
+
+/* NOTE : 
+ - when a demande is created its set automatically to pending.
+ - so when we show pending demands they are shown chronologically correct the recent added demande is shown on top (reversed table)
+ - but the non pending demands are actually pending demands that were declined or approved in a given time (time of treatment)
+ - and practicaly speaking in the "historique" section demands shown should be sorted in a way to show the last approved or declined demand
+ - if we approve demand B , then decline demand C , demand C should be shown first as declined then demand B should be shown second as approved
+ - to make this happen we need to build a sorting algorith that goes through all non pending demandes and sort them using their date of creation
+ - WE DID THAT BELLOW
+
+*/
 
 export const selectSortedNonPendingDemandes = createSelector(
   selectNonPendingDemandes,
   (demandes) => {
-    return [...demandes].sort((a, b) => {
-      const dateA = a.dateTraitement
-        ? parseDate(a.dateTraitement)
+    return [...demandes].sort((a, b) => { // here we use the sort method that sorts an array (ascending) using
+      const dateA = a.dateTraitement 
+        ? parseDate(a.dateTraitement) // here we parse the date so it can be treated as a number 
         : a.dateCreation
         ? parseDate(a.dateCreation)
         : 0; // Fallback if both are null/undefined
@@ -49,37 +91,30 @@ export const selectSortedNonPendingDemandes = createSelector(
       return dateB - dateA; // Descending order
     });
   }
-);
+); // used to select sorted non pending demandes (approved/declined) (using the formated treatment date in each demand) 
 
 export const selectNonPendingDemandesByType = (type: TypeDocument) =>
   createSelector(selectSortedNonPendingDemandes, (demandes) =>
     demandes.filter((demande) => demande.typeDocument === type)
-  );
+  ); // used to select sorted non pending demandes by type 
 
 export const selectNonPendingDemandesByStatus = (type: DemandeStatus) =>
   createSelector(selectSortedNonPendingDemandes, (demandes) =>
     demandes.filter((demande) => demande.status === type)
-  );
+  ); // used to select sorted non pending demandes by status 
 
-export const selectNonPendingDemandesByTypeAndStatus = (
-  type: TypeDocument,
-  status: DemandeStatus
-) =>
+export const selectNonPendingDemandesByTypeAndStatus = ( type: TypeDocument, status: DemandeStatus ) =>
   createSelector(selectSortedNonPendingDemandes, (demandes) =>
     demandes.filter(
       (demande) => demande.typeDocument === type && demande.status === status
     )
-  );
+  ); // used to select sorted non pending demandes by type and status
 
-export const selectDataState = createSelector(
-  selectDemandesState,
-  (state) => state.demandeState
-);
-export const selectErrorMessage = createSelector(
-  selectDemandesState,
-  (state) => state.errorMessage
-);
 
+
+
+// ------------------ Helper function to extract the hour minute and second when the demande was treated
+//------------------- Then it turns it into a date and then transforms it into a number (ms) 
 function parseDate(dateString: string): number {
   // Expected format: "dd-mm-yyyy hh:mm:ss"
   const [datePart, timePart] = dateString.split(' ');
@@ -89,15 +124,4 @@ function parseDate(dateString: string): number {
   return new Date(year, month - 1, day, hour, minute, second).getTime();
 }
 
-// insight :
-/*
-these selectors will be used by the store to return specific observables
-that will be subscribed to in the template 
-example : 
- - let us say we have a list and a nav bar
- - the nav bar controls the elements shown in the list 
- - meaning we will first collect an observable using the selector that gets all demandes
- - then we will switch the demandes shown using the selectors following the user's actions
- - we will also subscribe to the Data State and use it to know if the data is loading
 
-*/

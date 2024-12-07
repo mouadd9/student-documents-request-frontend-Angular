@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngIf="demandeState$ | async as state"> <!-- for each state we have an array of demands Demande[] each array has items of type Demande -->
+          <ng-container *ngIf="demandeState$ | async as state">
           <tr app-historique-item *ngFor="let demande of state.demandes" [demande]="demande"></tr>
         </ng-container>
 

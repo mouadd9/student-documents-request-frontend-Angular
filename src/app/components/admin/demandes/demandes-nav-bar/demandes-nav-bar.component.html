@@ -1,20 +1,31 @@
 <!-- here we should be able to send events to the parent component -->
 <!-- this component will change the state, onSearch() , onCategoryChange(), ideally the state should change -->
 <!-- we should filter out demandes, and not get all the state -->
-
 <!-- Action 1 : -->
 <!-- if we put in a string in the search bar the state should be filtered according to that keyword -->
 <!-- Action 2 : -->
 <!-- if we select a document the state should be filtered out to include only the docs with that particular type -->
-
-
 <h1>Gestion des Demandes</h1>
-  <div class="controls">
-    <input class="search-bar" type="text" placeholder="Rechercher par nom, email ou N° apogée..."/>
+<div class="controls">
+  <div class="filters-style">
+    <img
+      src="assets/icons/filter.svg"
+      alt="Student Icon"
+      class="icon-svg" />
     <select class="select" (change)="onCategoryChange($event)">
+      <option value="" disabled hidden selected>Filtrer par document</option>
       <option value="ALL">Toutes les demandes</option>
       <option value="ATTESTATION_SCOLARITE">Attestations</option>
       <option value="RELEVE_NOTES">Relevés de notes</option>
     </select>
   </div>
+  <div class="search-bar">
 
+    <input type="text"
+      placeholder="Rechercher par nom, email ou N° apogée..." />
+    <img
+      src="assets/icons/search.svg"
+      alt="Student Icon"
+      class="search-icon-svg" />
+  </div>
+</div>

@@ -1,21 +1,20 @@
- 
-  <td>{{ demande.dateCreation }}</td>
-  <td>{{ demande.etudiant?.nom }}</td>
-  <td>{{ demande.email }}</td>
-  <td>{{ demande.numApogee }}</td>
-  <td>{{ demande.typeDocument }}</td>
-  <td>
-    <span class="status-badge" [class.status-pending]="demande.status === 'EN_ATTENTE'">
-        {{ demande.status }}
-    </span>
-  </td>
-  <td>
-    <button class="btn approve" (click)="onApprove(demande)">
-      <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
+<td>{{ demande.dateCreation }}</td>
+<td>{{ demande.etudiant?.nom }}</td>
+<td>{{ demande.email }}</td>
+<td>{{ demande.numApogee }}</td>
+<td>{{ demande.typeDocument }}</td>
+<td>
+  <span class="status-badge" [class.status-pending]="demande.status === 'EN_ATTENTE'">
+        En attente
+  </span>
+</td>
+<td>
+  <button class="btn approve" (click)="onApprove(demande)">
+    <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
       Approuver
-    </button>
-    <button class="btn reject" (click)="onReject(demande)">
-      <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
+  </button>
+  <button class="btn reject" (click)="onReject(demande)">
+    <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
       Rejeter
-    </button>
-  </td>
+  </button>
+</td>

@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Reclamation } from '../../../models/reclamation';
 import { ReclamationService } from '../../../services/reclamation.service';
-import { ReclamationsNavBarComponent } from './reclamations-nav-bar/reclamations-nav-bar.component';
-import { ReclamationsListComponent } from './reclamations-list/reclamations-list.component';
+
 
 @Component({
   selector: 'app-reclamations',
@@ -21,28 +20,27 @@ export class ReclamationsComponent {
   constructor(private reclamationService: ReclamationService) {}
 
   ngOnInit(): void {
-    this.fetchReclamations();
   }
 
-  fetchReclamations(): void {
+  /*fetchReclamations(): void {
     this.reclamationService.fetchAllReclamations().subscribe((data: Reclamation[]) => {
       this.reclamations = data;
       this.filteredReclamations = data; // Initially show all demandes
     });
-  }
+  }*/
 
 
   onSearchChanged(searchTerm: string): void {
-    this.searchTerm = searchTerm.toLowerCase();
-    this.applyFilters();
-  }
+   /* this.searchTerm = searchTerm.toLowerCase();
+    this.applyFilters();*/
+  } 
 
   // onCategoryChanged(category: string): void {
   //   this.selectedCategory = category;
   //   this.applyFilters();
   // }
 
-  applyFilters(): void {
+ /* applyFilters(): void {
     this.filteredReclamations = this.reclamations.filter(r => {
       const searchTermLower = this.searchTerm.toLowerCase().trim();
       // const selectedCategoryLower = this.selectedCategory.toLowerCase().trim();
@@ -55,5 +53,5 @@ export class ReclamationsComponent {
       
       return matchesSearch;
     });
-  }
+  }*/
 }

@@ -17,9 +17,9 @@
 
               <!-- Apoge Number Input -->
               <div class="form-group-input" [ngClass]="{'error': state.state === STATE.error}">
-                  <label for="apogeNumber">Numéro apogée</label>
-                  <input type="text" formControlName="apogeeNumber" placeholder="apogee">
-                  <div class="form-message" *ngIf="reclamationForm.get('apogeeNumber')?.hasError('required') && (reclamationForm.get('apogeeNumber')?.touched || reclamationForm.get('apogeeNumber')?.dirty)">apogée is required.</div>
+                  <label for="numApogee">Numéro apogée</label>
+                  <input type="text" formControlName="numApogee" placeholder="apogee">
+                  <div class="form-message" *ngIf="reclamationForm.get('numApogee')?.hasError('required') && (reclamationForm.get('numApogee')?.touched || reclamationForm.get('numApogee')?.dirty)">apogée is required.</div>
                 </div>
 
               <!-- CIN Input -->
@@ -30,15 +30,15 @@
                 </div>
 
               <div class="form-group-input" [ngClass]="{'error': state.state === STATE.error}">
-                  <label for="complaintSubject">Sujet</label>
-                  <input type="text" formControlName="subject" placeholder="Sujet de votre réclamation">
-                  <div class="form-message" *ngIf="this.reclamationForm.get('subject')?.hasError('required') && (reclamationForm.get('subject')?.touched || reclamationForm.get('subject')?.dirty) ">subject is required.</div>
+                  <label for="sujet">Sujet</label>
+                  <input type="text" formControlName="sujet" placeholder="Sujet de votre réclamation">
+                  <div class="form-message" *ngIf="this.reclamationForm.get('sujet')?.hasError('required') && (reclamationForm.get('sujet')?.touched || reclamationForm.get('sujet')?.dirty) ">Subject is required.</div>
               </div>
 
               <div class="form-group-input" [ngClass]="{'error': state.state === STATE.error}">
-                  <label for="complaintText">Message</label>
+                  <label for="message">Message de réclamation</label>
                   <textarea formControlName="message" rows="4" placeholder="Détaillez votre réclamation..."></textarea>
-                  <div class="form-message" *ngIf="this.reclamationForm.get('message')?.hasError('required') && (reclamationForm.get('message')?.touched || reclamationForm.get('message')?.dirty) ">description is required.</div>
+                  <div class="form-message" *ngIf="this.reclamationForm.get('message')?.hasError('required') && (reclamationForm.get('message')?.touched || reclamationForm.get('message')?.dirty) ">Description is required.</div>
               </div>
 
               <div class="onError" *ngIf="state.state === STATE.error">
@@ -59,8 +59,6 @@
 
           </form>
         </ng-container>
-        
-
       </div>
   </div>
 </div>

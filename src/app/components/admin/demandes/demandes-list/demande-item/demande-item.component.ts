@@ -12,7 +12,7 @@ import { DemandeActions } from '../../../../../store/demandes-feature/demandes.a
 export class DemandeItemComponent {
   @Input() demande!: Demande;
   constructor(private store:Store){}
-  // we will dispatch actions from here , approve and reject
+  // we will dispatch actions from here to approve and reject
   onApprove(demande: Demande): void { 
     this.store.dispatch(DemandeActions.validateDemande({payload:demande}))
   }
