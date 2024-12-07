@@ -26,6 +26,20 @@ export const reclamationsReducer = createReducer(
     on(reclamationActions.resetReclamation,(state) => ({
         ...state,
         state: STATE.initial
+    })),
+    on(reclamationActions.fetchReclamation, (state)=>({
+        ...state,
+        state:STATE.loading
+    })),
+    on(reclamationActions.fetchReclamationSuccess,(state, { payload } ) => ({
+        ...state,
+        reclamations : payload,
+        state : STATE.loaded
+    })),
+    on(reclamationActions.fetchReclamationError,(state, { payload })=>({
+        ...state, 
+        state : STATE.error,
+        errorMessage : payload
     }))
 )
 

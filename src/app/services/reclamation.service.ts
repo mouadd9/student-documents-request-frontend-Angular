@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, switchMap, timer } from 'rxjs';
+import { map, Observable, switchMap, timer } from 'rxjs';
 import { Reclamation } from '../models/reclamation';
 import { environment } from '../environments/environment';
 
@@ -32,8 +32,9 @@ export class ReclamationService {
   }
 
   public fetchAllReclamations() : Observable<Reclamation[]> {
-    return this.http.get<Reclamation[]>(this.host + "/reclamations" );
-
+    return this.http.get<Reclamation[]>(this.host + "/reclamations" ).pipe(
+      map((reclamations) => reclamations.slice().reverse())
+    );
   }
 
 

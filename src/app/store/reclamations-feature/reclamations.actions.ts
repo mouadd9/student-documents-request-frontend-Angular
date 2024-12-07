@@ -20,6 +20,13 @@ export const reclamationActions = createActionGroup({
         saveReclamation: props<{payload : Reclamation}>(), // { type : "[Reclamation] save reclamation", payload : { /*reclamation object*/ } }
         saveReclamationSuccess: props<{payload : Reclamation}>(),
         saveReclamationError: props<{payload : string}>(),
-        resetReclamation: emptyProps() // this is really important, when an action of type success is dispatched we will use effects to reset the state to initial
+
+        // action 2 
+        resetReclamation: emptyProps(), // this is really important, when an action of type success is dispatched we will use effects to reset the state to initial
+
+        // action 3 
+        fetchReclamation : emptyProps(),
+        fetchReclamationSuccess : props<{payload : Reclamation[]}>(),
+        fetchReclamationError : props<{payload: string}>()
     }
 })
