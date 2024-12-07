@@ -1,10 +1,3 @@
-// this is a class
-// it injects an observable of type Observable<Action>
-// it has properties
-// each property is an Observable used by the store
-// these observables are of type actions that will dispatched
-// so what we will do exactly , we will create some observables for each action
-
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { catchError, delay, map, mergeMap, Observable, of } from 'rxjs';
@@ -12,17 +5,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { DemandeActions } from './demandes.actions';
 import { DemandeService } from '../../services/demande.service';
 
-// 1 - an observable for the action : fetch data
-// this observable will give access to all the actions of type fetchDemandeSuccess or fetchDemandeError emitted by the backend
-
-// 2 - an observable for the action : post data
-// this observable will give access to all the actions of type postDemandeSuccess or postDemandeError
-
-// what does this mean ?
-
-// - the effects encounters a specific action "fetchDemande"
+// - the effects encounters a specific action
 // - the effects does an async operation using a method in our service
 // - then merges the response into the stream of data that we will store in our property
+// - this property is used by the store to dispatche actions of either sucess or failure
 
 @Injectable()
 export class DemandesEffects {

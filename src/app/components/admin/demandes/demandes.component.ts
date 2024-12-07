@@ -19,9 +19,10 @@ import { DemandeActions } from '../../../store/demandes-feature/demandes.actions
   styleUrl: './demandes.component.css',
 })
 
-// this component will get the demandeState Observale from the store
+// this component will dispatch a fetch demands actions
+// and will use specific selectors to get observables for specific demandes
 export class DemandesComponent {
-  
+
   state$ : Observable<STATE>;
   errorMessage$: Observable<string>;
   demandes$!: Observable<Demande[]>;
@@ -31,14 +32,16 @@ export class DemandesComponent {
     state: STATE;
     errorMessage: string;
   }>;
-
   // Holds the currently selected category
   selectedCategory: TypeDocument | null = null;
+
+  // we will select the the parts of the state that only have one selector
   constructor(private store: Store) {
     this.state$ = this.store.select(selectDataState);
     this.errorMessage$ = this.store.select(selectErrorMessage);
   }
 
+  // after the creation of the component
   ngOnInit(): void {
     // Dispatch an action to fetch demandes when the component initializes
     this.store.dispatch(DemandeActions.fetchDemandes());

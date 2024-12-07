@@ -11,9 +11,8 @@ import { Demande } from '../../../../models/demande';
 })
 
 
-// this component will Subscribe to the demandeState Observable in its template
+// this component will Subscribe to the combined$ Observable in its template
 export class DemandesListComponent {
-
   // we use @Input to declare a property that will receive data from the parent component.
   // in our case demandeState$ (located in demandes-list) will receive an Observable<demandeState>; from (demandeComponent) 
   // this variable will be subscribed to in this template using <ng-container></ng-container>
@@ -22,10 +21,7 @@ export class DemandesListComponent {
     state: STATE;
     errorMessage: string;
   }> ;
- 
 }
-
-
 
 /*
 Un rappel : 

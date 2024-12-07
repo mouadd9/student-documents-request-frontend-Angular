@@ -4,7 +4,6 @@ import { reclamationActions } from "./reclamations.actions";
 import { STATE } from "../state";
 
 
-
 export const reclamationsReducer = createReducer(
     // first we put the initial state 
     initialStateReclamation,
