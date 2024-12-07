@@ -18,20 +18,15 @@ export class ReclamationsListComponent {
   constructor(private reclamationService: ReclamationService) {}
 
   ngOnInit(): void {
-    this.fetchReclamations();
+   // this.fetchReclamations();
   }
 
-  fetchReclamations(): void {
-    this.reclamationService.fetchAllReclamations().subscribe((data: Reclamation[]) => {
-      this.reclamations = data;
-      this.filteredReclamations = data; // Initially show all demandes
-    });
-  }
+
 
 
   onSearchChanged(searchTerm: string): void {
     this.searchTerm = searchTerm.toLowerCase();
-    this.applyFilters();
+    //this.applyFilters();
   }
 
   // onCategoryChanged(category: string): void {
@@ -39,7 +34,7 @@ export class ReclamationsListComponent {
   //   this.applyFilters();
   // }
 
-  applyFilters(): void {
+  /*applyFilters(): void {
     this.filteredReclamations = this.reclamations.filter(r => {
       const searchTermLower = this.searchTerm.toLowerCase().trim();
       // const selectedCategoryLower = this.selectedCategory.toLowerCase().trim();
@@ -51,7 +46,7 @@ export class ReclamationsListComponent {
   
       
       return matchesSearch;
-    });
+    });*/
   }
   // approveDemande(demande: any): void {
   //   // Update the status locally
@@ -76,4 +71,4 @@ export class ReclamationsListComponent {
   //   );
   // }
  
-}
+

@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap, timer } from 'rxjs';
 import { Reclamation } from '../models/reclamation';
-import { environment } from '../environments/environment.dev';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReclamationService {
-  private host: string = environment.backendHost;
+  private host: string = environment.devHost;
 
   constructor(private http: HttpClient) { }
 
