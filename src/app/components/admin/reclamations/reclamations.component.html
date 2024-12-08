@@ -1,18 +1,10 @@
-<div class="reclamations-container">
-    <!-- Navigation Bar -->
-    <div class="nav-bar">
-      <app-reclamations-nav-bar
-      (searchChanged)="onSearchChanged($event)" 
-      
-      >
-    </app-reclamations-nav-bar>
-    </div>
-  
-    <!-- Demand List -->
-    <div class="reclamations-list">
-
-<app-reclamations-list [reclamations]="filteredReclamations"></app-reclamations-list>
-
-    </div>
-  </div>
-  
+<div class="container">
+  <!-- Navigation Bar -->
+  <section class="section">
+    <app-reclamations-nav-bar></app-reclamations-nav-bar>
+  </section>
+  <!-- Demand List -->
+  <app-reclamations-list
+    [reclamationsState$]="reclamationsState$">
+  </app-reclamations-list>
+</div>

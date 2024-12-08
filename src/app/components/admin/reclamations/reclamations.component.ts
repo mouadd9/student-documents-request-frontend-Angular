@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Reclamation } from '../../../models/reclamation';
-import { ReclamationService } from '../../../services/reclamation.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectReclamationState } from '../../../store/reclamations-feature/reclamations.selectors';
+import { reclamationState } from '../../../store/reclamations-feature/reclamations.state';
+import { reclamationActions } from '../../../store/reclamations-feature/reclamations.actions';
 
 
 @Component({
@@ -10,48 +14,13 @@ import { ReclamationService } from '../../../services/reclamation.service';
   styleUrl: './reclamations.component.css'
 })
 export class ReclamationsComponent {
-  @Input() reclamations: Reclamation[] = [];
 
-  // demands: Demande[] = [];
-  filteredReclamations: Reclamation[] = [];
-  searchTerm: string = '';
-  // selectedCategory: string = 'Toutes les demandes';
+  reclamationsState$!: Observable<reclamationState>;
 
-  constructor(private reclamationService: ReclamationService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
+    this.store.dispatch(reclamationActions.fetchReclamation());// here we dispatch an action that changes the state (LOADING -> LOADED / ERROR)
+    this.reclamationsState$ = this.store.select(selectReclamationState); // in this case we select the whole state (the observable representes a stream of the state object)
   }
-
-  /*fetchReclamations(): void {
-    this.reclamationService.fetchAllReclamations().subscribe((data: Reclamation[]) => {
-      this.reclamations = data;
-      this.filteredReclamations = data; // Initially show all demandes
-    });
-  }*/
-
-
-  onSearchChanged(searchTerm: string): void {
-   /* this.searchTerm = searchTerm.toLowerCase();
-    this.applyFilters();*/
-  } 
-
-  // onCategoryChanged(category: string): void {
-  //   this.selectedCategory = category;
-  //   this.applyFilters();
-  // }
-
- /* applyFilters(): void {
-    this.filteredReclamations = this.reclamations.filter(r => {
-      const searchTermLower = this.searchTerm.toLowerCase().trim();
-      // const selectedCategoryLower = this.selectedCategory.toLowerCase().trim();
-  
-      const matchesSearch = 
-        r.email.toLowerCase().includes(searchTermLower) ||
-        r.cin.toLowerCase().includes(searchTermLower) ||
-        r.apogeeNumber.toLowerCase().includes(searchTermLower);
-  
-      
-      return matchesSearch;
-    });
-  }*/
 }

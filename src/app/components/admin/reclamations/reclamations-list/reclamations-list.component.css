@@ -1,45 +1,5 @@
-/* Container */
-.container {
-    padding: 1.5rem;
-  }
-  
-  /* Section */
-  .section {
-    margin-bottom: 2rem;
-  }
 
-  .section h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
   
-  /* Controls */
-  .controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .search-bar {
-    width: 300px;
-    padding: 0.5rem 1rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.375rem;
-    font-size: 1rem;
-  }
-  
-  .select {
-    width: 200px;
-    padding: 0.5rem 1rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.375rem;
-    font-size: 1rem;
-    background-color: #ffffff;
-  }
-  
-  /* Card */
   .card {
     background-color: #ffffff;
     border: 1px solid #e5e7eb;
@@ -67,13 +27,13 @@
   .card-header p {
     font-size: 0.875rem;
     color: #6b7280;
+    font-weight: 700;
   }
-  
+
   .card-content {
     padding: 1rem;
   }
   
-  /* Table */
   table {
     width: 100%;
     border-collapse: collapse;
@@ -81,37 +41,37 @@
   
   table th,
   table td {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
+    font-size: 0.90rem;
+    padding: 0.75rem;
     text-align: center;
     border-bottom: 1px solid #e5e7eb;
-    border-left: 1px solid #e5e7eb;
-    border-right: 1px solid #e5e7eb;
-
   }
   
   table th {
     background-color: #f9fafb;
     font-weight: 600;
-    text-wrap:nowrap;
+  }
+  table tr {
+    font-size: 0.90rem;
+
+
   }
   
   table tbody tr:hover {
+    
+
     background-color: #f0f0f0;
   }
-  
-  /* Buttons */
+
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0.5rem 1rem;
     border-radius: 0.375rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    gap: 0.25rem;
-    min-width: 80px;
   }
   
   .btn:hover {
@@ -124,11 +84,24 @@
     box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
   }
   
+  .btn.destructive {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #000000;
+  }
+  
+  .btn.destructive:hover {
+    background-color: #1a1a1a;
+  }
+  
   .btn.approve {
     background-color: #28a745;
     color: #ffffff;
     border: none;
     margin-right: 0.5rem;
+    padding: 7px 15px;
+    border-radius: 0.375rem;
+    font-weight: 600;
   }
   
   .btn.approve:hover {
@@ -139,51 +112,112 @@
     background-color: #dc3545;
     color: #ffffff;
     border: none;
+    margin-right: 0.5rem;
+    padding: 7px 15px;
+    border-radius: 0.375rem;
+    font-weight: 600;
   }
   
   .btn.reject:hover {
     background-color: #c82333;
   }
   
-  /* Status Badge */
-  .status-badge {
-    display: inline-block;
-    padding: 0.25rem 0.5rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-align: center;
+  .btn.treat {
+    background-color: #3b82f6;
+    color: #ffffff;
+    border: none;
+    margin-right: 0.5rem;
+    padding: 7px 15px;
+    border-radius: 0.375rem;
+    font-weight: 600;
   }
   
-  .status-pending {
-    background-color: #fef3c7;
-    color: #92400e;
+  .btn.respond {
+    background-color: #10b981;
+    color: #ffffff;
+    border: none;
+    margin-right: 0.5rem;
+    padding: 7px 15px;
+    border-radius: 0.375rem;
+    font-weight: 600;
   }
   
-  /* Icon SVG */
-  .icon-svg {
-    width: 1rem;
-    height: 1rem;
-  }
-  .status-badge {
-    padding: 0.3em 0.6em;
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
+  .btn.treat:hover {
+    background-color: #2563eb;
   }
   
-  .status-pending {
-    background-color: #fef3c7;
-    color: #92400e;  }
-  
-  .status-approved {
-    background-color: #218838;
+  .btn.respond:hover {
+    background-color: #059669;
   }
   
-  .status-rejected {
+  .btn.outline {
+    background: none;
+    border: 1px solid #000000;
+    color: #000000;
+    margin-right: 0.5rem;
+    border-radius: 0.375rem;
+  }
+  
+  .btn.outline:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .btn.toggle-btn {
+    font-size: 1.5rem;
+  }
+
+    /* Icon SVG */
+    .icon-svg {
+      width: 1rem;
+      height: 1rem;
+    }
+    td {
+      font-weight: 400;
+      text-align: center;
+    }
+
+    /* When the details row is shown */
+    .details-cell {
+      padding: 1.5rem;
+      background-color: #f3d4d7;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.375rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .details-content {
+      display: flex;
+      flex-direction: column; /* Stack the content vertically */
+      gap: 1rem; /* Add spacing between elements */
+    }
+    
+    .details-content h4 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .details-content p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .details-content button {
+      align-self: flex-start; /* Align button to the start */
+      display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    cursor: pointer;
     background-color: #dc3545;
+    color: #ffffff;
+    border: none;
+    margin-right: 0.5rem;
+    padding: 7px 15px;
+    border-radius: 0.375rem;
+    font-weight: 600;
   }
-  .status-in-progress{
-    background-color: #96da01;
-    color:#1a1a1a;
-  }
+    
+    

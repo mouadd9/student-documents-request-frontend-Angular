@@ -1,26 +1,43 @@
 <div class="card">
-    <div class="card-header">
-      <h3>Demandes Traitées</h3>
-      <p>Liste des demandes ayant reçu une action</p>
-    </div>
-    <div class="card-content">
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Nom</th>
-            <th>Email</th>
-            <th>N° Apogée</th>
-            <th>Document</th>
-            <th>Statut</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngIf="demandeState$ | async as state">
-          <tr app-historique-item *ngFor="let demande of state.demandes" [demande]="demande"></tr>
+  <div class="card-header">
+    <h3>Demandes Traitées</h3>
+    <p>Liste des demandes ayant reçu une action</p>
+  </div>
+  <div class="card-content">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>N° Apogée</th>
+          <th>Document</th>
+          <th>Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="demandeState$ | async as state">
+          <ng-container *ngFor="let demande of state.demandes">
+            <tr>
+              <td>{{demande.dateCreation}}</td>
+              <td>{{demande.etudiant?.nom}}</td>
+              <td>{{demande.email}}</td>
+              <td>{{demande.numApogee}}</td>
+              <td>{{demande.typeDocument}}</td>
+              <td>
+                <span class="status-badge" [ngSwitch]="demande.status">
+                  <div class="status-badge status-approved"
+                    *ngSwitchCase="this.DemandeStatus.APPROVEE">Approuvée</div>
+                  <div class="status-badge status-rejected"
+                    *ngSwitchCase="this.DemandeStatus.REFUSEE">Refusée</div>
+                </span>
+              </td>
+            </tr>
+          </ng-container>
+
         </ng-container>
 
-        </tbody>
-      </table>
-    </div>
+      </tbody>
+    </table>
+  </div>
 </div>

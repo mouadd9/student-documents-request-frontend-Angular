@@ -14,7 +14,6 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
 import { DemandesComponent } from './components/admin/demandes/demandes.component';
 import { DemandesListComponent } from './components/admin/demandes/demandes-list/demandes-list.component';
 import { DemandesNavBarComponent } from './components/admin/demandes/demandes-nav-bar/demandes-nav-bar.component';
-import { DemandeItemComponent } from './components/admin/demandes/demandes-list/demande-item/demande-item.component';
 import { provideRouter, RouterModule } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
@@ -27,7 +26,6 @@ import { ReclamationsListComponent } from './components/admin/reclamations/recla
 import { ReclamationsNavBarComponent } from './components/admin/reclamations/reclamations-nav-bar/reclamations-nav-bar.component';
 import { ReclamationsComponent } from './components/admin/reclamations/reclamations.component';
 import { HistoriqueListComponent } from './components/admin/historique/historique-list/historique-list.component';
-import { HistoriqueItemComponent } from './components/admin/historique/historique-list/historique-item/historique-item.component';
 import { HistoriqueNavBarComponent } from './components/admin/historique/historique-nav-bar/historique-nav-bar.component';
 
 
@@ -54,14 +52,12 @@ import { HistoriqueNavBarComponent } from './components/admin/historique/histori
     DemandesComponent,
     DemandesNavBarComponent,
     DemandesListComponent,
-    DemandeItemComponent,  
     ReclamationComponent,
     ReclamationsComponent,
     ReclamationsNavBarComponent,
     ReclamationsListComponent,
     HistoriqueComponent,
     HistoriqueListComponent,
-    HistoriqueItemComponent,
     HistoriqueNavBarComponent
   ],
   imports: [

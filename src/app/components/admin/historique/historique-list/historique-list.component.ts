@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Demande } from '../../../../models/demande';
 import { STATE } from '../../../../store/state';
+import { DemandeStatus } from '../../../../models/enums/document-status';
 
 @Component({
   selector: 'app-historique-list',
@@ -15,4 +16,7 @@ export class HistoriqueListComponent {
     state: STATE;
     errorMessage: string;
   }> ;
+
+  public DemandeStatus = DemandeStatus;
+
 }

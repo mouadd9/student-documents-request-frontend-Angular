@@ -1,48 +1,54 @@
-<!-- src/app/demandes-list/demandes-list.component.html -->
-<!--
-<div>
-    <div class="card-header">
-        <h3>Reclamations</h3>
-        <p>Liste des Reclamations qui nécessitent une action</p>
-      </div>
+<div class="card">
+  <div class="card-header">
+    <h3>Réclamations en attente</h3>
+    <p>Liste des réclamations qui nécessitent une action</p>
+  </div>
+  <div class="card-content">
     <table>
       <thead>
         <tr>
+          <th>Date de Soumission</th>
+          <th>Etudiant</th>
           <th>Email</th>
-          <th>CIN</th>
-          <th>Apogee Number</th>
-          <th>Description</th>
-          <th>Status</th>
+          <th>Sujet</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let reclamation of reclamations">
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><textarea type="text" readonly value=""></textarea></td>
-          <td>
-            <span class="status-badge" [class.status-pending]="" 
-              [class.status-approved]="" 
-              [class.status-rejected]=""
-              [class.status-in-progress]="">
+        <ng-container *ngIf="reclamationsState$ | async as state">
+          <ng-container *ngFor="let reclamation of state.reclamations">
+            <!-- Main row -->
+            <tr>
+              <td>{{reclamation.dateCreation}}</td>
+              <td>{{reclamation.etudiant?.nom}}</td>
+              <td>{{reclamation.etudiant?.email}}</td>
+              <td>{{reclamation.sujet}}</td>
+              <td>
+                <button class="btn treat" (click)="toggleDetails(reclamation)">
+                  <img src="assets/icons/expand_white.svg" alt="Traiter Icon" class="icon-svg">
+                  Afficher plus
+                </button>
+                <button class="btn respond">
+                  <img src="assets/icons/email_white.svg" alt="Répondre Icon"
+                      class="icon-svg">
+                  Répondre
+              </button>
+              </td>
+            </tr>
 
-              {{ reclamation.status }}
-          </span>
-          </td>
-          <td>
-            <button class="btn approve">
-                <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
-                Traiter
-            </button>
-            <button class="btn reject" >
-                <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
-                Ignoner
-            </button>
-          </td>
-        </tr>
+            <!-- Details row -->
+            <tr *ngIf="expandedReclamation === reclamation" class="details-row">
+              <td colspan="5" class="details-cell">
+                <div class="details-content">
+                  <h4>Sujet: {{reclamation.sujet}}</h4>
+                  <p>Message: {{reclamation.message}}</p>
+                  <button class="" (click)="toggleDetails(null)">Retour</button>
+                </div>
+              </td>
+            </tr>            
+          </ng-container>
+        </ng-container>
       </tbody>
     </table>
   </div>
--->
+</div>

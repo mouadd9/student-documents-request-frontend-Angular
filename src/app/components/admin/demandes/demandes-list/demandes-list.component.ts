@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { STATE } from '../../../../store/state';
 import { Demande } from '../../../../models/demande';
+import { Store } from '@ngrx/store';
+import { DemandeActions } from '../../../../store/demandes-feature/demandes.actions';
 
 @Component({
   selector: 'app-demandes-list',
@@ -21,6 +23,17 @@ export class DemandesListComponent {
     state: STATE;
     errorMessage: string;
   }> ;
+
+  public STATE = STATE;
+
+  constructor(private store:Store){}
+
+  onApprove(demande: Demande): void { 
+    this.store.dispatch(DemandeActions.validateDemande({payload:demande}))
+  }
+  onReject(demande: Demande): void {
+    this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
+  }
 }
 
 /*
