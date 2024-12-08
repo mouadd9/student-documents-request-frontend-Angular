@@ -31,7 +31,6 @@ import { HistoriqueNavBarComponent } from './components/admin/historique/histori
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

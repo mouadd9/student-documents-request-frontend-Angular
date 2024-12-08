@@ -218,3 +218,30 @@
 }
 
 /* Card, Table, Buttons, and Status-Badge remain unchanged from the previous configuration */
+
+/* Hide the checkbox visually but keep it accessible */
+.toggle-checkbox {
+  display: none;
+}
+
+/* Style the toggle button */
+.details-toggle-label {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: underline;
+  display: inline-block;
+  font-size:43%;
+}
+
+/* Initially hide the error details */
+.error-details {
+  display: none;
+  font-family: monospace;
+  color: #972732;
+  font-size:40%;
+}
+
+/* Show the error details when the checkbox is checked */
+.toggle-checkbox:checked + .details-toggle-label + .error-details {
+  display: block;
+}

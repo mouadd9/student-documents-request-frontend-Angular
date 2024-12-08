@@ -15,10 +15,11 @@ import { DemandeActions } from '../../../../store/demandes-feature/demandes.acti
 
 // this component will Subscribe to the combined$ Observable in its template
 export class DemandesListComponent {
+  
   // we use @Input to declare a property that will receive data from the parent component.
   // in our case demandeState$ (located in demandes-list) will receive an Observable<demandeState>; from (demandeComponent) 
   // this variable will be subscribed to in this template using <ng-container></ng-container>
-  @Input() demandeState$!: Observable<{
+  @Input() demandeState$!: Observable<{//shouldnt be used
     demandes: Demande[];
     state: STATE;
     errorMessage: string;
@@ -33,6 +34,10 @@ export class DemandesListComponent {
   }
   onReject(demande: Demande): void {
     this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
+  }
+  onDownload(demande: Demande): void {
+    // this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
+    this.store.dispatch(DemandeActions.downloadDemand({payload:demande}));
   }
 
   onRetry(){

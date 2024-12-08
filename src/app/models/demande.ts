@@ -8,7 +8,7 @@ export interface Demande {
     cin?: string;
     numApogee?: string;
     typeDocument: TypeDocument;
-    status?: DemandeStatus; 
+    statut?: DemandeStatus; 
     dateCreation?: string | null;
     dateTraitement?: string | null;
     etudiant?: Etudiant;

@@ -7,7 +7,7 @@
       "cin": "I901234",
       "numApogee": "90123456",
       "typeDocument": "ATTESTATION_SCOLARITE",
-      "status": "APPROVEE",
+      "status": "EN_ATTENTE",
       "dateCreation": "2023-12-09T10:00:00.000Z",
       "dateTraitement": "08-12-2024 07:08:12",
       "etudiant": {
@@ -22,7 +22,7 @@
       "cin": "J012345",
       "numApogee": "01234567",
       "typeDocument": "RELEVE_NOTES",
-      "status": "REFUSEE",
+      "status": "EN_ATTENTE",
       "dateCreation": "2023-12-10T11:30:00.000Z",
       "dateTraitement": "08-12-2024 07:07:23",
       "etudiant": {
@@ -37,7 +37,7 @@
       "cin": "K123456",
       "numApogee": "12345678",
       "typeDocument": "CERTIFICAT_STAGE",
-      "status": "APPROVEE",
+      "status": "EN_ATTENTE",
       "dateCreation": "2023-12-11T14:15:00.000Z",
       "dateTraitement": "08-12-2024 07:08:11",
       "etudiant": {
@@ -52,7 +52,7 @@
       "cin": "L234567",
       "numApogee": "23456789",
       "typeDocument": "ATTESTATION_SCOLARITE",
-      "status": "APPROVEE",
+      "status": "EN_ATTENTE",
       "dateCreation": "2023-12-12T16:45:00.000Z",
       "dateTraitement": "08-12-2024 07:08:08",
       "etudiant": {
@@ -69,7 +69,7 @@
       "typeDocument": "RELEVE_NOTES",
       "status": "APPROVEE",
       "dateCreation": "2023-12-13T18:30:00.000Z",
-      "dateTraitement": "08-12-2024 07:07:07",
+      "dateTraitement": "08-12-2024 14:13:12",
       "etudiant": {
         "id": 14,
         "nom": "Mila Kunis",

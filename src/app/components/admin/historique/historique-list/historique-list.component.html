@@ -36,7 +36,7 @@
               <td>{{demande.numApogee}}</td>
               <td>{{demande.typeDocument}}</td>
               <td>
-                <span class="status-badge" [ngSwitch]="demande.status">
+                <span class="status-badge" [ngSwitch]="demande.statut">
                   <div class="status-badge status-approved"
                     *ngSwitchCase="this.DemandeStatus.APPROVEE">Approuvée</div>
                   <div class="status-badge status-rejected"

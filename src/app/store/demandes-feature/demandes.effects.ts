@@ -23,6 +23,7 @@ export class DemandesEffects {
   resetStateDemandeEffect$: Observable<Action>;
   validateDemandeEffect$: Observable<Action>;
   refuseDemandeEffect$: Observable<Action>;
+  downloadDemandEffect$:Observable<Action>;
 
   constructor(action$: Actions, demandeService: DemandeService) {
     // here we will inject the stream of Actions
@@ -125,6 +126,43 @@ export class DemandesEffects {
           )
         )
       );
+      
+      this.downloadDemandEffect$ = createEffect(() =>
+        this.action$.pipe(
+          ofType(DemandeActions.downloadDemand), // Listen for the downloadDemand action
+          mergeMap((action) => {
+            const demande = action.payload; // Get the entire 'demande' object from the payload
+      
+            // Call the service to get the download URL
+            return this.demandeService.downloadDemande(demande).pipe(
+              map((response: Blob) => {
+                // Assuming the service returns the Blob content (you may modify this part if the URL itself is returned)
+                
+                // Generate the dynamic filename based on 'etudiant.nom' and 'documentType'
+                const filename = demande.etudiant 
+                      ? `${demande.etudiant.nom}_${demande.typeDocument}.pdf`
+                      : `defaultName_${demande.typeDocument}.pdf`;
+
+                      // const downloadUrl = 'Liam%20Neeson_ATTESTATION_SCOLARITE.pdf';
+                      // Create a link and trigger the download
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(response); // Use the Blob response to create a URL for the download
+                // link.download = downloadUrl;  // for testing purpose
+                link.download = filename; 
+                link.click();  // Trigger the download
+      
+                return DemandeActions.downloadDemandSuccess(); // Dispatch success action
+              }),
+              catchError((error) => 
+                of(DemandeActions.downloadDemandError({ payload: error.message })) // Dispatch error if the download fails
+              )
+            );
+          })
+        )
+      );
+      
+      
+      
   }
 }
 
