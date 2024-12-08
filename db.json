@@ -7,9 +7,9 @@
       "cin": "I901234",
       "numApogee": "90123456",
       "typeDocument": "ATTESTATION_SCOLARITE",
-      "status": "EN_ATTENTE",
+      "status": "APPROVEE",
       "dateCreation": "2023-12-09T10:00:00.000Z",
-      "dateTraitement": "06-12-2024 02:33:17",
+      "dateTraitement": "08-12-2024 07:08:12",
       "etudiant": {
         "id": 10,
         "nom": "Isla Fisher",
@@ -22,9 +22,9 @@
       "cin": "J012345",
       "numApogee": "01234567",
       "typeDocument": "RELEVE_NOTES",
-      "status": "APPROVEE",
+      "status": "REFUSEE",
       "dateCreation": "2023-12-10T11:30:00.000Z",
-      "dateTraitement": "08-12-2024 06:10:37",
+      "dateTraitement": "08-12-2024 07:07:23",
       "etudiant": {
         "id": 11,
         "nom": "John Doe",
@@ -39,7 +39,7 @@
       "typeDocument": "CERTIFICAT_STAGE",
       "status": "APPROVEE",
       "dateCreation": "2023-12-11T14:15:00.000Z",
-      "dateTraitement": "08-12-2024 06:07:39",
+      "dateTraitement": "08-12-2024 07:08:11",
       "etudiant": {
         "id": 12,
         "nom": "Kylie Jenner",
@@ -54,7 +54,7 @@
       "typeDocument": "ATTESTATION_SCOLARITE",
       "status": "APPROVEE",
       "dateCreation": "2023-12-12T16:45:00.000Z",
-      "dateTraitement": "06-12-2024 02:34:36",
+      "dateTraitement": "08-12-2024 07:08:08",
       "etudiant": {
         "id": 13,
         "nom": "Liam Neeson",
@@ -69,7 +69,7 @@
       "typeDocument": "RELEVE_NOTES",
       "status": "APPROVEE",
       "dateCreation": "2023-12-13T18:30:00.000Z",
-      "dateTraitement": "08-12-2024 06:09:50",
+      "dateTraitement": "08-12-2024 07:07:07",
       "etudiant": {
         "id": 14,
         "nom": "Mila Kunis",

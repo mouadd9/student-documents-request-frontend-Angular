@@ -34,6 +34,10 @@ export class DemandesListComponent {
   onReject(demande: Demande): void {
     this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
   }
+
+  onRetry(){
+    this.store.dispatch(DemandeActions.fetchDemandes());
+  }
 }
 
 /*

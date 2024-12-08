@@ -3,20 +3,31 @@
     <h3>Demandes Traitées</h3>
     <p>Liste des demandes ayant reçu une action</p>
   </div>
-  <div class="card-content">
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Nom</th>
-          <th>Email</th>
-          <th>N° Apogée</th>
-          <th>Document</th>
-          <th>Statut</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngIf="demandeState$ | async as state">
+  <ng-container *ngIf="demandeState$ | async as state">
+    <div class="card-content">
+      <div class="spinner-container" *ngIf="state.state === STATE.loading">
+        <div class="spinner"></div>
+        <p class="loading-text">Chargement...</p>
+      </div>
+      <!-- Error State -->
+      <div class="error-container" *ngIf="state.state === STATE.error">
+        <div class="error-icon">⚠️</div>
+        <p class="error-text">Une erreur s'est produite. Veuillez réessayer.</p>
+        <button class="btn retry" (click)="onRetry()">Réessayer</button>
+      </div>
+      <table *ngIf="state.state === STATE.loaded">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>N° Apogée</th>
+            <th>Document</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+
           <ng-container *ngFor="let demande of state.demandes">
             <tr>
               <td>{{demande.dateCreation}}</td>
@@ -35,9 +46,8 @@
             </tr>
           </ng-container>
 
-        </ng-container>
-
-      </tbody>
-    </table>
-  </div>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
 </div>
