@@ -75,6 +75,13 @@
         "nom": "Mila Kunis",
         "email": "milakunis@example.com"
       }
+    },
+    {
+      "id": "4e92",
+      "email": "kihlyounes123@gmail.com",
+      "cin": "A123456",
+      "numApogee": "1001",
+      "typeDocument": "RELEVE_NOTES"
     }
   ],
   "reclamations": [
@@ -136,7 +143,7 @@
       "numApogee": "23456789",
       "sujet": "ATTESTATION_SCOLARITE",
       "message": "Request for attestation of enrollment.",
-      "status": "EN_ATTENTE",
+      "status": "TRAITEE",
       "dateCreation": "2023-12-12T16:45:00.000Z",
       "dateTraitement": "2024-12-06T02:34:36.000Z",
       "etudiant": {
@@ -144,7 +151,7 @@
         "nom": "Liam Neeson",
         "email": "liamneeson@example.com"
       },
-      "response": "qsc"
+      "response": "test"
     },
     {
       "id": "14",
