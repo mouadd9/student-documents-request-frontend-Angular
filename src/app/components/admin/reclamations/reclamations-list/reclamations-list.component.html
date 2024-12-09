@@ -72,7 +72,7 @@
                   </div>
 
                   <div class="details-content">
-                    <div class="response-form">
+                    <div class="response-form" *ngIf="!state.respondLoading">
                       <form
                         [formGroup]="responseForm"
                         (ngSubmit)="onRespond(reclamation)"
@@ -106,6 +106,27 @@
                             Le message de réponse est requis.
                           </div>
                         </div>
+                        <div class="actions">
+                          <button
+                            type="submit"
+                            class="btn respond"
+                            [disabled]="state.respondLoading"
+                          >
+                            <img
+                              src="assets/icons/email_white.svg"
+                              alt="Répondre Icon"
+                              class="icon-svg"
+                            />
+                            Envoyer
+                          </button>
+                          <button
+                            type="button"
+                            class="btn reject"
+                            (click)="toggleDetails(null)"
+                          >
+                            Fermer
+                          </button>
+                        </div>
                       </form>
                     </div>
                     <!-- Loading Spinner -->
@@ -114,27 +135,6 @@
                       <p class="loading-text">En cours...</p>
                     </div>
                   </div>
-                </div>
-                <div class="actions">
-                  <button
-                    type="submit"
-                    class="btn respond"
-                    [disabled]="state.respondLoading"
-                  >
-                    <img
-                      src="assets/icons/email_white.svg"
-                      alt="Répondre Icon"
-                      class="icon-svg"
-                    />
-                    Envoyer
-                  </button>
-                  <button
-                    type="button"
-                    class="btn reject"
-                    (click)="toggleDetails(null)"
-                  >
-                    Fermer
-                  </button>
                 </div>
               </td>
             </tr>
