@@ -27,6 +27,11 @@ export const reclamationActions = createActionGroup({
         // action 3 
         fetchReclamation : emptyProps(),
         fetchReclamationSuccess : props<{payload : Reclamation[]}>(),
-        fetchReclamationError : props<{payload: string}>()
+        fetchReclamationError : props<{payload: string}>(),
+
+        // action 4 respond to reclamation 
+        respondReclamation : props<{payload : Reclamation}>(), // this performs a side effect
+        respondReclamationSuccess :props<{payload : Reclamation}>(), 
+        respondReclamationError : props<{payload : string}>() ,
     }
 })

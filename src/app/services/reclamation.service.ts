@@ -24,9 +24,9 @@ export class ReclamationService {
     );
   
   } // effects will use this Async Method when an action of type sendReclamation is dispatched 
-  public updateReclamationAsync(reclamation: Reclamation ,response: string ): Observable<Reclamation> {
-    let updatedReclamation = {...reclamation, response: response};
-    return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, updatedReclamation);
+  public updateReclamationAsync(updatedReclamation: Reclamation): Observable<Reclamation> {
+    
+    return this.http.put<Reclamation>(this.host + "/reclamations/" + updatedReclamation.id, updatedReclamation);
 
     // return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, response);
   }

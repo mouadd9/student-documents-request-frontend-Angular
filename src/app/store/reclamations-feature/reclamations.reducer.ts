@@ -40,7 +40,25 @@ export const reclamationsReducer = createReducer(
         ...state, 
         state : STATE.error,
         errorMessage : payload
-    }))
+    })),
+    on(reclamationActions.respondReclamation,(state) => ({
+        ...state,
+        state : STATE.loading,
+        respondLoading : true
+    })),
+    on(reclamationActions.respondReclamationSuccess,(state, {payload})=> ({
+        ...state,
+        reclamations : state.reclamations.map((reclamation)=> reclamation.id === payload.id? payload : reclamation ),
+        state : STATE.loaded,
+        respondLoading : false,
+
+    })),
+    on(reclamationActions.respondReclamationError, (state, {payload}) => ({
+        ...state,
+        state: STATE.error,
+        errorMessage: payload,
+        respondLoading : false
+    }) )
 )
 
 //-------------------------OLD METHOD

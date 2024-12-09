@@ -286,6 +286,19 @@
   gap: 1rem;
 }
 
+.spinner-container-td {
+  display: flex; /* Use flexbox to align content */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100%; /* Ensure it takes the full height of the cell */
+  padding: 2rem 0;
+  padding: 1.5rem;
+  background-color: #f3d4d7;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
 .loading-text {
   font-size: 1rem;
   color: #333;
@@ -307,4 +320,89 @@
   border-top-color: #333;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+}
+
+/* Details row and cell styling */
+.details-row td {
+  text-align: center;
+}
+
+.details-cell {
+  padding: 1.5rem;
+  background-color: #f3d4d7;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Form group input and messages */
+.form-group-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group-input label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.form-group-input input {
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+}
+
+.form-group-input.error input {
+  border-color: #dc3545;
+}
+
+.form-message {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #dc3545;
+}
+
+/* Actions container for buttons */
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Buttons for send and close actions */
+.btn.approve {
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+  padding: 7px 15px;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn.approve:hover {
+  background-color: #218838;
+}
+
+.btn.reject {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 7px 15px;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn.reject:hover {
+  background-color: #c82333;
 }

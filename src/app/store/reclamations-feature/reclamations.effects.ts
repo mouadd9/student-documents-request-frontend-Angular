@@ -22,6 +22,8 @@ export class reclamationsEffects {
 
     fetchReclamationEffect$: Observable<Action>;
 
+    respondReclamationEffect$: Observable<Action>;
+
     constructor (actions$: Actions, reclamationService: ReclamationService) {
 
         this.actions$ = actions$;
@@ -67,6 +69,19 @@ export class reclamationsEffects {
            )
         )
 
+        this.respondReclamationEffect$ = createEffect(()=>
+            this.actions$.pipe(
+                ofType(reclamationActions.respondReclamation),
+                delay(3000),
+                mergeMap(
+                    (action) => this.reclamationService.updateReclamationAsync(action.payload).pipe(
+                        map((reclamation)=>reclamationActions.respondReclamationSuccess({payload:reclamation})),
+                        catchError((err)=>of(reclamationActions.respondReclamationError({payload: err.message})))
+                    )
+
+                )
+            )
+        )
 
     }
 

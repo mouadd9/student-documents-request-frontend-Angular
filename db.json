@@ -85,14 +85,15 @@
       "numApogee": "90123456",
       "sujet": "ATTESTATION_SCOLARITE",
       "message": "Request for attestation of enrollment.",
-      "status": "APPROVEE",
+      "status": "EN_ATTENTE",
       "dateCreation": "2023-12-09T10:00:00.000Z",
       "dateTraitement": "2024-12-06T02:33:17.000Z",
       "etudiant": {
         "id": 10,
         "nom": "Isla Fisher",
         "email": "islafisher@example.com"
-      }
+      },
+      "response": "qsc"
     },
     {
       "id": "11",
@@ -108,7 +109,8 @@
         "id": 11,
         "nom": "John Doe",
         "email": "johndoe@example.com"
-      }
+      },
+      "response": "sdv"
     },
     {
       "id": "12",
@@ -124,7 +126,8 @@
         "id": 12,
         "nom": "Kylie Jenner",
         "email": "kyliejenner@example.com"
-      }
+      },
+      "response": "qcs"
     },
     {
       "id": "13",
@@ -133,14 +136,15 @@
       "numApogee": "23456789",
       "sujet": "ATTESTATION_SCOLARITE",
       "message": "Request for attestation of enrollment.",
-      "status": "APPROVEE",
+      "status": "EN_ATTENTE",
       "dateCreation": "2023-12-12T16:45:00.000Z",
       "dateTraitement": "2024-12-06T02:34:36.000Z",
       "etudiant": {
         "id": 13,
         "nom": "Liam Neeson",
         "email": "liamneeson@example.com"
-      }
+      },
+      "response": "qsc"
     },
     {
       "id": "14",
@@ -149,14 +153,15 @@
       "numApogee": "34567890",
       "sujet": "RELEVE_NOTES",
       "message": "Request for transcript of records.",
-      "status": "REFUSEE",
+      "status": "TRAITEE",
       "dateCreation": "2023-12-13T18:30:00.000Z",
       "dateTraitement": "2024-12-06T02:33:27.000Z",
       "etudiant": {
         "id": 14,
         "nom": "Mila Kunis",
         "email": "milakunis@example.com"
-      }
+      },
+      "response": "shut the fuck upp"
     }
   ]
 }

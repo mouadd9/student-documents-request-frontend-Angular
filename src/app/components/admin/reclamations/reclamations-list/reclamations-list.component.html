@@ -4,29 +4,31 @@
     <p>Liste des réclamations qui nécessitent une action</p>
   </div>
   <ng-container *ngIf="reclamationsState$ | async as state">
-  <div class="card-content">
-    <div class="spinner-container" *ngIf="state.state === STATE.loading">
-      <div class="spinner"></div>
-      <p class="loading-text">Chargement...</p>
-    </div>
-    <!-- Error State -->
-    <div class="error-container" *ngIf="state.state === STATE.error">
-      <div class="error-icon">⚠️</div>
-      <p class="error-text">Une erreur s'est produite. Veuillez réessayer.</p>
-      <button class="btn retry" (click)="onRetry()">Réessayer</button>
-    </div>
-    <table *ngIf="state.state === STATE.loaded">
-      <thead>
-        <tr>
-          <th>Date de Soumission</th>
-          <th>Etudiant</th>
-          <th>Email</th>
-          <th>Sujet</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-   
+    <div class="card-content">
+      <div class="spinner-container"
+        *ngIf="(state.state === STATE.loading) && !state.respondLoading">
+        <div class="spinner"></div>
+        <p class="loading-text">Chargement...</p>
+      </div>
+      <!-- Error State -->
+      <div class="error-container" *ngIf="state.state === STATE.error">
+        <div class="error-icon">⚠️</div>
+        <p class="error-text">Une erreur s'est produite. Veuillez réessayer.</p>
+        <button class="btn retry" (click)="onRetry()">Réessayer</button>
+      </div>
+      <table
+        *ngIf="(state.state === STATE.loaded) || ( ( state.state === STATE.loading ) && state.respondLoading)">
+        <thead>
+          <tr>
+            <th>Date de Soumission</th>
+            <th>Etudiant</th>
+            <th>Email</th>
+            <th>Sujet</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+
           <ng-container *ngFor="let reclamation of state.reclamations">
             <!-- Main row -->
             <tr>
@@ -36,31 +38,68 @@
               <td>{{reclamation.sujet}}</td>
               <td>
                 <button class="btn treat" (click)="toggleDetails(reclamation)">
-                  <img src="assets/icons/expand_white.svg" alt="Traiter Icon" class="icon-svg">
+                  <img src="assets/icons/expand_white.svg" alt="Traiter Icon"
+                    class="icon-svg">
                   Afficher plus
                 </button>
-                <button class="btn respond">
+                <button class="btn respond"
+                  (click)="toggleResponse(reclamation)">
                   <img src="assets/icons/email_white.svg" alt="Répondre Icon"
-                      class="icon-svg">
+                    class="icon-svg">
                   Répondre
-              </button>
+                </button>
               </td>
             </tr>
 
             <!-- Details row -->
-            <tr *ngIf="expandedReclamation === reclamation" class="details-row">
+            <tr *ngIf="(expandedReclamation === reclamation) "
+              class="details-row">
               <td colspan="5" class="details-cell">
                 <div class="details-content">
                   <h4>Sujet: {{reclamation.sujet}}</h4>
                   <p>Message: {{reclamation.message}}</p>
-                  <button class="" (click)="toggleDetails(null)">Retour</button>
+                  <button class (click)="toggleDetails(null)">Fermer</button>
                 </div>
               </td>
-            </tr>            
+            </tr>
+
+            <tr *ngIf="(respondingReclamation === reclamation)"
+              class="details-row">
+              <td colspan="5" class="details-cell">
+                <div class="spinner-container" *ngIf="state.respondLoading ">
+                  <div class="spinner"></div>
+                  <p class="loading-text">En cours...</p>
+                </div>
+                <div class="details-content" *ngIf="!state.respondLoading ">
+                  <h4>Réponse</h4>
+                  <form [formGroup]="responseForm"
+                    (ngSubmit)="onRespond(reclamation)">
+                    <div class="form-group-input"
+                      [ngClass]="{'error': responseForm.get('response')?.invalid && (responseForm.get('response')?.touched || responseForm.get('response')?.dirty)}">
+                      <label for="responseMessage">Votre réponse:</label>
+                      <input type="text" formControlName="response"
+                        placeholder="Entrez votre réponse...">
+                      <div class="form-message"
+                        *ngIf="responseForm.get('response')?.hasError('required') && (responseForm.get('response')?.touched || responseForm.get('response')?.dirty)">
+                        Le message de réponse est requis.
+                      </div>
+                    </div>
+                    <div class="actions">
+                      <button type="submit" class="btn approve"
+                        *ngIf="!state.respondLoading">Envoyer</button>
+                      <button type="button" class="btn reject"
+                        (click)="closeResponseForm()">Fermer</button>
+                    </div>
+                  </form>
+                </div>
+              </td>
+
+            </tr>
+
           </ng-container>
-     
-      </tbody>
-    </table>
-  </div>
-</ng-container>
+
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
 </div>

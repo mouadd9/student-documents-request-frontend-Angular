@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { Reclamation } from '../../../models/reclamation';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectReclamationState } from '../../../store/reclamations-feature/reclamations.selectors';
+import { selectPendingReclamationsState, selectReclamationState } from '../../../store/reclamations-feature/reclamations.selectors';
 import { reclamationState } from '../../../store/reclamations-feature/reclamations.state';
 import { reclamationActions } from '../../../store/reclamations-feature/reclamations.actions';
 
@@ -15,12 +14,15 @@ import { reclamationActions } from '../../../store/reclamations-feature/reclamat
 })
 export class ReclamationsComponent {
 
-  reclamationsState$!: Observable<reclamationState>;
+  reclamationsState$!: Observable<reclamationState>; // this observable is passed to a child element
 
   constructor(private store: Store) {}
 
-  ngOnInit(): void {
-    this.store.dispatch(reclamationActions.fetchReclamation());// here we dispatch an action that changes the state (LOADING -> LOADED / ERROR)
-    this.reclamationsState$ = this.store.select(selectReclamationState); // in this case we select the whole state (the observable representes a stream of the state object)
+  ngOnInit(): void { 
+    // first we select the specific observable we need, subscribing to this observable will provide us with a continous stream of state over time
+    // so that whenever the selected state changes in the store using a reducer , the new state is emitted via the store
+    this.reclamationsState$ = this.store.select(selectPendingReclamationsState); 
+    // here we dispatch an action that will lead to a change in state, and will get us new state
+    this.store.dispatch(reclamationActions.fetchReclamation());
   }
 }

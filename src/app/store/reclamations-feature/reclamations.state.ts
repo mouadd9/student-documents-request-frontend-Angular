@@ -4,12 +4,14 @@ import { STATE } from "../state";
 export interface reclamationState {
     reclamations : Reclamation[],
     state : STATE,
-    errorMessage : string
+    errorMessage : string,
+    respondLoading: boolean;
 }
 
 export const initialStateReclamation: reclamationState = {
     reclamations : [],
     state : STATE.initial,
-    errorMessage : ''
+    errorMessage : '',
+    respondLoading : false
 }
 
