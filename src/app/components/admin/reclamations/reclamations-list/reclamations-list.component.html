@@ -67,98 +67,84 @@
             <!-- Details row -->
             <tr *ngIf="expandedReclamation === reclamation" class="details-row">
               <td colspan="5" class="details-cell">
-                <div class="details-content">
-                  <div class="details-header">
-                    <h4>Détails de la réclamation</h4>
+                <div class="combined-content">
+                  <div class="details-content">
+                    <div class="message-container">
+                      <div class="message-label">Sujet</div>
+                      <div class="message-content">{{ reclamation.sujet }}</div>
+                    </div>
+
+                    <div class="message-container">
+                      <div class="message-label">Message</div>
+                      <div class="message-content">
+                        {{ reclamation.message }}
+                      </div>
+                    </div>
+
+                    <div class="actions">
+                      <button class="btn reject" (click)="toggleDetails(null)">
+                        Fermer
+                      </button>
+                    </div>
+                  </div>
+                  <div class="spinner-container" *ngIf="state.respondLoading">
+                    <div class="spinner"></div>
+                    <p class="loading-text">En cours...</p>
                   </div>
 
-                  <div class="message-container">
-                    <div class="message-label">Sujet</div>
-                    <div class="message-content">{{ reclamation.sujet }}</div>
-                  </div>
-
-                  <div class="message-container">
-                    <div class="message-label">Message</div>
-                    <div class="message-content">{{ reclamation.message }}</div>
-                  </div>
-
-                  <div class="actions">
-                    <button class="btn reject" (click)="toggleDetails(null)">
-                      Fermer
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Response row -->
-            <tr
-              *ngIf="respondingReclamation === reclamation"
-              class="details-row"
-            >
-              <td colspan="5" class="details-cell">
-                <div class="spinner-container" *ngIf="state.respondLoading">
-                  <div class="spinner"></div>
-                  <p class="loading-text">En cours...</p>
-                </div>
-
-                <div class="details-content" *ngIf="!state.respondLoading">
-                  <div class="details-header">
-                    <h4>Répondre à la réclamation</h4>
-                  </div>
-
-                  <div class="response-form">
-                    <form
-                      [formGroup]="responseForm"
-                      (ngSubmit)="onRespond(reclamation)"
-                    >
-                      <div
-                        class="form-group-textarea"
-                        [ngClass]="{
-                          error:
-                            responseForm.get('response')?.invalid &&
-                            (responseForm.get('response')?.touched ||
-                              responseForm.get('response')?.dirty)
-                        }"
+                  <div class="details-content" *ngIf="!state.respondLoading">
+                    <div class="response-form">
+                      <form
+                        [formGroup]="responseForm"
+                        (ngSubmit)="onRespond(reclamation)"
                       >
-                        <label for="responseMessage">Votre réponse</label>
-                        <textarea
-                          id="responseMessage"
-                          formControlName="response"
-                          placeholder="Entrez votre réponse..."
-                          rows="4"
-                        ></textarea>
                         <div
-                          class="form-message"
-                          *ngIf="
-                            responseForm
-                              .get('response')
-                              ?.hasError('required') &&
-                            (responseForm.get('response')?.touched ||
-                              responseForm.get('response')?.dirty)
-                          "
+                          class="form-group-textarea"
+                          [ngClass]="{
+                            error:
+                              responseForm.get('response')?.invalid &&
+                              (responseForm.get('response')?.touched ||
+                                responseForm.get('response')?.dirty)
+                          }"
                         >
-                          Le message de réponse est requis.
+                          <label for="responseMessage">Réponse</label>
+                          <textarea
+                            id="responseMessage"
+                            formControlName="response"
+                            placeholder="Entrez votre réponse..."
+                            rows="4"
+                          ></textarea>
+                          <div
+                            class="form-message"
+                            *ngIf="
+                              responseForm
+                                .get('response')
+                                ?.hasError('required') &&
+                              (responseForm.get('response')?.touched ||
+                                responseForm.get('response')?.dirty)
+                            "
+                          >
+                            Le message de réponse est requis.
+                          </div>
                         </div>
-                      </div>
-
-                      <div class="actions">
-                        <button
-                          type="button"
-                          class="btn reject"
-                          (click)="closeResponseForm()"
-                        >
-                          Annuler
-                        </button>
-                        <button
-                          type="submit"
-                          class="btn approve"
-                          *ngIf="!state.respondLoading"
-                        >
-                          Envoyer
-                        </button>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
+                    <div class="actions">
+                      <button
+                        type="button"
+                        class="btn reject"
+                        (click)="closeResponseForm()"
+                      >
+                        Annuler
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn approve"
+                        *ngIf="!state.respondLoading"
+                      >
+                        Envoyer
+                      </button>
+                    </div>
                   </div>
                 </div>
               </td>

@@ -249,7 +249,7 @@ td {
 
 /* Details Panel Styling */
 .details-cell {
-  padding: 2rem;
+
   background-color: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 0.5rem;
@@ -257,27 +257,18 @@ td {
 }
 
 .details-content {
-  max-width: 800px;
+  width: 49%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.details-header {
-  border-bottom: 2px solid #e2e8f0;
-}
-
-.details-header h4 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #1e293b;
-}
-
 .message-container {
   background-color: white;
   padding: 0.5rem;
   border: 2px solid #e2e8f0;
+  border-radius: 0.25rem;
 }
 
 .message-label {
@@ -297,8 +288,8 @@ td {
 .response-form {
   background-color: white;
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #e2e8f0;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.25rem;
 }
 
 .form-group-textarea {
@@ -347,3 +338,7 @@ td {
   gap: 1rem;
 }
 
+.combined-content {
+  display: flex;
+  gap: 2rem;
+}
