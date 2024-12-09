@@ -22,6 +22,7 @@
     "@ngrx/store": "^18.1.1",
     "@ngrx/store-devtools": "^18.1.1",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.7",
     "concurrently": "^9.0.1",
     "font-awesome": "^4.7.0",
     "http-proxy-middleware": "^3.0.3",

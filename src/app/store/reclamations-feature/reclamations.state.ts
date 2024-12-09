@@ -2,15 +2,15 @@ import { Reclamation } from "../../models/reclamation";
 import { STATE } from "../state";
 
 export interface reclamationState {
-    reclamations : Reclamation[],
     state : STATE,
+    reclamations : Reclamation[],
     errorMessage : string,
     respondLoading: boolean;
 }
 
 export const initialStateReclamation: reclamationState = {
-    reclamations : [],
     state : STATE.initial,
+    reclamations : [],
     errorMessage : '',
     respondLoading : false
 }

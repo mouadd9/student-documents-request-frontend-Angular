@@ -31,7 +31,7 @@ const initialStatistic: Statistics = {
     }
   };
   
-export let initialState: statisticsState = {
+export let initialStatisticState: statisticsState = {
     state : STATE.initial,
     statistics : initialStatistic,
     errorMessage : ""

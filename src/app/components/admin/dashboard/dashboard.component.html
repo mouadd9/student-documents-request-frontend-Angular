@@ -1,1 +1,73 @@
-<p>Here add the dashboard like stats....</p>
+
+<div class="container">
+    <!-- Section: Statistiques -->
+    <section class="section">
+      <h1>Statistiques</h1>
+
+      <div class="stats-cards">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header-inline">
+              <img
+                src="/assets/icons/approve_black.svg"
+                alt="Demandes Approuvées Icon"
+                class="icon-svg-bg"
+              />
+              <h3>Demandes Approuvées</h3>
+            </div>
+            <p class="stat-value">235</p>
+            <p class="stat-change">+20.1% par rapport au mois dernier</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header-inline">
+              <img
+                src="/assets/icons/treat_black.svg"
+                alt="Temps Moyen de Traitement Icon"
+                class="icon-svg-bg"
+              />
+              <h3>Temps Moyen de Traitement</h3>
+            </div>
+            <p class="stat-value">2.4 jours</p>
+            <p class="stat-change negative">
+              -0.3 jours par rapport au mois dernier
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header-inline">
+              <img
+                src="/assets/icons/user.svg"
+                alt="Taux de Satisfaction Icon"
+                class="icon-svg-bg"
+              />
+              <h3>Taux de Satisfaction</h3>
+            </div>
+            <p class="stat-value">94.2%</p>
+            <p class="stat-change">+2.4% par rapport au mois dernier</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="charts">
+        <div class="charts-inline">
+          <div class="chart-card">
+            <h3>Aperçu Mensuel</h3>
+            <canvas id="monthlyOverview"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Distribution par Statut</h3>
+            <canvas id="statusDistribution"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Tendances Hebdomadaires</h3>
+            <canvas id="weeklyTrends"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
