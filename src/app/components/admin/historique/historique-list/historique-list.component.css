@@ -37,11 +37,10 @@
     width: 100%;
     border-collapse: collapse;
   }
-  
-  table th,
-  table td {
-    font-size: 0.90rem;
-    padding: 0.75rem;
+  table td,
+  table th {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
     text-align: center;
     border-bottom: 1px solid #e5e7eb;
   }
@@ -50,29 +49,25 @@
     background-color: #f9fafb;
     font-weight: 600;
   }
-  table tr {
-    font-size: 0.90rem;
-
-
-  }
   
   table tbody tr:hover {
-    
-
     background-color: #f0f0f0;
   }
-
-
+  
+ 
   
   .status-badge {
     display: inline-block;
+    margin: 0;
     padding: 0.5rem 0.5rem;
     border-radius: 9999px;
     font-size: 0.75rem;
     font-weight: 500;
     text-align: center;
   }
-  
+  .badge {
+    padding: 0rem !important;
+  }
   .status-approved {
     background-color: #d1fae5;
     color: #218838;
@@ -133,7 +128,7 @@
 }
 
 .btn:focus {
-  outline: none;
+  outline: 0;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
 }
 .btn.retry {
