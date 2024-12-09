@@ -1,12 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { reclamationState } from '../../../../store/reclamations-feature/reclamations.state';
 import { Reclamation } from '../../../../models/reclamation';
 import { STATE } from '../../../../store/state';
 import { Store } from '@ngrx/store';
 import { reclamationActions } from '../../../../store/reclamations-feature/reclamations.actions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { selectReclamationState } from '../../../../store/reclamations-feature/reclamations.selectors';
 import { ReclamationStatus } from '../../../../models/enums/reclamation-status';
 
 @Component({
@@ -18,7 +17,6 @@ export class ReclamationsListComponent {
 
   @Input() reclamationsState$!: Observable<reclamationState>; // this input property will be initialized with the passed observable
   expandedReclamation: Reclamation | null = null;
-  respondingReclamation: Reclamation | null = null; // This will track which reclamation is being responded to
 
   public STATE = STATE;
   responseForm!: FormGroup;
@@ -36,19 +34,10 @@ export class ReclamationsListComponent {
   toggleDetails(reclamation: Reclamation | null): void {
     this.expandedReclamation = this.expandedReclamation === reclamation ? null : reclamation;
     // If we show details for another reclamation, close the response form if open
-    if (this.expandedReclamation && this.expandedReclamation !== this.respondingReclamation) {
-      this.respondingReclamation = null;
+    if (this.expandedReclamation !== reclamation) {
+      this.responseForm.reset();
     }
-  }
-
-  toggleResponse(reclamation: Reclamation | null): void {
-    // Reset the form each time we open a new response form
-    this.responseForm.reset();
-    this.respondingReclamation = this.respondingReclamation === reclamation ? null : reclamation;
-    // If we are responding to a different reclamation, close the details if opened for another
-    if (this.respondingReclamation && this.expandedReclamation && this.expandedReclamation !== this.respondingReclamation) {
-      this.expandedReclamation = null;
-    }
+   
   }
 
   onRespond(reclamation: Reclamation | null) {
@@ -64,9 +53,6 @@ export class ReclamationsListComponent {
     }
   }
 
-  closeResponseForm() {
-    this.respondingReclamation = null;
-  }
   onRetry(){
     this.store.dispatch(reclamationActions.fetchReclamation());
   }
