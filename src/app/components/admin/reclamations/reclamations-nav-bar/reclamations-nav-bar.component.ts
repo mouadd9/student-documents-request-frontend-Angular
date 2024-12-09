@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-reclamations-nav-bar',
-  templateUrl: './reclamations-nav-bar.component.html',
-  styleUrl: './reclamations-nav-bar.component.css'
+    selector: 'app-reclamations-nav-bar',
+    templateUrl: './reclamations-nav-bar.component.html',
+    styleUrl: './reclamations-nav-bar.component.css',
+    standalone: false
 })
 export class ReclamationsNavBarComponent {
   @Output() searchChanged = new EventEmitter<string>(); // Emits search term changes

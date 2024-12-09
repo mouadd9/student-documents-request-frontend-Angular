@@ -7,10 +7,10 @@ import { reclamationActions } from '../../../store/reclamations-feature/reclamat
 
 
 @Component({
-  selector: 'app-reclamations',
-
-  templateUrl: './reclamations.component.html',
-  styleUrl: './reclamations.component.css'
+    selector: 'app-reclamations',
+    templateUrl: './reclamations.component.html',
+    styleUrl: './reclamations.component.css',
+    standalone: false
 })
 export class ReclamationsComponent {
 
