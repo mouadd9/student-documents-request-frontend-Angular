@@ -50,21 +50,10 @@
                   />
                   Afficher plus
                 </button>
-                <button
-                  class="btn respond"
-                  (click)="toggleResponse(reclamation)"
-                >
-                  <img
-                    src="assets/icons/email_white.svg"
-                    alt="Répondre Icon"
-                    class="icon-svg"
-                  />
-                  Répondre
-                </button>
               </td>
             </tr>
 
-            <!-- Details row -->
+            <!-- Combined Details and Response row -->
             <tr *ngIf="expandedReclamation === reclamation" class="details-row">
               <td colspan="5" class="details-cell">
                 <div class="combined-content">
@@ -80,19 +69,9 @@
                         {{ reclamation.message }}
                       </div>
                     </div>
-
-                    <div class="actions">
-                      <button class="btn reject" (click)="toggleDetails(null)">
-                        Fermer
-                      </button>
-                    </div>
-                  </div>
-                  <div class="spinner-container" *ngIf="state.respondLoading">
-                    <div class="spinner"></div>
-                    <p class="loading-text">En cours...</p>
                   </div>
 
-                  <div class="details-content" *ngIf="!state.respondLoading">
+                  <div class="details-content">
                     <div class="response-form">
                       <form
                         [formGroup]="responseForm"
@@ -129,23 +108,33 @@
                         </div>
                       </form>
                     </div>
-                    <div class="actions">
-                      <button
-                        type="button"
-                        class="btn reject"
-                        (click)="closeResponseForm()"
-                      >
-                        Annuler
-                      </button>
-                      <button
-                        type="submit"
-                        class="btn approve"
-                        *ngIf="!state.respondLoading"
-                      >
-                        Envoyer
-                      </button>
+                    <!-- Loading Spinner -->
+                    <div class="spinner-container" *ngIf="state.respondLoading">
+                      <div class="spinner"></div>
+                      <p class="loading-text">En cours...</p>
                     </div>
                   </div>
+                </div>
+                <div class="actions">
+                  <button
+                    type="submit"
+                    class="btn respond"
+                    [disabled]="state.respondLoading"
+                  >
+                    <img
+                      src="assets/icons/email_white.svg"
+                      alt="Répondre Icon"
+                      class="icon-svg"
+                    />
+                    Envoyer
+                  </button>
+                  <button
+                    type="button"
+                    class="btn reject"
+                    (click)="toggleDetails(null)"
+                  >
+                    Fermer
+                  </button>
                 </div>
               </td>
             </tr>
