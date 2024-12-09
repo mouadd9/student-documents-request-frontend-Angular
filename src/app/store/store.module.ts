@@ -10,6 +10,8 @@ import { demandeReducer } from './demandes-feature/demandes.reducer';
 import { DemandesEffects } from './demandes-feature/demandes.effects';
 import { reclamationsReducer } from './reclamations-feature/reclamations.reducer';
 import { reclamationsEffects } from './reclamations-feature/reclamations.effects';
+import { statisticsReducer } from './statistics-feature/statistics.reducer';
+import { StatisticsEffects } from './statistics-feature/statistics.effects';
 
 
 @NgModule({
@@ -17,11 +19,13 @@ import { reclamationsEffects } from './reclamations-feature/reclamations.effects
   imports: [
     StoreModule.forRoot({
       demandes: demandeReducer, 
-      reclamations: reclamationsReducer
+      reclamations: reclamationsReducer,
+      statistics: statisticsReducer
     }),
     EffectsModule.forRoot([
       DemandesEffects,
-      reclamationsEffects
+      reclamationsEffects,
+      StatisticsEffects
     ])
   ],
   providers: [
