@@ -1,34 +1,64 @@
-<!--here we subscribe to the observable using the pipe and async-->
 <div class="card">
   <div class="card-header">
     <h3>Demandes</h3>
     <p>Liste des demandes qui nécessitent une action</p>
   </div>
-  <div class="card-content">
-  <table>
-    <!-- this holds the column headers (fixed) -->
-    <thead>
-      <tr>
-        <th>Date de Soumission</th>
-        <th>Etudiant</th>
-        <th>Email</th>
-        <th>N°Apogée</th>
-        <th>Document</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <!-- this tbody will hold rows, for each demande there will be one a <tr></tr> -->
-     <!-- each tr will have data associated to the headers we defined -->
-    <tbody>
-      <!-- this ng-container will be shown if the @input property is initialzed -->
-      <!-- then it will subscribe to teh state and then store it in a variable -->
-      <ng-container *ngIf="demandeState$ | async as state"> 
-        <!-- for each state we have an array of demands Demande[] each array has items of type Demande -->
-        <!-- we will use ngFor to iterate over the items we have, and create a row with the data in our item (demande) -->
-          <tr app-demande-item *ngFor="let demande of state.demandes" [demande]="demande"></tr>
-      </ng-container>
-    </tbody>
-  </table>
-</div>
+  <ng-container *ngIf="demandeState$ | async as state">
+    <div class="card-content">
+      <div class="spinner-container" *ngIf="state.state === STATE.loading">
+        <div class="spinner"></div>
+        <p class="loading-text">Chargement...</p>
+      </div>
+      <!-- Error State -->
+      <div class="error-container" *ngIf="state.state === STATE.error">
+        <div class="error-icon">⚠️</div>
+        <p class="error-text">Une erreur s'est produite. Veuillez réessayer.</p>
+        <button class="btn retry" (click)="onRetry()">Réessayer</button>
+      </div>
+      <table *ngIf="state.state === STATE.loaded">
+        <thead>
+          <tr>
+            <th>Date de Soumission</th>
+            <th>Etudiant</th>
+            <th>Email</th>
+            <th>N°Apogée</th>
+            <th>Document</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <ng-container *ngFor="let demande of state.demandes">
+            <tr>
+              <td>{{ demande.dateCreation }}</td>
+              <td>{{ demande.etudiant?.nom }}</td>
+              <td>{{ demande.email }}</td>
+              <td>{{ demande.numApogee }}</td>
+              <td>{{ demande.typeDocument }}</td>
+              <td>
+                <span class="status-badge"
+                  [class.status-pending]="demande.status === 'EN_ATTENTE'">
+                  En attente
+                </span>
+              </td>
+              <td>
+                <button class="btn approve" (click)="onApprove(demande)">
+                  <img src="assets/icons/approve_white.svg" alt="Approuver Icon"
+                    class="icon-svg">
+                  Approuver
+                </button>
+                <button class="btn reject" (click)="onReject(demande)">
+                  <img src="assets/icons/reject_white.svg" alt="Rejeter Icon"
+                    class="icon-svg">
+                  Rejeter
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
 </div>

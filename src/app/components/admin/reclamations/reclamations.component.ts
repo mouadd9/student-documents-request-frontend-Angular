@@ -1,6 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { Reclamation } from '../../../models/reclamation';
-import { ReclamationService } from '../../../services/reclamation.service';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectPendingReclamationsState, selectReclamationState } from '../../../store/reclamations-feature/reclamations.selectors';
+import { reclamationState } from '../../../store/reclamations-feature/reclamations.state';
+import { reclamationActions } from '../../../store/reclamations-feature/reclamations.actions';
 
 
 @Component({
@@ -10,48 +13,16 @@ import { ReclamationService } from '../../../services/reclamation.service';
   styleUrl: './reclamations.component.css'
 })
 export class ReclamationsComponent {
-  @Input() reclamations: Reclamation[] = [];
 
-  // demands: Demande[] = [];
-  filteredReclamations: Reclamation[] = [];
-  searchTerm: string = '';
-  // selectedCategory: string = 'Toutes les demandes';
+  reclamationsState$!: Observable<reclamationState>; // this observable is passed to a child element
 
-  constructor(private reclamationService: ReclamationService) {}
+  constructor(private store: Store) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    // first we select the specific observable we need, subscribing to this observable will provide us with a continous stream of state over time
+    // so that whenever the selected state changes in the store using a reducer , the new state is emitted via the store
+    this.reclamationsState$ = this.store.select(selectPendingReclamationsState); 
+    // here we dispatch an action that will lead to a change in state, and will get us new state
+    this.store.dispatch(reclamationActions.fetchReclamation());
   }
-
-  /*fetchReclamations(): void {
-    this.reclamationService.fetchAllReclamations().subscribe((data: Reclamation[]) => {
-      this.reclamations = data;
-      this.filteredReclamations = data; // Initially show all demandes
-    });
-  }*/
-
-
-  onSearchChanged(searchTerm: string): void {
-   /* this.searchTerm = searchTerm.toLowerCase();
-    this.applyFilters();*/
-  } 
-
-  // onCategoryChanged(category: string): void {
-  //   this.selectedCategory = category;
-  //   this.applyFilters();
-  // }
-
- /* applyFilters(): void {
-    this.filteredReclamations = this.reclamations.filter(r => {
-      const searchTermLower = this.searchTerm.toLowerCase().trim();
-      // const selectedCategoryLower = this.selectedCategory.toLowerCase().trim();
-  
-      const matchesSearch = 
-        r.email.toLowerCase().includes(searchTermLower) ||
-        r.cin.toLowerCase().includes(searchTermLower) ||
-        r.apogeeNumber.toLowerCase().includes(searchTermLower);
-  
-      
-      return matchesSearch;
-    });
-  }*/
 }

@@ -1,10 +1,21 @@
 <div class="card">
-    <div class="card-header">
-      <h3>Demandes Traitées</h3>
-      <p>Liste des demandes ayant reçu une action</p>
-    </div>
+  <div class="card-header">
+    <h3>Demandes Traitées</h3>
+    <p>Liste des demandes ayant reçu une action</p>
+  </div>
+  <ng-container *ngIf="demandeState$ | async as state">
     <div class="card-content">
-      <table>
+      <div class="spinner-container" *ngIf="state.state === STATE.loading">
+        <div class="spinner"></div>
+        <p class="loading-text">Chargement...</p>
+      </div>
+      <!-- Error State -->
+      <div class="error-container" *ngIf="state.state === STATE.error">
+        <div class="error-icon">⚠️</div>
+        <p class="error-text">Une erreur s'est produite. Veuillez réessayer.</p>
+        <button class="btn retry" (click)="onRetry()">Réessayer</button>
+      </div>
+      <table *ngIf="state.state === STATE.loaded">
         <thead>
           <tr>
             <th>Date</th>
@@ -16,11 +27,27 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngIf="demandeState$ | async as state">
-          <tr app-historique-item *ngFor="let demande of state.demandes" [demande]="demande"></tr>
-        </ng-container>
+
+          <ng-container *ngFor="let demande of state.demandes">
+            <tr>
+              <td>{{demande.dateCreation}}</td>
+              <td>{{demande.etudiant?.nom}}</td>
+              <td>{{demande.email}}</td>
+              <td>{{demande.numApogee}}</td>
+              <td>{{demande.typeDocument}}</td>
+              <td>
+                <span class="status-badge" [ngSwitch]="demande.status">
+                  <div class="status-badge status-approved"
+                    *ngSwitchCase="this.DemandeStatus.APPROVEE">Approuvée</div>
+                  <div class="status-badge status-rejected"
+                    *ngSwitchCase="this.DemandeStatus.REFUSEE">Refusée</div>
+                </span>
+              </td>
+            </tr>
+          </ng-container>
 
         </tbody>
       </table>
     </div>
+  </ng-container>
 </div>

@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { reclamationState } from '../../../store/reclamations-feature/reclamations.state';
-import { Reclamation } from '../../../models/reclamation';
 import { selectReclamationState } from '../../../store/reclamations-feature/reclamations.selectors';
 import { reclamationActions } from '../../../store/reclamations-feature/reclamations.actions';
 import { STATE } from '../../../store/state';

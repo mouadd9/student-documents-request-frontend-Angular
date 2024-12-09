@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, switchMap, timer } from 'rxjs';
+import { map, Observable, switchMap, timer } from 'rxjs';
 import { Reclamation } from '../models/reclamation';
 import { environment } from '../environments/environment';
 
@@ -24,16 +24,17 @@ export class ReclamationService {
     );
   
   } // effects will use this Async Method when an action of type sendReclamation is dispatched 
-  public updateReclamationAsync(reclamation: Reclamation ,response: string ): Observable<Reclamation> {
-    let updatedReclamation = {...reclamation, response: response};
-    return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, updatedReclamation);
+  public updateReclamationAsync(updatedReclamation: Reclamation): Observable<Reclamation> {
+    
+    return this.http.put<Reclamation>(this.host + "/reclamations/" + updatedReclamation.id, updatedReclamation);
 
     // return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, response);
   }
 
   public fetchAllReclamations() : Observable<Reclamation[]> {
-    return this.http.get<Reclamation[]>(this.host + "/reclamations" );
-
+    return this.http.get<Reclamation[]>(this.host + "/reclamations" ).pipe(
+      map((reclamations) => reclamations.slice().reverse())
+    );
   }
 
 
