@@ -1,5 +1,5 @@
 .card {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -36,9 +36,8 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
-
-table th,
-table td {
+table td,
+table th {
   font-size: 0.9rem;
   padding: 0.5rem 0.75rem;
   text-align: center;
@@ -73,37 +72,13 @@ table tbody tr:hover {
 }
 
 .btn:focus {
-  outline: none;
+  outline: 0;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
-}
-
-.btn.destructive {
-  background-color: #000000;
-  color: #ffffff;
-  border: 1px solid #000000;
-}
-
-.btn.destructive:hover {
-  background-color: #1a1a1a;
-}
-
-.btn.approve {
-  background-color: #28a745;
-  color: #ffffff;
-  border: none;
-  padding: 5px 15px;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.btn.approve:hover {
-  background-color: #218838;
 }
 
 .btn.reject {
   background-color: #dc3545;
-  color: #ffffff;
+  color: #fff;
   border: none;
   padding: 5px 15px;
   border-radius: 0.375rem;
@@ -117,7 +92,7 @@ table tbody tr:hover {
 
 .btn.treat {
   background-color: #3b82f6;
-  color: #ffffff;
+  color: #fff;
   border: none;
   padding: 5px 15px;
   margin-right: 0.5rem;
@@ -128,7 +103,7 @@ table tbody tr:hover {
 
 .btn.respond {
   background-color: #10b981;
-  color: #ffffff;
+  color: #fff;
   border: none;
   padding: 5px 15px;
   margin-right: 0.5rem;
@@ -143,22 +118,6 @@ table tbody tr:hover {
 
 .btn.respond:hover {
   background-color: #059669;
-}
-
-.btn.outline {
-  background: none;
-  border: 1px solid #000000;
-  color: #000000;
-  margin-right: 0.5rem;
-  border-radius: 0.375rem;
-}
-
-.btn.outline:hover {
-  background-color: #f0f0f0;
-}
-
-.btn.toggle-btn {
-  font-size: 1.5rem;
 }
 
 .icon-svg {
@@ -247,7 +206,6 @@ td {
   animation: spin 1s linear infinite;
 }
 
-/* Details Panel Styling */
 .details-cell {
   background-color: #f8fafc;
   border: 1px solid #e2e8f0;
@@ -264,7 +222,7 @@ td {
 }
 
 .message-container {
-  background-color: white;
+  background-color: #fff;
   padding: 0.5rem;
   border: 2px solid #e2e8f0;
   border-radius: 0.25rem;
@@ -283,9 +241,8 @@ td {
   color: #334155;
 }
 
-/* Response Form Styling */
 .response-form {
-  background-color: white;
+  background-color: #fff;
   padding: 0.5rem 1rem;
   border: 2px solid #e2e8f0;
   border-radius: 0.25rem;
@@ -316,7 +273,7 @@ td {
 }
 
 .form-group-textarea textarea:focus {
-  outline: none;
+  outline: 0;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
@@ -342,14 +299,4 @@ td {
   display: flex;
   gap: 2rem;
   margin-bottom: 10px;
-}
-
-.details-section,
-.response-section {
-  flex: 1;
-}
-
-.response-section {
-  border-left: 1px solid #e2e8f0;
-  padding-left: 1rem;
 }
