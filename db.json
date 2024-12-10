@@ -22,9 +22,9 @@
       "cin": "J012345",
       "numApogee": "01234567",
       "typeDocument": "RELEVE_NOTES",
-      "status": "EN_ATTENTE",
+      "status": "REFUSEE",
       "dateCreation": "2023-12-10T11:30:00.000Z",
-      "dateTraitement": "08-12-2024 07:07:23",
+      "dateTraitement": "10-12-2024 00:27:25",
       "etudiant": {
         "id": 11,
         "nom": "John Doe",
@@ -37,9 +37,9 @@
       "cin": "K123456",
       "numApogee": "12345678",
       "typeDocument": "CERTIFICAT_STAGE",
-      "status": "EN_ATTENTE",
+      "status": "APPROVEE",
       "dateCreation": "2023-12-11T14:15:00.000Z",
-      "dateTraitement": "08-12-2024 07:08:11",
+      "dateTraitement": "10-12-2024 00:27:23",
       "etudiant": {
         "id": 12,
         "nom": "Kylie Jenner",
@@ -85,7 +85,7 @@
       "numApogee": "90123456",
       "sujet": "ATTESTATION_SCOLARITE",
       "message": "Request for attestation of enrollment.",
-      "status": "EN_ATTENTE",
+      "status": "TRAITEE",
       "dateCreation": "2023-12-09T10:00:00.000Z",
       "dateTraitement": "2024-12-06T02:33:17.000Z",
       "etudiant": {
@@ -93,7 +93,7 @@
         "nom": "Isla Fisher",
         "email": "islafisher@example.com"
       },
-      "response": "qsc"
+      "response": "test"
     },
     {
       "id": "11",

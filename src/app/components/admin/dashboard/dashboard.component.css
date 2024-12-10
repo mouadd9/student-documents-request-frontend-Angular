@@ -1,0 +1,46 @@
+/* statistiques styles */
+
+.stats-cards {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .charts {
+    margin-top: 2rem;
+  }
+  
+  .charts-inline {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .chart-card {
+    flex: 1;
+    min-width: 300px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow: hidden;
+    box-sizing: border-box;
+    height: 400px;
+  }
+  
+  .chart-card canvas {
+    width: 90% !important;
+    height: 90% !important;
+  }
+  
+  .monthly-overview {
+    margin-bottom: 2rem;
+  }
+  
+  .chart-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
