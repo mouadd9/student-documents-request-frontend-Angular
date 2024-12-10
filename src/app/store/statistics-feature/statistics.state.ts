@@ -12,11 +12,9 @@ const initialStatistic: Statistics = {
     approvedDemandes: 0,
     rejectedDemandes: 0,
     pendingDemandes: 0,
-    approvalRate: 0.0,
-    rejectionRate: 0.0,
+    pendingReclamations: 0.0,
     averageDemandesProcessingTimeDays: 0.0,
     averageReclamationsProcessingTimeDays: 0.0,
-    satisfactionRate: 0.0,
   
     monthlyLabels: [],
     monthlyData: {

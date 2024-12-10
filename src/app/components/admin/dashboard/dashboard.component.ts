@@ -14,16 +14,16 @@ import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
 export class DashboardComponent implements OnInit {
   public statisticsState$: Observable<statisticsState>;
 
-  // Set the ChartType directly without 'as ChartType'
+  // these are the properties that will be given to the charts 
+
   public monthlyChartType: ChartType = 'bar';
   public statusChartType: ChartType = 'pie';
   public weeklyChartType: ChartType = 'line';
-
   public monthlyChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: ["Mar", "Avr", "Mai", "Juin"],
+    labels: [],
     datasets: [
-      { label: "Attestations", data: [20, 30, 40, 50], backgroundColor: "#3b82f6" },
-      { label: "Relevés de notes", data: [15, 25, 35, 45], backgroundColor: "#fbbf24" }
+      { label: "Attestations", data: [], backgroundColor: "#3b82f6" },
+      { label: "Relevés de notes", data: [], backgroundColor: "#fbbf24" }
     ]
   };
   public monthlyChartOptions: ChartOptions<'bar'> = {
@@ -31,23 +31,21 @@ export class DashboardComponent implements OnInit {
     maintainAspectRatio: false,
     scales: { y: { beginAtZero: true } }
   };
-
   public statusChartData: ChartConfiguration<'pie'>['data'] = {
     labels: ["Approuvées", "En attente", "Rejetées"],
     datasets: [
-      { data: [57, 31, 11], backgroundColor: ["#28a745", "#ffc107", "#dc3545"] }
+      { data: [0, 0, 0], backgroundColor: ["#28a745", "#ffc107", "#dc3545"] }
     ]
   };
   public statusChartOptions: ChartOptions<'pie'> = {
     responsive: true,
     maintainAspectRatio: false
   };
-
   public weeklyChartData: ChartConfiguration<'line'>['data'] = {
-    labels: ["Lun", "Mar", "Mer", "Jeu", "Ven"],
+    labels: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
     datasets: [
-      { label: "Demandes", data: [20, 25, 30, 28, 35], borderColor: "#10b981", fill: false },
-      { label: "Réclamations", data: [5, 8, 17, 13, 10], borderColor: "#f59e0b", fill: false }
+      { label: "Demandes", data: [0,0,0,0,0,0,0], borderColor: "#10b981", fill: false },
+      { label: "Réclamations", data: [0,0,0,0,0,0,0], borderColor: "#f59e0b", fill: false }
     ]
   };
   public weeklyChartOptions: ChartOptions<'line'> = {
@@ -56,6 +54,9 @@ export class DashboardComponent implements OnInit {
     scales: { y: { beginAtZero: true } }
   };
 
+
+
+  
   constructor(private store: Store) {
     this.statisticsState$ = this.store.select(selectStatisticsState);
   }
