@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class StatsService {
-  private host: string = environment.devHost;
+  private host: string = environment.prodHost;
 
   constructor(private http: HttpClient) { }
 
   public fetchStats() : Observable<Statistics> {
-    return this.http.get<Statistics>(this.host + "/statistics" )
+    return this.http.get<Statistics>(this.host + "/admin/statistiques" )
   }
 
 }

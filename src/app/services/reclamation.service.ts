@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class ReclamationService {
-  private host: string = environment.devHost;
+  private host: string = environment.prodHost;
 
   constructor(private http: HttpClient) { }
 
@@ -18,26 +18,25 @@ export class ReclamationService {
   // - GET all demandes ,fetchReclamationsAsync()
   // - UPDATE a reclamation by adding a response
 
+  
+  public fetchAllReclamations() : Observable<Reclamation[]> {
+    return this.http.get<Reclamation[]>(this.host + "/admin/reclamations" ).pipe(
+      map((reclamations) => reclamations.slice().reverse())
+    );
+  }
+
   public saveReclamationAsync(reclamation: Reclamation): Observable<Reclamation> {
-    return timer(4000).pipe(
-      switchMap(() => this.http.post<Reclamation>(this.host + "/reclamations", reclamation))
+    return timer(500).pipe(
+      switchMap(() => this.http.post<Reclamation>(this.host + "/public/reclamations", reclamation))
     );
   
   } // effects will use this Async Method when an action of type sendReclamation is dispatched 
   public updateReclamationAsync(updatedReclamation: Reclamation): Observable<Reclamation> {
     
-    return this.http.put<Reclamation>(this.host + "/reclamations/" + updatedReclamation.id, updatedReclamation);
+    return this.http.put<Reclamation>(this.host + "/admin/reclamations/" + updatedReclamation.id + '/treat', updatedReclamation);
 
     // return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, response);
   }
-
-  public fetchAllReclamations() : Observable<Reclamation[]> {
-    return this.http.get<Reclamation[]>(this.host + "/reclamations" ).pipe(
-      map((reclamations) => reclamations.slice().reverse())
-    );
-  }
-
-
 
 
 }

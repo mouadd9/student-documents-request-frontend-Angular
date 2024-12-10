@@ -10,13 +10,13 @@ import { DemandeStatus } from '../models/enums/document-status';
 })
 export class DemandeService {
 
-  private host: string = environment.devHost;
+  private host: string = environment.prodHost;
 
   constructor(private http: HttpClient) { }
 
   // this is used by the Demande Component to fetch data to populate the store
   public fetchDemandesAsync(): Observable<Demande[]> {
-    return this.http.get<Demande[]>(this.host + "/demandes").pipe(
+    return this.http.get<Demande[]>(this.host + "/admin/demandes").pipe(
       map(demandes => demandes.slice().reverse()) // Reverses the array
     );
   }
@@ -24,28 +24,31 @@ export class DemandeService {
   // this is used by the student/demande component to post a new Demande
   public saveDemandeAsync(demande: Demande): Observable<Demande> {
     return timer(4000).pipe(
-      switchMap(() => this.http.post<Demande>(this.host + "/demandes", demande))
+      switchMap(() => this.http.post<Demande>(this.host + "/public/demandes", demande))
     );
   } // Effect will use this methods when we dispatch an action of type requestDemande
   
   public validateDemandeAsync(demande: Demande): Observable<Demande>{
     // for the purpose of demonstration we will change it here instead of doing it in the backend
-    const nowFormatted = formatCurrentDate();
+   /* const nowFormatted = formatCurrentDate();
     const updatedDemande = {
       ...demande,
       status: DemandeStatus.APPROVEE,
       dateTraitement: nowFormatted
-    };
+    };*/
     
-    return this.http.put<Demande>(
+   /* return this.http.put<Demande>(
       `${this.host}/demandes/${demande.id}`,
       updatedDemande
+    );*/
+    return this.http.put<Demande>(
+      `${this.host}/admin/demandes/${demande.id}/approve`,{}
     );
   }
 
   public refuseDemandeAsync(demande: Demande): Observable<Demande>{
 
-    const nowFormatted = formatCurrentDate();
+  /*  const nowFormatted = formatCurrentDate();
   const updatedDemande = {
     ...demande,
     status: DemandeStatus.REFUSEE,
@@ -54,13 +57,16 @@ export class DemandeService {
     return this.http.put<Demande>(
       `${this.host}/demandes/${demande.id}`,
       updatedDemande
-    );
+    );*/
+    return this.http.put<Demande>(
+      `${this.host}/admin/demandes/${demande.id}/reject`, {});
+    
   }
 
 
 }
 
-
+/*
 function formatCurrentDate(): string {
   const now = new Date();
   
@@ -74,7 +80,7 @@ function formatCurrentDate(): string {
 
   return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
 }
-
+*/
 
 
 
