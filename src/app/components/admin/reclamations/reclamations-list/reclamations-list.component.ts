@@ -44,7 +44,7 @@ export class ReclamationsListComponent {
   onRespond(reclamation: Reclamation | null) {
     if (this.responseForm.valid && reclamation) {
       const responseMessage = this.responseForm.value.response;
-      let updatedReclamation = {...reclamation, response:responseMessage}; 
+      let updatedReclamation = {...reclamation, reponse:responseMessage}; 
       this.store.dispatch(reclamationActions.respondReclamation({payload: updatedReclamation}));
       this.responseForm.reset();
       
