@@ -9,9 +9,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReclamationStatus } from '../../../../models/enums/reclamation-status';
 
 @Component({
-  selector: 'app-reclamations-list',
-  templateUrl: './reclamations-list.component.html',
-  styleUrl: './reclamations-list.component.css',
+    selector: 'app-reclamations-list',
+    templateUrl: './reclamations-list.component.html',
+    styleUrl: './reclamations-list.component.css',
+    standalone: false
 })
 export class ReclamationsListComponent {
 

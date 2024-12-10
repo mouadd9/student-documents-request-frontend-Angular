@@ -28,6 +28,8 @@ import { ReclamationsComponent } from './components/admin/reclamations/reclamati
 import { HistoriqueListComponent } from './components/admin/historique/historique-list/historique-list.component';
 import { HistoriqueNavBarComponent } from './components/admin/historique/historique-nav-bar/historique-nav-bar.component';
 
+import { NgChartsModule} from 'ng2-charts';
+
 
 
 
@@ -58,19 +60,22 @@ import { HistoriqueNavBarComponent } from './components/admin/historique/histori
     ReclamationsListComponent,
     HistoriqueComponent,
     HistoriqueListComponent,
-    HistoriqueNavBarComponent
+    HistoriqueNavBarComponent,
+
   ],
   imports: [
     BrowserModule,
     RouterModule, // this provides : <router-outlet></router-outlet> [routerLink] .....
     ReactiveFormsModule,
     StoreModuleConfig,  
+    NgChartsModule
     
 
   ],
   providers: [
     provideHttpClient(), // this provides the httpClient service that will be injected to our services
-    provideRouter(routes) // this provides routes for the RouterModule
+    provideRouter(routes), // this provides routes for the RouterModule
+    
   ],
   bootstrap: [AppComponent]
 })

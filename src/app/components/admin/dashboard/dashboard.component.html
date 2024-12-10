@@ -1,1 +1,87 @@
-<p>Here add the dashboard like stats....</p>
+<div class="container">
+    <section class="section">
+      <h1>Statistiques</h1>
+  <ng-container *ngIf="statisticsState$ | async as statState" >
+      <div class="stats-cards">
+        <div class="card" >
+          <div class="card-content">
+            <div class="card-header-inline">
+              <img src="/assets/icons/sand_timer.svg" alt="Demandes Approuvées Icon" class="icon-svg-bg" />
+              <h3>Demandes en Attente</h3>
+            </div>
+            <p class="stat-value">{{statState.statistics.pendingDemandes}}</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header-inline">
+              <img src="/assets/icons/sand_timer.svg" alt="Demandes Approuvées Icon" class="icon-svg-bg" />
+              <h3>Réclamations en Attente</h3>
+            </div>
+            <p class="stat-value">{{statState.statistics.pendingReclamations}}</p>
+          </div>
+        </div>
+  
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header-inline">
+              <img src="/assets/icons/avg.svg" alt="Temps Moyen de Traitement Icon" class="icon-svg-bg" />
+              <h3>Temps Moyen de Traitement de Réclamation</h3>
+            </div>
+            <p class="stat-value">{{statState.statistics.averageReclamationsProcessingTimeDays}} jours</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header-inline">
+              <img src="/assets/icons/avg.svg" alt="Temps Moyen de Traitement Icon" class="icon-svg-bg" />
+              <h3>Temps Moyen de Traitement de Demandes</h3>
+            </div>
+            <p class="stat-value">{{statState.statistics.averageDemandesProcessingTimeDays}} jours</p>
+          </div>
+        </div>
+  </div>
+      <div class="charts">
+        <div class="charts-inline">
+          <!-- Monthly Overview (Bar Chart) -->
+          <div class="chart-card">
+            <h3>Aperçu Mensuel</h3>
+            <div style="height: 300px;">
+              <canvas baseChart
+                      [data]="monthlyChartData"
+                      [options]="monthlyChartOptions"
+                      [type]="'bar'">
+              </canvas>
+            </div>
+          </div>
+  
+          <!-- Distribution par Statut (Pie Chart) -->
+          <div class="chart-card">
+            <h3>Distribution par Statut</h3>
+            <div style="height: 300px;">
+              <canvas baseChart
+                      [data]="statusChartData"
+                      [options]="statusChartOptions"
+                      [type]="'pie'">
+              </canvas>
+            </div>
+          </div>
+  
+          <!-- Tendances Hebdomadaires (Line Chart) -->
+          <div class="chart-card">
+            <h3>Tendances Hebdomadaires</h3>
+            <div style="height: 300px;">
+              <canvas baseChart
+                      [data]="weeklyChartData"
+                      [options]="weeklyChartOptions"
+                      [type]="'line'">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    </section>
+  </div>
+  
