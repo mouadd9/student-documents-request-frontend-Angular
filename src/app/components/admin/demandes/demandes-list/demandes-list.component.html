@@ -12,7 +12,7 @@
       <!-- Error State -->
       <div class="error-container" *ngIf="state.state === STATE.error">
         <div class="error-icon">⚠️</div>
-        <p class="error-text">Une erreur s'est produite. Veuillez réessayer.</p>
+        <p class="error-text">Une erreur s'est produite. Veuillez réessayer.{{ state.errorMessage | json }}</p>
         <button class="btn retry" (click)="onRetry()">Réessayer</button>
       </div>
       <table *ngIf="state.state === STATE.loaded">
