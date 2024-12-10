@@ -13,7 +13,7 @@ export const statisticsReducer = createReducer(
     on(statisticsActions.fetchStatisticSuccess, (state, {payload}) => ({
         ...state,
         state : STATE.loaded,
-        statistic: payload
+        statistics: payload
     })),
     on(statisticsActions.fetchStatisticError, (state, {payload})=>({
         ...state,

@@ -21,7 +21,6 @@
             <th>Date</th>
             <th>Nom</th>
             <th>Email</th>
-            <th>N° Apogée</th>
             <th>Document</th>
             <th>Statut</th>
           </tr>
@@ -31,9 +30,8 @@
           <ng-container *ngFor="let demande of state.demandes">
             <tr>
               <td>{{demande.dateCreation}}</td>
-              <td>{{demande.etudiant?.nom}}</td>
-              <td>{{demande.email}}</td>
-              <td>{{demande.numApogee}}</td>
+              <td>{{demande.etudiant!.nom}}</td>
+              <td>{{demande.etudiant!.email}}</td>
               <td>{{demande.typeDocument}}</td>
               <td class="badge">
                 <span class="status-badge" [ngSwitch]="demande.status">
