@@ -1,5 +1,8 @@
 {
   "students": [],
+  "auth": {
+    "access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtb3VhZCIsInNjb3BlIjoiQURNSU4gVVNFUiJ9.kxtUC6kfYhzDc-VK-p_e7mzqiuCK5GwFB0eTIv6GCJI"
+  },
   "demandes": [
     {
       "id": "10",
