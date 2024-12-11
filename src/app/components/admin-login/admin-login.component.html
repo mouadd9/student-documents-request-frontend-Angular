@@ -1,28 +1,45 @@
 <div class="container1">
   <div class="card">
+    <ng-container *ngIf="authState$ | async as state">
     <div class="card-header-auth">
       <h2>Connexion Administrateur</h2>
       <p>Connectez-vous pour accéder à l'espace administrateur</p>
     </div>
     <div class="card-content-auth">
-      <form id="admin-auth-form">
-        <div class="form-group">
+      <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group" [ngClass]="{'error': state.state === STATE.error}">
           <label for="username">Nom d'utilisateur</label>
-          <input type="text" id="username" name="username" required />
-          <span class="form-message"></span>
+          <input type="text" formControlName="username" />
+          <div class="form-message" *ngIf="authForm.get('username')?.hasError('required') && (authForm.get('username')?.touched || authForm.get('username')?.dirty)">Username is required.</div>
         </div>
-        <div class="form-group">
+
+        <div class="form-group" [ngClass]="{'error': state.state === STATE.error}">
           <label for="password">Mot de passe</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            minlength="6" />
-          <span class="form-message"></span>
+          <input type="password" formControlName="password" />
+          <div class="form-message" *ngIf="authForm.get('password')?.hasError('required') && (authForm.get('password')?.touched || authForm.get('password')?.dirty)">Password is required.</div>
         </div>
-        <button type="submit" class="btn">Se connecter</button>
+
+        <div class="onError" *ngIf="state.state === STATE.error">
+          <div class="icon">
+              <img
+                src="assets/icons/danger.svg"
+                alt="Admin Icon"
+                class="icon-danger" />
+          </div>
+          Identifiants invalides.
+        </div>
+
+        <button  [ngClass]="{'loading': state.state === STATE.loading, 'loaded': state.state === STATE.loaded, 'disabeled-btn': (state.state === STATE.initial) && authForm.invalid  , 'btn': (state.state === STATE.initial) || (state.state === STATE.error)}" type="submit" [disabled]=" state.state === STATE.loading || state.state === STATE.loaded"
+        type="submit" class="btn">
+        <div class="spinner" *ngIf="state.state === STATE.loading"></div>
+        <div *ngIf="(state.state === STATE.initial) || (state.state === STATE.error)">Se connecter</div>
+        <div *ngIf="state.state === STATE.loaded">Connecté</div>
+        </button>
+
       </form>
     </div>
+  </ng-container>
+
   </div>
 </div>
