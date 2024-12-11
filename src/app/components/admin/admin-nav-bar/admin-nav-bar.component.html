@@ -1,9 +1,13 @@
 <div class="header">
-  <h2>Espace Administrateur</h2>
-  <div class="user-info">
-    <p>Mouad bencaid</p>
-    <div class="circle-container">
-      <img src="assets/icons/user.svg" alt="User Icon" class="icon-svg-user">
+  <ng-container *ngIf="userClaimsState$ | async as claims">
+
+    <h2>Espace Administrateur</h2>
+    <div class="user-info">
+      <p>{{claims.username}}</p>
+      <div class="circle-container">
+        <img src="assets/icons/admin_2.svg" alt="User Icon" class="icon-svg-user">
+      </div>
     </div>
-  </div>
+
+  </ng-container>
 </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { authState } from '../../store/auth-feature/auth.state';
-import { selectTokenState } from '../../store/auth-feature/auth.selectors';
+import { selectAuthState } from '../../store/auth-feature/auth.selectors';
 import { authActions } from '../../store/auth-feature/auth.actions';
 import { STATE } from '../../store/state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -27,7 +27,7 @@ export class AdminLoginComponent {
 // for example if its invalid or valid , or if a formControl is valid or not 
 
   constructor(private store: Store, private fb: FormBuilder, private router: Router) {
-    this.authState$ = store.select(selectTokenState); // we select the token state to observe token changes, to know when to authenticate and when not to
+    this.authState$ = store.select(selectAuthState); // we select the token state to observe token changes, to know when to authenticate and when not to
     this.authForm = this.fb.group({ 
       username: ['', Validators.required],
       password: ['', Validators.required],
