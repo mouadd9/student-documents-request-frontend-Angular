@@ -10,6 +10,7 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
 import { HistoriqueComponent } from './components/admin/historique/historique.component';
 import { ReclamationsComponent } from './components/admin/reclamations/reclamations.component';
 import { AuthGuard } from './guards/auth.guard';
+import { StudentGuard } from './guards/student.guard';
 
 // the paths we have
 //---------level 1
@@ -37,10 +38,10 @@ export const routes: Routes = [
   // lvl 2.1 demande-reclamation are dynamic within StudentComponent
   {
     path: 'student',
-    component: StudentComponent,
+    component: StudentComponent, canActivate: [StudentGuard],
     children: [
-      { path: 'demande', component: DemandeComponent },
-      { path: 'reclamation', component: ReclamationComponent },
+      { path: 'demande', component: DemandeComponent, canActivate: [StudentGuard] },
+      { path: 'reclamation', component: ReclamationComponent, canActivate: [StudentGuard]  },
     ],
   },
   // lvl 2.2 dashboard-demandes are dynamic within AdminComponent
