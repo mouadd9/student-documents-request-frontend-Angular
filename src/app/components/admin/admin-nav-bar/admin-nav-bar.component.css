@@ -12,33 +12,41 @@
 }
 
 .header h2 {
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.6rem;
+  font-weight: 600;
 }
+.header p {
+  color: black !important;
+  font-size: 1.4rem;
+  font-weight: 600;
+  
+}
+
 
 .user-info {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 13px;
+  font-size: 10px;
+  background-color: #fbf28a80; /* Soft light gray background */
+  color: #333; /* Neutral dark gray text color */
+  padding: 5px 10px; /* Slightly larger padding for balance */
+  border-radius: 5px; /* Rounded corners for a modern look */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
-
 .circle-container {
   width: 30px;
   height: 30px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: 2px solid #000000;
+  
+ 
 }
 
-.circle-container:hover {
-  background-color: #e6e6e6;
-}
 
 .icon-svg-user {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
 }

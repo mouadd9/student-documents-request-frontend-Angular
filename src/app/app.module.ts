@@ -15,7 +15,7 @@ import { DemandesComponent } from './components/admin/demandes/demandes.componen
 import { DemandesListComponent } from './components/admin/demandes/demandes-list/demandes-list.component';
 import { DemandesNavBarComponent } from './components/admin/demandes/demandes-nav-bar/demandes-nav-bar.component';
 import { provideRouter, RouterModule } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { ReactiveFormsModule } from '@angular/forms';
 
