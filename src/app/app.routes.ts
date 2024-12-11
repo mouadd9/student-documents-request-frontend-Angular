@@ -9,6 +9,7 @@ import { DemandesComponent } from './components/admin/demandes/demandes.componen
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { HistoriqueComponent } from './components/admin/historique/historique.component';
 import { ReclamationsComponent } from './components/admin/reclamations/reclamations.component';
+import { AuthGuard } from './guards/auth.guard';
 
 // the paths we have
 //---------level 1
@@ -46,11 +47,14 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
-      { path: 'demandes', component: DemandesComponent },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'reclamations', component: ReclamationsComponent },
-      { path: 'historique', component: HistoriqueComponent },
+      { path: 'demandes', component: DemandesComponent ,canActivate: [AuthGuard],},
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], },
+      { path: 'reclamations', component: ReclamationsComponent , canActivate: [AuthGuard],},
+      { path: 'historique', component: HistoriqueComponent, canActivate: [AuthGuard], },
     ],
   },
+  
+  { path: '**', redirectTo: '/home' },
 ];
