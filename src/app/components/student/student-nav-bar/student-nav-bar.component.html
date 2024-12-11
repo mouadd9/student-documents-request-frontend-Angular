@@ -1,10 +1,22 @@
-
 <div class="tab-wrapper">
+  <!-- Arrow button to go home -->
+  <button class="arrow-button" type="button"
+    routerLink="/student/home"
+    routerLinkActive="active-tab"
+    [routerLinkActiveOptions]="{ exact: true }">
+    <div class="icon">
+      <img
+        src="assets/icons/arrow.svg"
+        alt="Admin Icon"
+        class="icon-danger" />
+  </div></button>
+
   <div class="tab-container">
     <button class="tab-button" type="button"
       routerLink="/student/demande"
       routerLinkActive="active-tab"
       [routerLinkActiveOptions]="{ exact: true }">Demande de Document</button>
+
     <button class="tab-button" type="button"
       routerLink="/student/reclamation"
       routerLinkActive="active-tab"

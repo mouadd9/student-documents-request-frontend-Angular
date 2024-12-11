@@ -1,47 +1,69 @@
-
-/*----------wrapper */
 .tab-wrapper {
-    position: fixed; /* Fixed on the screen */
-    top: 0; /* Align with the top of the screen */
-    width: 640px; /* Match the width of the form */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust for centering */
-    z-index: 100; /* Keep it above other content */
-    padding: 60px 10px 10px; /* Extend padding to cover 20px space at the top */
-    background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
-    backdrop-filter: blur(10px); /* Apply blur effect */
-    border-radius: 0 0 8px 8px; /* Rounded corners only at the bottom */
-    border: 1.5px solid rgba(239, 239, 239, 0.6); /* Subtle border using #efefef */
-  }
+  position: fixed; /* Fixed on the screen */
+  top: 0; /* Align with the top of the screen */
+  width: 640px; /* Match the width of the form */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  z-index: 100; /* Keep it above other content */
+  padding: 60px 10px 10px; /* Extend padding to cover 20px space at the top */
+  background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  border-radius: 0 0 8px 8px; /* Rounded corners only at the bottom */
+  border: 1.5px solid rgba(239, 239, 239, 0.6); /* Subtle border using #efefef */
+}
+
+/* Arrow button styling */
+.arrow-button {
+  position: absolute;
+  top: 71.7%;
+  left: -48px; /* Move it outside the box to the left */
+  transform: translateY(-50%);
+  padding: 10.75px 18px;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #efefef;
+  transition: all 0.2s;
+  margin-right: 30px;
+}
+
+/* Apply active style if routed */
+.arrow-button.active-tab {
+  background-color: white !important;
+}
+
+/*----------container */
+.tab-container {
+  background-color: #efefef;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two main buttons */
+  gap: 4px; /* Space between the buttons */
+  width: 100%; /* Match the navbar width */
+  padding: 4px;
+  border-radius: 0px 8px 8px 0px;
+}
+
+/*----------buttons */
+.tab-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  background-color: #efefef;
+}
+
+.active-tab {
+  background-color: white !important;
+}
+
+.icon {
+  height: 25px ;
+  width: 25px;
   
-    
-    /*----------container */
-    .tab-wrapper .tab-container {
-      background-color: #efefef;
-      display: grid;
-      grid-template-columns: 1fr 1fr; /* Two buttons of equal width */
-      gap: 4px; /* Space between the buttons */
-      width: 100%; /* Match the navbar width */
-      padding: 4px;
-      border-radius: 8px;
-    }
-    
-    /*----------buttons */
-    .tab-wrapper .tab-container .tab-button {
-      padding: 8px 16px;
-      border: none;
-      border-radius: 6px;
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-      background: transparent;
-      background-color: #efefef;
-    }
-    
-    /*this is used with the router, when click on a button that uses the router we will activate this style*/
-    .active-tab {
-      background-color: white !important;
-    }
-    
-    
+}
