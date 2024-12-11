@@ -4,7 +4,7 @@
 // authenticate failure
 // disconnect 
 
-import { createActionGroup, props } from "@ngrx/store";
+import { createActionGroup, emptyProps, props } from "@ngrx/store";
 import { Credentials } from "../../models/credentials";
 
 // an action of type authenticate will have a payload of type credentials 
@@ -26,8 +26,7 @@ export const authActions = createActionGroup({
         // authentication actions , sending credentials, getting a response (token or error message)
         authenticate: props<{payload: Credentials}>(), // this action will be dispatched from the admin-auth section, when we click submit in the form, we will validate the fields then after validation the action will be dispatched and we will pass an object of type credentials
         authenticateSuccessWithClaims: props<{payload : any}>(), // when the effect will detect an action of type authenticate, it conduct an api call (after getting a 200 OK status), we will dispatch this action that will hold the jwt as a string
-        authenticateError: props<{payload: string}>(),
-
+        authenticateError: props<{payload: string}>()
         // disconnect actions
     }
 })
