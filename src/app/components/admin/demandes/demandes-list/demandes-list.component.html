@@ -14,7 +14,19 @@
         <div class="error-icon">⚠️</div>
         <p class="error-text">Une erreur s'est produite. Veuillez réessayer.{{ state.errorMessage | json }}</p>
         <button class="btn retry" (click)="onRetry()">Réessayer</button>
+      
+        <!-- Toggle Details -->
+        <input type="checkbox" id="toggle-details" class="toggle-checkbox" />
+        <label for="toggle-details" class="details-toggle-label">
+          Afficher les détails
+        </label>
+      
+        <!-- Collapsible Section for Error Details -->
+        <div class="error-details">
+          <pre class="error-json">{{ state.errorMessage | json }}</pre>
+        </div>
       </div>
+      
       <table *ngIf="state.state === STATE.loaded">
         <thead>
           <tr>
@@ -31,14 +43,14 @@
 
           <ng-container *ngFor="let demande of state.demandes">
             <tr>
-              <td>{{ demande.dateCreation }}</td>
+              <td>{{ demande.dateCreation | date:'dd/MM/yyyy hh:mm a'}}</td>
               <td>{{ demande.etudiant?.nom }}</td>
-              <td>{{ demande.email }}</td>
-              <td>{{ demande.numApogee }}</td>
+              <td>{{ demande.etudiant?.email }}</td>
+              <td>{{ demande.etudiant?.numApogee }}</td>
               <td>{{ demande.typeDocument }}</td>
               <td>
                 <span class="status-badge"
-                  [class.status-pending]="demande.status === 'EN_ATTENTE'">
+                  [class.status-pending]="demande.statut === 'EN_ATTENTE'">
                   En attente
                 </span>
               </td>
@@ -53,6 +65,12 @@
                     class="icon-svg">
                   Rejeter
                 </button>
+                <!-- Download Button -->
+                <button class="btn download flex items-center space-x-2" (click)="onDownload(demande)" style="background-color: rgb(16, 239, 120);">
+                  <i class="fas fa-download text-white"></i>
+                  <span>Télécharger</span>
+                </button>                
+
               </td>
             </tr>
           </ng-container>

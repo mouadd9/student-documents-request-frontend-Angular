@@ -6,7 +6,7 @@ import { Demande } from "../../models/demande";
 // this object has two properties : 
 // - source property that has the namespace that describes our feature so that teh action type will look like this "[namespace] description"
 // - an events property that has an object of actions
-export const DemandeActions = createActionGroup({
+export const  DemandeActions = createActionGroup({
     source : "Demande", // here we put the namespace
     events: {
 
@@ -30,8 +30,15 @@ export const DemandeActions = createActionGroup({
         refuseDemandeSuccess: props<{payload: Demande}>(),
         refuseDemandeError: props<{payload: string}>(),
 
+
         // 5 - an action to reset to state to initial
-        resetDemandeStateEnum: emptyProps()
+        resetDemandeStateEnum: emptyProps(),
+
+        //6 - for the downloading
+        downloadDemand: props<{payload: Demande}>(),
+        downloadDemandSuccess: emptyProps(),
+        downloadDemandError: props<{payload: string}>(),
+
 
     }
 });

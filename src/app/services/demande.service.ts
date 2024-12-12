@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Demande } from '../models/demande';
 import { map, Observable, switchMap, timer } from 'rxjs';
@@ -9,6 +9,7 @@ import { DemandeStatus } from '../models/enums/document-status';
   providedIn: 'root'
 })
 export class DemandeService {
+ 
 
   private host: string = environment.prodHost;
 
@@ -16,8 +17,15 @@ export class DemandeService {
 
   // this is used by the Demande Component to fetch data to populate the store
   public fetchDemandesAsync(): Observable<Demande[]> {
-    return this.http.get<Demande[]>(this.host + "/demandes").pipe(
-      map(demandes => demandes.slice().reverse()) // Reverses the array
+    // Hardcoded token for testing
+    const token = '';//for test add token here value
+
+    // Create the Authorization header with the token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    // Send the GET request with the token in the headers
+    return this.http.get<Demande[]>(`${this.host}/admin/demandes`, { headers }).pipe(
+      map(demandes => demandes.slice().reverse())  // Reverses the array
     );
   }
 
@@ -45,7 +53,7 @@ export class DemandeService {
       `${this.host}/demandes/${demande.id}`,{}
     );
   }
-
+  
   public refuseDemandeAsync(demande: Demande): Observable<Demande>{
 
   /*  const nowFormatted = formatCurrentDate();
@@ -61,6 +69,19 @@ export class DemandeService {
     return this.http.put<Demande>(
       `${this.host}/admin/demandes/${demande.id}/reject`, {});
     
+  }
+  public downloadDemande(demande: Demande): Observable<Blob> {
+    const url = `${this.host}/admin/demandes/${demande.id}/pdf`;  // Construct the URL dynamically using the demande ID
+    
+    // Replace with actual token retrieval logic, for example:
+    const token = '';//testing purpose dont forget to remove it!!!!
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);  // Add token to the headers
+
+    return this.http.get(url, {
+      headers,  // Include headers with the Authorization token
+      responseType: 'blob',  // Response of type file, so we specify 'blob'
+    });
   }
 
 
