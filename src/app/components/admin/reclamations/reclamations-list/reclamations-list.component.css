@@ -301,3 +301,28 @@ td {
   gap: 2rem;
   margin-bottom: 10px;
 }
+.toggle-checkbox {
+  display: none;
+}
+
+/* Style the toggle button */
+.details-toggle-label {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: underline;
+  display: inline-block;
+  font-size:85%;
+}
+
+/* Initially hide the error details */
+.error-details {
+  display: none;
+  font-family: monospace;
+  color: #972732;
+  font-size:75%;
+}
+
+/* Show the error details when the checkbox is checked */
+.toggle-checkbox:checked + .details-toggle-label + .error-details {
+  display: block;
+}

@@ -14,7 +14,20 @@
         <div class="error-icon">⚠️</div>
         <p class="error-text">Une erreur s'est produite. Veuillez réessayer.</p>
         <button class="btn retry" (click)="onRetry()">Réessayer</button>
+        <!-- Toggle Details -->
+       <input type="checkbox" id="toggle-details" class="toggle-checkbox" />
+       <label for="toggle-details" class="details-toggle-label">
+         Afficher les détails
+       </label>
+     
+       <!-- Collapsible Section for Error Details -->
+       <div class="error-details">
+         <pre class="error-json">{{ state.errorMessage | json }}</pre>
+       </div>
+     
       </div>
+       
+     
       <table *ngIf="state.state === STATE.loaded">
         <thead>
           <tr>
@@ -34,7 +47,7 @@
               <td>{{demande.etudiant!.email}}</td>
               <td>{{demande.typeDocument}}</td>
               <td class="badge">
-                <span class="status-badge" [ngSwitch]="demande.status">
+                <span class="status-badge" [ngSwitch]="demande.statut">
                   <div class="status-badge status-approved"
                     *ngSwitchCase="this.DemandeStatus.APPROVEE">Approuvée</div>
                   <div class="status-badge status-rejected"
