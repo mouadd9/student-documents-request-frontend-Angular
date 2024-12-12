@@ -10,13 +10,13 @@ import { DemandeStatus } from '../models/enums/document-status';
 })
 export class DemandeService {
 
-  private host: string = environment.prodHost;
+  private host: string = environment.devHost;
 
   constructor(private http: HttpClient) { }
 
   // this is used by the Demande Component to fetch data to populate the store
   public fetchDemandesAsync(): Observable<Demande[]> {
-    return this.http.get<Demande[]>(this.host + "/admin/demandes").pipe(
+    return this.http.get<Demande[]>(this.host + "/demandes").pipe(
       map(demandes => demandes.slice().reverse()) // Reverses the array
     );
   }
@@ -24,7 +24,7 @@ export class DemandeService {
   // this is used by the student/demande component to post a new Demande
   public saveDemandeAsync(demande: Demande): Observable<Demande> {
     return timer(4000).pipe(
-      switchMap(() => this.http.post<Demande>(this.host + "/public/demandes", demande))
+      switchMap(() => this.http.post<Demande>(this.host + "/demandes", demande))
     );
   } // Effect will use this methods when we dispatch an action of type requestDemande
   
@@ -42,7 +42,7 @@ export class DemandeService {
       updatedDemande
     );*/
     return this.http.put<Demande>(
-      `${this.host}/admin/demandes/${demande.id}/approve`,{}
+      `${this.host}/demandes/${demande.id}`,{}
     );
   }
 
