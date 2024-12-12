@@ -10,7 +10,7 @@ import { DemandeStatus } from '../models/enums/document-status';
 })
 export class DemandeService {
 
-  private host: string = environment.devHost;
+  private host: string = environment.prodHost;
 
   constructor(private http: HttpClient) { }
 
