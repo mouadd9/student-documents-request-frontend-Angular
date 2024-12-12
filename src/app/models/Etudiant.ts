@@ -2,7 +2,7 @@ export interface Etudiant {
   id?: number;
   nom: string;
   email: string;
-  numApogee: string;
+  num_apogee: string;
   cin: string;
   dateNaissance: string;  // Date of birth
   lieuNaissance: string;  // Birthplace

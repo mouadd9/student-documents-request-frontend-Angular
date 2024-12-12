@@ -40,42 +40,48 @@
           </tr>
         </thead>
         <tbody>
-
-          <ng-container *ngFor="let demande of state.demandes">
+          <!-- Check if there are demandes -->
+          <ng-container *ngIf="state.demandes && state.demandes.length > 0; else noDemandes">
+            <ng-container *ngFor="let demande of state.demandes">
+              <tr>
+                <td>{{ demande.dateCreation | date:'dd/MM/yyyy hh:mm a' }}</td>
+                <td>{{ demande.etudiant?.nom }}</td>
+                <td>{{ demande.etudiant?.email }}</td>
+                <td>{{ demande.etudiant?.num_apogee }}</td>
+                <td>{{ demande.typeDocument }}</td>
+                <td>
+                  <span class="status-badge" [class.status-pending]="demande.status === 'EN_ATTENTE'">
+                    En attente
+                  </span>
+                </td>
+                <td>
+                  <button class="btn approve" (click)="onApprove(demande)">
+                    <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
+                    Approuver
+                  </button>
+                  <button class="btn reject" (click)="onReject(demande)">
+                    <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
+                    Rejeter
+                  </button>
+                  <!-- Download Button -->
+                  <button class="btn download flex items-center space-x-2" (click)="onDownload(demande)" style="background-color: rgb(16, 239, 120);">
+                    <i class="fas fa-download text-white"></i>
+                    <span>Télécharger</span>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        
+          <!-- Fallback template for empty demandes -->
+          <ng-template #noDemandes>
             <tr>
-              <td>{{ demande.dateCreation | date:'dd/MM/yyyy hh:mm a'}}</td>
-              <td>{{ demande.etudiant?.nom }}</td>
-              <td>{{ demande.etudiant?.email }}</td>
-              <td>{{ demande.etudiant?.numApogee }}</td>
-              <td>{{ demande.typeDocument }}</td>
-              <td>
-                <span class="status-badge"
-                  [class.status-pending]="demande.statut === 'EN_ATTENTE'">
-                  En attente
-                </span>
-              </td>
-              <td>
-                <button class="btn approve" (click)="onApprove(demande)">
-                  <img src="assets/icons/approve_white.svg" alt="Approuver Icon"
-                    class="icon-svg">
-                  Approuver
-                </button>
-                <button class="btn reject" (click)="onReject(demande)">
-                  <img src="assets/icons/reject_white.svg" alt="Rejeter Icon"
-                    class="icon-svg">
-                  Rejeter
-                </button>
-                <!-- Download Button -->
-                <button class="btn download flex items-center space-x-2" (click)="onDownload(demande)" style="background-color: rgb(16, 239, 120);">
-                  <i class="fas fa-download text-white"></i>
-                  <span>Télécharger</span>
-                </button>                
-
+              <td colspan="7" class="text-center text-gray-500">
+                Aucune demande trouvée.
               </td>
             </tr>
-          </ng-container>
-
-        </tbody>
+          </ng-template>
+        </tbody>        
       </table>
     </div>
   </ng-container>

@@ -39,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-
+        <ng-container *ngIf="state.reclamations && state.reclamations.length > 0; else noReclamations">
           <ng-container *ngFor="let reclamation of state.reclamations">
             <!-- Main row -->
             <tr>
@@ -183,7 +183,14 @@
             </tr> -->
 
           </ng-container>
-
+        </ng-container>
+        <ng-template #noReclamations>
+          <tr>
+            <td colspan="5" class="text-center text-gray-500">
+              Aucune réclamation trouvée.
+            </td>
+          </tr>
+        </ng-template>
         </tbody>
       </table>
     </div>

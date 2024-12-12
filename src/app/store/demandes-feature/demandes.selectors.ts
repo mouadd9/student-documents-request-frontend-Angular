@@ -44,7 +44,7 @@ export const selectErrorMessage = createSelector(
 export const selectPendingDemandes = createSelector(
   selectAllDemandes,
   (demandes) =>
-    demandes.filter((demande) => demande.statut === DemandeStatus.EN_ATTENTE)
+    demandes.filter((demande) => demande.status === DemandeStatus.EN_ATTENTE)
 ); // used to select pending demandes
 
 export const selectDemandesByType = (type: TypeDocument) =>
@@ -58,7 +58,7 @@ export const selectDemandesByType = (type: TypeDocument) =>
 export const selectNonPendingDemandes = createSelector(
   selectAllDemandes,
   (demandes) =>
-    demandes.filter((demande) => demande.statut !== DemandeStatus.EN_ATTENTE)
+    demandes.filter((demande) => demande.status !== DemandeStatus.EN_ATTENTE)
 ); // used to select non pending demandes (approved/declined)
 
 /* NOTE : 
@@ -100,13 +100,13 @@ export const selectNonPendingDemandesByType = (type: TypeDocument) =>
 
 export const selectNonPendingDemandesByStatus = (type: DemandeStatus) =>
   createSelector(selectSortedNonPendingDemandes, (demandes) =>
-    demandes.filter((demande) => demande.statut === type)
+    demandes.filter((demande) => demande.status === type)
   ); // used to select sorted non pending demandes by status 
 
 export const selectNonPendingDemandesByTypeAndStatus = ( type: TypeDocument, status: DemandeStatus ) =>
   createSelector(selectSortedNonPendingDemandes, (demandes) =>
     demandes.filter(
-      (demande) => demande.typeDocument === type && demande.statut === status
+      (demande) => demande.typeDocument === type && demande.status === status
     )
   ); // used to select sorted non pending demandes by type and status
 

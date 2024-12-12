@@ -11,7 +11,7 @@ import { DemandeStatus } from '../models/enums/document-status';
 export class DemandeService {
  
 
-  private host: string = environment.prodHost;
+  private host: string = environment.devHost;
 
   constructor(private http: HttpClient) { }
 
@@ -27,12 +27,15 @@ export class DemandeService {
     return this.http.get<Demande[]>(`${this.host}/admin/demandes`, { headers }).pipe(
       map(demandes => demandes.slice().reverse())  // Reverses the array
     );
+    // return this.http.get<Demande[]>(`${this.host}/admin/demandes`, { headers }).pipe(
+    //   map(demandes => demandes.slice().reverse())  // Reverses the array
+    // );
   }
 
   // this is used by the student/demande component to post a new Demande
   public saveDemandeAsync(demande: Demande): Observable<Demande> {
     return timer(4000).pipe(
-      switchMap(() => this.http.post<Demande>(this.host + "/demandes", demande))
+      switchMap(() => this.http.post<Demande>(this.host + "/public/demandes", demande))
     );
   } // Effect will use this methods when we dispatch an action of type requestDemande
   
@@ -50,7 +53,7 @@ export class DemandeService {
       updatedDemande
     );*/
     return this.http.put<Demande>(
-      `${this.host}/demandes/${demande.id}`,{}
+      `${this.host}/admin/demandes/${demande.id}/approve`,{}
     );
   }
   
@@ -68,6 +71,8 @@ export class DemandeService {
     );*/
     return this.http.put<Demande>(
       `${this.host}/admin/demandes/${demande.id}/reject`, {});
+      // return this.http.put<Demande>(
+      //   `${this.host}/admin/demandes/${demande.id}/reject`, {});
     
   }
   public downloadDemande(demande: Demande): Observable<Blob> {
