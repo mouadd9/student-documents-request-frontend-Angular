@@ -29,6 +29,7 @@ import { HistoriqueListComponent } from './components/admin/historique/historiqu
 import { HistoriqueNavBarComponent } from './components/admin/historique/historique-nav-bar/historique-nav-bar.component';
 
 import { NgChartsModule} from 'ng2-charts';
+import { AuthInterceptor } from './interceptors/auth-interceptor';
 
 
 
@@ -75,7 +76,11 @@ import { NgChartsModule} from 'ng2-charts';
   providers: [
     provideHttpClient(), // this provides the httpClient service that will be injected to our services
     provideRouter(routes), // this provides routes for the RouterModule
-    
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true, // Allows multiple interceptors to work together
+    },
   ],
   bootstrap: [AppComponent]
 })
