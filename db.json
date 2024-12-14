@@ -25,7 +25,7 @@
       "cin": "J012345",
       "numApogee": "01234567",
       "typeDocument": "RELEVE_NOTES",
-      "status": "REFUSEE",
+      "status": "EN_ATTENTE",
       "dateCreation": "2023-12-10T11:30:00.000Z",
       "dateTraitement": "10-12-2024 04:08:22",
       "etudiant": {
@@ -42,7 +42,7 @@
       "typeDocument": "CERTIFICAT_STAGE",
       "status": "EN_ATTENTE",
       "dateCreation": "2023-12-11T14:15:00.000Z",
-      "dateTraitement": "10-12-2024 00:27:23",
+      "dateTraitement": "08-12-2024 07:08:11",
       "etudiant": {
         "id": 12,
         "nom": "Kylie Jenner",
@@ -72,7 +72,7 @@
       "typeDocument": "RELEVE_NOTES",
       "status": "APPROVEE",
       "dateCreation": "2023-12-13T18:30:00.000Z",
-      "dateTraitement": "10-12-2024 04:08:21",
+      "dateTraitement": "08-12-2024 14:13:12",
       "etudiant": {
         "id": 14,
         "nom": "Mila Kunis",

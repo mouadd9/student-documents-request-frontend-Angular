@@ -14,7 +14,20 @@
         <div class="error-icon">⚠️</div>
         <p class="error-text">Une erreur s'est produite. Veuillez réessayer.</p>
         <button class="btn retry" (click)="onRetry()">Réessayer</button>
+        <!-- Toggle Details -->
+       <input type="checkbox" id="toggle-details" class="toggle-checkbox" />
+       <label for="toggle-details" class="details-toggle-label">
+         Afficher les détails
+       </label>
+     
+       <!-- Collapsible Section for Error Details -->
+       <div class="error-details">
+         <pre class="error-json">{{ state.errorMessage | json }}</pre>
+       </div>
+     
       </div>
+       
+     
       <table *ngIf="state.state === STATE.loaded">
         <thead>
           <tr>
@@ -26,25 +39,34 @@
           </tr>
         </thead>
         <tbody>
-
-          <ng-container *ngFor="let demande of state.demandes">
+          <!-- Check if there are demandes -->
+          <ng-container *ngIf="state.demandes && state.demandes.length > 0; else noDemandes">
+            <ng-container *ngFor="let demande of state.demandes">
+              <tr>
+                <td>{{ demande.dateCreation }}</td>
+                <td>{{ demande.etudiant!.nom }}</td>
+                <td>{{ demande.etudiant!.email }}</td>
+                <td>{{ demande.typeDocument }}</td>
+                <td class="badge">
+                  <span class="status-badge" [ngSwitch]="demande.status">
+                    <div class="status-badge status-approved" *ngSwitchCase="this.DemandeStatus.APPROVEE">Approuvée</div>
+                    <div class="status-badge status-rejected" *ngSwitchCase="this.DemandeStatus.REFUSEE">Refusée</div>
+                  </span>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        
+          <!-- Fallback template for empty demandes -->
+          <ng-template #noDemandes>
             <tr>
-              <td>{{demande.dateCreation}}</td>
-              <td>{{demande.etudiant!.nom}}</td>
-              <td>{{demande.etudiant!.email}}</td>
-              <td>{{demande.typeDocument}}</td>
-              <td class="badge">
-                <span class="status-badge" [ngSwitch]="demande.status">
-                  <div class="status-badge status-approved"
-                    *ngSwitchCase="this.DemandeStatus.APPROVEE">Approuvée</div>
-                  <div class="status-badge status-rejected"
-                    *ngSwitchCase="this.DemandeStatus.REFUSEE">Refusée</div>
-                </span>
+              <td colspan="5" class="text-center text-gray-500">
+                Aucun historique de demandes disponible.
               </td>
             </tr>
-          </ng-container>
-
+          </ng-template>
         </tbody>
+        
       </table>
     </div>
   </ng-container>

@@ -30,7 +30,7 @@ import { HistoriqueNavBarComponent } from './components/admin/historique/histori
 
 import { NgChartsModule} from 'ng2-charts';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
-
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 
@@ -69,7 +69,8 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
     RouterModule, // this provides : <router-outlet></router-outlet> [routerLink] .....
     ReactiveFormsModule,
     StoreModuleConfig,  
-    NgChartsModule
+    NgChartsModule,
+    SweetAlert2Module.forRoot()
     
 
   ],

@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  private host: string = environment.devHost;
+  private host: string = environment.prodHost;
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +21,9 @@ export class AuthService {
    /* return this.http.post<any>(this.host + '/auth/login', credentials, {
       headers,
     });*/
-    return this.http.get<any>(`${this.host}/auth`);
+    return this.http.post<any>(`${this.host}/auth/login`, credentials, {
+      headers,
+    });
   }
 }
 

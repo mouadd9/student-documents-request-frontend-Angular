@@ -15,6 +15,17 @@
         <div class="error-icon">⚠️</div>
         <p class="error-text">Une erreur s'est produite. Veuillez réessayer.</p>
         <button class="btn retry" (click)="onRetry()">Réessayer</button>
+        <!-- Toggle Details -->
+       <input type="checkbox" id="toggle-details" class="toggle-checkbox" />
+       <label for="toggle-details" class="details-toggle-label">
+         Afficher les détails
+       </label>
+     
+       <!-- Collapsible Section for Error Details -->
+       <div class="error-details">
+         <pre class="error-json">{{ state.errorMessage | json }}</pre>
+       </div>
+     
       </div>
       <table
         *ngIf="(state.state === STATE.loaded) || ( ( state.state === STATE.loading ) && state.respondLoading)">
@@ -28,11 +39,12 @@
           </tr>
         </thead>
         <tbody>
-
+        <ng-container *ngIf="state.reclamations && state.reclamations.length > 0; else noReclamations">
           <ng-container *ngFor="let reclamation of state.reclamations">
             <!-- Main row -->
             <tr>
-              <td>{{reclamation.dateCreation}}</td>
+              
+              <td>{{reclamation.dateCreation | date:'dd/MM/yyyy HH:mm:ss'}}</td>
               <td>{{reclamation.etudiant?.nom}}</td>
               <td>{{reclamation.etudiant?.email}}</td>
               <td>{{reclamation.sujet}}</td>
@@ -171,7 +183,14 @@
             </tr> -->
 
           </ng-container>
-
+        </ng-container>
+        <ng-template #noReclamations>
+          <tr>
+            <td colspan="5" class="text-center text-gray-500">
+              Aucune réclamation trouvée.
+            </td>
+          </tr>
+        </ng-template>
         </tbody>
       </table>
     </div>

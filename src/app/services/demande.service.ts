@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Demande } from '../models/demande';
 import { map, Observable, switchMap, timer } from 'rxjs';
@@ -9,6 +9,7 @@ import { DemandeStatus } from '../models/enums/document-status';
   providedIn: 'root'
 })
 export class DemandeService {
+ 
 
   private host: string = environment.prodHost;
 
@@ -16,9 +17,19 @@ export class DemandeService {
 
   // this is used by the Demande Component to fetch data to populate the store
   public fetchDemandesAsync(): Observable<Demande[]> {
-    return this.http.get<Demande[]>(this.host + "/admin/demandes").pipe(
-      map(demandes => demandes.slice().reverse()) // Reverses the array
+    // Hardcoded token for testing
+    // const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoiQURNSU4iLCJpYXQiOjE3MzQwMzc1ODEsImV4cCI6MTczNDEyMzk4MX0.oxT9N7nmykCWUZAH5KVYRnyPNnONi2zRN8bt_I2ipc4';//for test add token here value
+
+    // // Create the Authorization header with the token
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    // Send the GET request with the token in the headers
+    return this.http.get<Demande[]>(`${this.host}/admin/demandes`).pipe(
+      map(demandes => demandes.slice().reverse())  // Reverses the array
     );
+    // return this.http.get<Demande[]>(`${this.host}/admin/demandes`, { headers }).pipe(
+    //   map(demandes => demandes.slice().reverse())  // Reverses the array
+    // );
   }
 
   // this is used by the student/demande component to post a new Demande
@@ -45,7 +56,7 @@ export class DemandeService {
       `${this.host}/admin/demandes/${demande.id}/approve`,{}
     );
   }
-
+  
   public refuseDemandeAsync(demande: Demande): Observable<Demande>{
 
   /*  const nowFormatted = formatCurrentDate();
@@ -60,7 +71,22 @@ export class DemandeService {
     );*/
     return this.http.put<Demande>(
       `${this.host}/admin/demandes/${demande.id}/reject`, {});
+      // return this.http.put<Demande>(
+      //   `${this.host}/admin/demandes/${demande.id}/reject`, {});
     
+  }
+  public downloadDemande(demande: Demande): Observable<Blob> {
+    const url = `${this.host}/admin/demandes/${demande.id}/pdf`;  // Construct the URL dynamically using the demande ID
+    
+    // Replace with actual token retrieval logic, for example:
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoiQURNSU4iLCJpYXQiOjE3MzQwMzc1ODEsImV4cCI6MTczNDEyMzk4MX0.oxT9N7nmykCWUZAH5KVYRnyPNnONi2zRN8bt_I2ipc4';//testing purpose dont forget to remove it!!!!
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);  // Add token to the headers
+
+    return this.http.get(url, {
+      headers,  // Include headers with the Authorization token
+      responseType: 'blob',  // Response of type file, so we specify 'blob'
+    });
   }
 
 
