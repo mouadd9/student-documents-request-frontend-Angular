@@ -27,7 +27,7 @@ export class AuthEffects {
             return this.authService.fetchTokenAsync(action.payload).pipe(
               map(
                 (token) => { // this variable has the coded jwt, we need to decode it and extract the claims , here its in this form : {'access-token':'token'} ;
-                    const access_token = token['access-token'];
+                    const access_token = token['access_token'];
                     const decodedToken = jwtDecode(access_token);
                     localStorage.setItem('jwt-token', access_token); // here we put the token in our local storage
                   return authActions.authenticateSuccessWithClaims({ // when the authenticateSuccess action is dispatched we will pass a decoded token to it

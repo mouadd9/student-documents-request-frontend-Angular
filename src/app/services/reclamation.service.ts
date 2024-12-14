@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class ReclamationService {
-  private host: string = environment.devHost;
+  private host: string = environment.prodHost;
 
   constructor(private http: HttpClient) { }
 

@@ -11,20 +11,20 @@ import { DemandeStatus } from '../models/enums/document-status';
 export class DemandeService {
  
 
-  private host: string = environment.devHost;
+  private host: string = environment.prodHost;
 
   constructor(private http: HttpClient) { }
 
   // this is used by the Demande Component to fetch data to populate the store
   public fetchDemandesAsync(): Observable<Demande[]> {
     // Hardcoded token for testing
-    const token = '';//for test add token here value
+    // const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoiQURNSU4iLCJpYXQiOjE3MzQwMzc1ODEsImV4cCI6MTczNDEyMzk4MX0.oxT9N7nmykCWUZAH5KVYRnyPNnONi2zRN8bt_I2ipc4';//for test add token here value
 
-    // Create the Authorization header with the token
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    // // Create the Authorization header with the token
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     // Send the GET request with the token in the headers
-    return this.http.get<Demande[]>(`${this.host}/admin/demandes`, { headers }).pipe(
+    return this.http.get<Demande[]>(`${this.host}/admin/demandes`).pipe(
       map(demandes => demandes.slice().reverse())  // Reverses the array
     );
     // return this.http.get<Demande[]>(`${this.host}/admin/demandes`, { headers }).pipe(
@@ -79,7 +79,7 @@ export class DemandeService {
     const url = `${this.host}/admin/demandes/${demande.id}/pdf`;  // Construct the URL dynamically using the demande ID
     
     // Replace with actual token retrieval logic, for example:
-    const token = '';//testing purpose dont forget to remove it!!!!
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoiQURNSU4iLCJpYXQiOjE3MzQwMzc1ODEsImV4cCI6MTczNDEyMzk4MX0.oxT9N7nmykCWUZAH5KVYRnyPNnONi2zRN8bt_I2ipc4';//testing purpose dont forget to remove it!!!!
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);  // Add token to the headers
 

@@ -55,19 +55,13 @@
                   </span>
                 </td>
                 <td>
-                  <button class="btn approve" (click)="onApprove(demande)">
-                    <img src="assets/icons/approve_white.svg" alt="Approuver Icon" class="icon-svg">
-                    Approuver
+                  <button class="btn action" (click)="onAction(demande)">
+                    <svg width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                      <path d="M3 9a2 2 0 1 0 4 0 2 2 0 1 0-4 0zm5 0a2 2 0 1 0 4 0 2 2 0 1 0-4 0zm-5 3a2 2 0 1 0 4 0 2 2 0 1 0-4 0zm5 0a2 2 0 1 0 4 0 2 2 0 1 0-4 0z"/>
+                    </svg>
+                    Actions
                   </button>
-                  <button class="btn reject" (click)="onReject(demande)">
-                    <img src="assets/icons/reject_white.svg" alt="Rejeter Icon" class="icon-svg">
-                    Rejeter
-                  </button>
-                  <!-- Download Button -->
-                  <button class="btn download flex items-center space-x-2" (click)="onDownload(demande)" style="background-color: rgb(16, 239, 120);">
-                    <i class="fas fa-download text-white"></i>
-                    <span>Télécharger</span>
-                  </button>
+                  
                 </td>
               </tr>
             </ng-container>

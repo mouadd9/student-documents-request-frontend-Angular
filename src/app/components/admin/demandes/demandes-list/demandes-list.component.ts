@@ -4,6 +4,7 @@ import { STATE } from '../../../../store/state';
 import { Demande } from '../../../../models/demande';
 import { Store } from '@ngrx/store';
 import { DemandeActions } from '../../../../store/demandes-feature/demandes.actions';
+import Swal from 'sweetalert2';  // for the popUps
 
 @Component({
   selector: 'app-demandes-list',
@@ -30,19 +31,79 @@ export class DemandesListComponent {
   constructor(private store:Store){}
 
   onApprove(demande: Demande): void { 
-    this.store.dispatch(DemandeActions.validateDemande({payload:demande}))
-  }
+    Swal.fire({
+      title: 'Confirmer',
+      text: 'Voulez-vous approuver cette demande?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, approuver',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.store.dispatch(DemandeActions.validateDemande({payload:demande}))
+      }
+  })}
   onReject(demande: Demande): void {
-    this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
+    Swal.fire({
+      title: 'Confirmer',
+      text: 'Voulez-vous rejeter cette demande?',
+      icon: 'error',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, rejeter',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
+  }})
   }
   onDownload(demande: Demande): void {
-    // this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
-    this.store.dispatch(DemandeActions.downloadDemand({payload:demande}));
+    Swal.fire({
+      title: 'Confirmer',
+      text: 'Voulez-vous télécharger cette demande?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, télécharger',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
+        this.store.dispatch(DemandeActions.downloadDemand({payload:demande}));
+      }})
   }
 
   onRetry(){
     this.store.dispatch(DemandeActions.fetchDemandes());
   }
+
+  // for the action menu
+  onAction(demande: Demande): void {
+
+    Swal.fire({
+      title: 'Choisissez une action',
+      html: `
+        <button id="approveButton" class="swal2-confirm swal2-styled btn approve">Valider</button>
+        <button id="rejectButton" class="swal2-deny swal2-styled btn reject">Refuser</button>
+        <button id="downloadButton" class="swal2-cancel swal2-styled">Télécharger</button>
+      `,
+      
+      showConfirmButton: false, // Pas de bouton par défaut
+      didOpen: () => {
+        document.getElementById('approveButton')?.addEventListener('click', () => {
+          Swal.close();
+          this.onApprove(demande); // Appeler la fonction onApprove
+        });
+        document.getElementById('rejectButton')?.addEventListener('click', () => {
+          Swal.close();
+          this.onReject(demande); // Appeler la fonction onReject
+        });
+        document.getElementById('downloadButton')?.addEventListener('click', () => {
+          Swal.close();
+          this.onDownload(demande); // Appeler la fonction onDownload
+        });
+      },
+    });
+  }
+  
 }
 
 /*

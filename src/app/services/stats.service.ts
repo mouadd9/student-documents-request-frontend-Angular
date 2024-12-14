@@ -8,15 +8,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class StatsService {
-  private host: string = environment.devHost;
-  private token: string = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczMzg2MjIwOCwiZXhwIjoxNzMzOTQ4NjA4fQ.hXyv53VPir6zEeGQMcdw5XOducQNK8oS3U8Jl3Py1sQ';  // Replace with your actual token
+  private host: string = environment.prodHost;
+  // private token: string = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoiQURNSU4iLCJpYXQiOjE3MzQwMzc1ODEsImV4cCI6MTczNDEyMzk4MX0.oxT9N7nmykCWUZAH5KVYRnyPNnONi2zRN8bt_I2ipc4';  // Replace with your actual token
 
   constructor(private http: HttpClient) { }
 
   public fetchStats() : Observable<Statistics> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
 
-    return this.http.get<Statistics>(this.host + "/admin/statistiques",{headers} )
+    return this.http.get<Statistics>(this.host + "/admin/statistiques" )
   }
 
 }

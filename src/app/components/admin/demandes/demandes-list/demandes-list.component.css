@@ -247,3 +247,51 @@
 .toggle-checkbox:checked + .details-toggle-label + .error-details {
   display: block;
 }
+
+
+
+/* General Button Focus Style */
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Approve Button */
+.btn.approve {
+  background-color: #28a745; /* Green */
+  color: #ffffff;
+  border: none;
+  margin-right: 0.5rem;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn.approve:hover {
+  background-color: #218838; /* Darker green */
+}
+
+/* Reject Button */
+.btn.reject {
+  background-color: #dc3545; /* Red */
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+div:where(.swal2-container) button:where(.swal2-styled):not([disabled]).btn.reject:hover {
+  background-color: #c82333; /* Darker red */
+}
+
+/* Action Button (General) */
+.btn.action {
+  background-color: #007bff; /* Blue */
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+
