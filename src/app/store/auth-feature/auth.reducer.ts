@@ -23,5 +23,10 @@ export const authReducer = createReducer(
         state : STATE.error,
         errorMessage: payload
     })),
-    on(authActions.logout, () => initialAuthState)
+    on(authActions.logout, () => initialAuthState),
+    on(authActions.resetAuthState, (state)=>({
+        ...state,
+        state : STATE.initial,
+        errorMessage : ''
+    }))
 )
