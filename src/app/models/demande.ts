@@ -6,7 +6,7 @@ export interface Demande {
     id?: number; 
     email?: string;
     cin?: string;
-    numApogee?: number;
+    numApogee?: string;
     typeDocument: TypeDocument;
     status?: DemandeStatus; 
     dateCreation?: string | null;

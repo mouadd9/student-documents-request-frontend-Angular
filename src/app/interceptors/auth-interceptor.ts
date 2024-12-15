@@ -10,7 +10,7 @@ export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerF
   const store = inject(Store);
 
   // Only process requests starting with "private"
-  if (!req.url.startsWith('private')) {
+  if (req.url.startsWith('/public')) {
     console.log('Request does not start with "private", skipping interceptor.');
     return next(req);
   }
