@@ -14,24 +14,34 @@ import { Router } from '@angular/router';
   templateUrl: './admin-login.component.html',
   styleUrl: './admin-login.component.css'
 })
-export class AdminLoginComponent {
+export class AdminLoginComponent implements OnInit {
   // here we will select the authState from the global store
   // now each time a new value is there we will get it 
   // meaning if a user clicked and sent credentials 
   // the state will change and we will get claims , if the claims have the correct role we will redirect to the admin
   // not that authState has info about jwt claims ...... and even teh username , meaning we will send the username via router
-  public authState$: Observable<authState>;
+  public authState$!: Observable<authState>;
   public STATE = STATE;
   public authForm!: FormGroup; // this form will be initialzed in the constructer and bound to the form in our html
 // after initialization and binding , we can easily track the state of the form
 // for example if its invalid or valid , or if a formControl is valid or not 
 
-  constructor(private store: Store, private fb: FormBuilder, private router: Router) {
-    this.authState$ = store.select(selectAuthState); // we select the token state to observe token changes, to know when to authenticate and when not to
+  constructor(private store: Store, private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(authActions.resetAuthState()); // here we turn the state to INITIAL to change the template
+    this.authState$ = this.store.select(selectAuthState); // we select the token state to observe token changes, to know when to authenticate and when not to
     this.authForm = this.fb.group({ 
       username: ['', Validators.required],
       password: ['', Validators.required],
     })
+
+      // React to state changes to reset the form when state is LOADED
+      this.authState$.subscribe(state => {
+        if (state.state === STATE.loaded) {
+          this.authForm.reset(); // Reset the form only when the state is LOADED
+        }
+      });
   }
 
   onSubmit(): void{ 

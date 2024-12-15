@@ -27,8 +27,10 @@ export const authActions = createActionGroup({
         authenticate: props<{payload: Credentials}>(), // this action will be dispatched from the admin-auth section, when we click submit in the form, we will validate the fields then after validation the action will be dispatched and we will pass an object of type credentials
         authenticateSuccessWithClaims: props<{payload : any}>(), // when the effect will detect an action of type authenticate, it conduct an api call (after getting a 200 OK status), we will dispatch this action that will hold the jwt as a string
         authenticateError: props<{payload: string}>(),
-        logout: emptyProps() // this action will reset the state to its initial state 
+        logout: emptyProps(), // this action will reset the state to its initial state 
         // and concurrently we will rout to /login 
+        // an action to reset to state to initial
+        resetAuthState: emptyProps(),
 
     }
 })
