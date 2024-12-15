@@ -20,7 +20,7 @@ export class DemandesListComponent {
   // we use @Input to declare a property that will receive data from the parent component.
   // in our case demandeState$ (located in demandes-list) will receive an Observable<demandeState>; from (demandeComponent) 
   // this variable will be subscribed to in this template using <ng-container></ng-container>
-  @Input() demandeState$!: Observable<{//shouldnt be used
+  @Input() demandeState$!: Observable<{
     demandes: Demande[];
     state: STATE;
     errorMessage: string;
@@ -30,56 +30,17 @@ export class DemandesListComponent {
 
   constructor(private store:Store){}
 
-  onApprove(demande: Demande): void { 
-    Swal.fire({
-      title: 'Confirmer',
-      text: 'Voulez-vous approuver cette demande?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Oui, approuver',
-      cancelButtonText: 'Annuler'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.store.dispatch(DemandeActions.validateDemande({payload:demande}))
-      }
-  })}
-  onReject(demande: Demande): void {
-    Swal.fire({
-      title: 'Confirmer',
-      text: 'Voulez-vous rejeter cette demande?',
-      icon: 'error',
-      showCancelButton: true,
-      confirmButtonText: 'Oui, rejeter',
-      cancelButtonText: 'Annuler'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
-  }})
-  }
-  onDownload(demande: Demande): void {
-    Swal.fire({
-      title: 'Confirmer',
-      text: 'Voulez-vous télécharger cette demande?',
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonText: 'Oui, télécharger',
-      cancelButtonText: 'Annuler'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
-        this.store.dispatch(DemandeActions.downloadDemand({payload:demande}));
-      }})
-  }
+  // before we used to have two buttons 
+  // each button emits a click event that triggers a function that dispatched an action
 
-  onRetry(){
-    this.store.dispatch(DemandeActions.fetchDemandes());
-  }
+  // now we use sweetalert2 , when we click action button 
+  // a modal is shown with three buttons to either approve, deny or download
 
-  // for the action menu
   onAction(demande: Demande): void {
 
     Swal.fire({
       title: 'Choisissez une action',
+
       html: `
         <button id="approveButton" class="swal2-confirm swal2-styled btn approve">Valider</button>
         <button id="rejectButton" class="swal2-deny swal2-styled btn reject">Refuser</button>
@@ -87,7 +48,7 @@ export class DemandesListComponent {
       `,
       
       showConfirmButton: false, // Pas de bouton par défaut
-      didOpen: () => {
+      didOpen: () => { // when the modal is shown we create three event listeners
         document.getElementById('approveButton')?.addEventListener('click', () => {
           Swal.close();
           this.onApprove(demande); // Appeler la fonction onApprove
@@ -102,6 +63,55 @@ export class DemandesListComponent {
         });
       },
     });
+  }
+
+  onApprove(demande: Demande): void { 
+    Swal.fire({
+      title: 'Confirmer',
+      text: 'Voulez-vous approuver cette demande?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, approuver',
+      cancelButtonText: 'Annuler'
+    }).then((result) => { // if we select approve 
+       if (result.isConfirmed) {
+         this.store.dispatch(DemandeActions.validateDemande({payload:demande}))
+       }
+    });
+  }
+
+  onReject(demande: Demande): void {
+    Swal.fire({
+      title: 'Confirmer',
+      text: 'Voulez-vous rejeter cette demande?',
+      icon: 'error',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, rejeter',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+       if (result.isConfirmed) {
+         this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
+       }
+    });
+  }
+
+  onDownload(demande: Demande): void {
+    Swal.fire({
+      title: 'Confirmer',
+      text: 'Voulez-vous télécharger cette demande?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, télécharger',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.store.dispatch(DemandeActions.downloadDemand({payload:demande}));
+      }
+    })
+  }
+
+  onRetry(){
+    this.store.dispatch(DemandeActions.fetchDemandes());
   }
   
 }

@@ -4,9 +4,7 @@ import { createReducer, on } from "@ngrx/store";
 import { authActions } from "./auth.actions";
 import { initialAuthState } from "./auth.state";
 import { STATE } from "../state";
-console.log("---------------HERE AN ACTION HAS REACHED THE REDUCER ---------")
-console.log("------------------------------------------------------------------------")
-console.log("------------------------------------------------------------------------")
+
 export const authReducer = createReducer(
     initialAuthState, // initial state , passed to the reducer, when the store initializes
     on(authActions.authenticate, (state)=>({

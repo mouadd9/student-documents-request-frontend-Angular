@@ -3,7 +3,7 @@
 
 import { Injectable } from "@angular/core"
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, delay, map, mergeMap, Observable, of } from "rxjs"
+import { catchError, map, mergeMap, Observable, of } from "rxjs"
 import { Action } from "@ngrx/store";
 import { reclamationActions } from "./reclamations.actions";
 import { ReclamationService } from "../../services/reclamation.service";
@@ -19,9 +19,7 @@ export class reclamationsEffects {
     // properties 
     saveReclamationEffect$: Observable<Action>; 
     saveReclamationSuccessEffect$: Observable<Action>; 
-
     fetchReclamationEffect$: Observable<Action>;
-
     respondReclamationEffect$: Observable<Action>;
 
     constructor (actions$: Actions, reclamationService: ReclamationService) {
@@ -48,9 +46,8 @@ export class reclamationsEffects {
         this.saveReclamationSuccessEffect$ = createEffect(() => 
             this.actions$.pipe(
                 ofType(reclamationActions.saveReclamationSuccess),
-                delay(3000),
                 mergeMap(
-                    (action) => {
+                    () => {
                         return of(reclamationActions.resetReclamation()); // for each action we will return an observable
                     }
                 )
@@ -61,7 +58,7 @@ export class reclamationsEffects {
            this.actions$.pipe(
             ofType(reclamationActions.fetchReclamation),
             mergeMap(
-                (action) => this.reclamationService.fetchAllReclamations().pipe(
+                () => this.reclamationService.fetchAllReclamations().pipe(
                     map((reclamations)=> reclamationActions.fetchReclamationSuccess({payload : reclamations})),
                     catchError((err)=> of(reclamationActions.fetchReclamationError({payload : err.message})))
                 )
@@ -72,7 +69,6 @@ export class reclamationsEffects {
         this.respondReclamationEffect$ = createEffect(()=>
             this.actions$.pipe(
                 ofType(reclamationActions.respondReclamation),
-                delay(3000),
                 mergeMap(
                     (action) => this.reclamationService.updateReclamationAsync(action.payload).pipe(
                         map((reclamation)=>reclamationActions.respondReclamationSuccess({payload:reclamation})),

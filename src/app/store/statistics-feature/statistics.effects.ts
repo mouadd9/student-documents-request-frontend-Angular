@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { catchError, delay, map, mergeMap, Observable, of } from 'rxjs';
+import { catchError, map, mergeMap, Observable, of } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { StatsService } from '../../services/stats.service';
 import { statisticsActions } from './statistics.actions';

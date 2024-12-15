@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { catchError, delay, map, mergeMap, Observable, of } from 'rxjs';
+import { catchError, map, mergeMap, Observable, of } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { DemandeActions } from './demandes.actions';
 import { DemandeService } from '../../services/demande.service';
@@ -36,7 +36,7 @@ export class DemandesEffects {
         // first we use pipe to operate on the actions in the stream
         this.action$.pipe(
           ofType(DemandeActions.fetchDemandes), // for each action in this stream we will filter out only the ones that are of this type
-          mergeMap((action) => {
+          mergeMap(() => {
             // now for each action of this type we will make an async operation that will return an observable
             return this.demandeService.fetchDemandesAsync().pipe(
               // demandeService.fetchDemandesAsync() return an Observable<Demande[]>
@@ -84,12 +84,9 @@ export class DemandesEffects {
       // we should reset the state so that he can resend it again
       this.action$.pipe(
         ofType(DemandeActions.saveDemandeSuccess),
-        delay(3000),
         mergeMap(() => of(DemandeActions.resetDemandeStateEnum()))
       )
     );
-
-    // i need to add effects for validating and refusing
 
     this.validateDemandeEffect$ = createEffect(() =>
       this.action$.pipe(
@@ -129,28 +126,19 @@ export class DemandesEffects {
       
       this.downloadDemandEffect$ = createEffect(() =>
         this.action$.pipe(
-          ofType(DemandeActions.downloadDemand), // Listen for the downloadDemand action
+          ofType(DemandeActions.downloadDemand),
           mergeMap((action) => {
-            const demande = action.payload; // Get the entire 'demande' object from the payload
-      
-            // Call the service to get the download URL
+            const demande = action.payload;
             return this.demandeService.downloadDemande(demande).pipe(
               map((response: Blob) => {
-                // Assuming the service returns the Blob content (you may modify this part if the URL itself is returned)
-                
-                // Generate the dynamic filename based on 'etudiant.nom' and 'documentType'
                 const filename = demande.etudiant 
                       ? `${demande.etudiant.nom}_${demande.typeDocument}.pdf`
                       : `defaultName_${demande.typeDocument}.pdf`;
-
-                      // const downloadUrl = 'Liam%20Neeson_ATTESTATION_SCOLARITE.pdf';
-                      // Create a link and trigger the download
                 const link = document.createElement('a');
-                link.href = URL.createObjectURL(response); // Use the Blob response to create a URL for the download
-                // link.download = downloadUrl;  // for testing purpose
+                link.href = URL.createObjectURL(response);
                 link.download = filename; 
-                link.click();  // Trigger the download
-      
+                link.click();
+                URL.revokeObjectURL(link.href); 
                 return DemandeActions.downloadDemandSuccess(); // Dispatch success action
               }),
               catchError((error) => 
@@ -160,9 +148,6 @@ export class DemandesEffects {
           })
         )
       );
-      
-      
-      
   }
 }
 

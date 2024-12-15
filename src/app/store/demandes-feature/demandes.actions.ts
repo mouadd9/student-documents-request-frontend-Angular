@@ -34,7 +34,7 @@ export const  DemandeActions = createActionGroup({
         // 5 - an action to reset to state to initial
         resetDemandeStateEnum: emptyProps(),
 
-        //6 - for the downloading
+        // 6 - for the downloading
         downloadDemand: props<{payload: Demande}>(),
         downloadDemandSuccess: emptyProps(),
         downloadDemandError: props<{payload: string}>(),
