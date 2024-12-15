@@ -91,21 +91,20 @@ export function demandeReducer( demandeState: demandeState = initialDemandeState
           }),
         };
     }
-
     case DemandeActions.refuseDemandeError.type: {
           return {...demandeState, errorMessage:(action as any).payload, demandeState:STATE.error};
     }
-    
+
+    // 6 - downloadDemande actions
     case DemandeActions.downloadDemand.type: {
           return {...demandeState, demandeState:STATE.loading};
     }
     case DemandeActions.downloadDemandSuccess.type: {
-          return {...demandeState,  demandeState:STATE.loaded};
+          return {...demandeState, demandeState:STATE.loaded};
     }
     case DemandeActions.downloadDemandError.type: {
           return {...demandeState, errorMessage:(action as any).payload, demandeState:STATE.error};
     }
-
 
     default: {
       return demandeState;

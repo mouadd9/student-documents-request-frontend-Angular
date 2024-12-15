@@ -18,9 +18,6 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-   /* return this.http.post<any>(this.host + '/auth/login', credentials, {
-      headers,
-    });*/
     return this.http.post<any>(`${this.host}/auth/login`, credentials, {
       headers,
     });

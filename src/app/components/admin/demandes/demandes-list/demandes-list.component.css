@@ -221,6 +221,10 @@
 
 /* Card, Table, Buttons, and Status-Badge remain unchanged from the previous configuration */
 
+
+/*-------- New CSS */
+
+
 /* Hide the checkbox visually but keep it accessible */
 .toggle-checkbox {
   display: none;

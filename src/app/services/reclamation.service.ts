@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, switchMap, timer } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Reclamation } from '../models/reclamation';
 import { environment } from '../environments/environment';
 
@@ -17,7 +17,6 @@ export class ReclamationService {
   // - POST a reclamation (response : error , success) , saveReclamationAsync()
   // - GET all demandes ,fetchReclamationsAsync()
   // - UPDATE a reclamation by adding a response
-
   
   public fetchAllReclamations() : Observable<Reclamation[]> {
     return this.http.get<Reclamation[]>(this.host + "/admin/reclamations" ).pipe(
@@ -26,17 +25,13 @@ export class ReclamationService {
   }
 
   public saveReclamationAsync(reclamation: Reclamation): Observable<Reclamation> {
-    return timer(500).pipe(
-      switchMap(() => this.http.post<Reclamation>(this.host + "/public/reclamations", reclamation))
-    );
+    return  this.http.post<Reclamation>(this.host + "/public/reclamations", reclamation);
   
   } // effects will use this Async Method when an action of type sendReclamation is dispatched 
-  public updateReclamationAsync(updatedReclamation: Reclamation): Observable<Reclamation> {
-    
-    return this.http.put<Reclamation>(this.host + "/admin/reclamations/" + updatedReclamation.id + '/treat', updatedReclamation);
 
+  public updateReclamationAsync(updatedReclamation: Reclamation): Observable<Reclamation> {
+    return this.http.put<Reclamation>(this.host + "/admin/reclamations/" + updatedReclamation.id + '/treat', updatedReclamation);
     // return this.http.put<Reclamation>(this.host + "/reclamations/" + reclamation.id, response);
   }
-
 
 }

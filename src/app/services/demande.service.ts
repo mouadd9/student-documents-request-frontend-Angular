@@ -1,65 +1,70 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Demande } from '../models/demande';
-import { map, Observable, switchMap, timer } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '../environments/environment';
-import { DemandeStatus } from '../models/enums/document-status';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DemandeService {
- 
+ // the admin is the only authorized to fetchDemandes + validate/refuse a demande and download a pdf
+ // when a request reaches the backend we check for the authorization header, we extract the token, and check if the api call is authorized
+ // the Angular Interceptor, intercepts the http request and adds to it the jwt stored in state
 
   private host: string = environment.prodHost;
 
   constructor(private http: HttpClient) { }
 
-  // this is used by the Demande Component to fetch data to populate the store
-  public fetchDemandesAsync(): Observable<Demande[]> {
-    // Hardcoded token for testing
-    // const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoiQURNSU4iLCJpYXQiOjE3MzQwMzc1ODEsImV4cCI6MTczNDEyMzk4MX0.oxT9N7nmykCWUZAH5KVYRnyPNnONi2zRN8bt_I2ipc4';//for test add token here value
+// NOTE : 
 
-    // // Create the Authorization header with the token
+ /*Manualy adding the authorization header (without interceptor) */
+ // 1 - token :
+    // const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoiQURNSU4iLCJpYXQiOjE3MzQwMzc1ODEsImV4cCI6MTczNDEyMzk4MX0.oxT9N7nmykCWUZAH5KVYRnyPNnONi2zRN8bt_I2ipc4';
+ // 2 - manual header creation (Authorization Http Header)
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+ // 3 - appending headers on creation of the request
+    // return this.http.get<Demande[]>(`${this.host}/admin/demandes`, { headers });
 
-    // Send the GET request with the token in the headers
+ /* in Our case the interceptor does this for us */
+
+
+  public fetchDemandesAsync(): Observable<Demande[]> {
     return this.http.get<Demande[]>(`${this.host}/admin/demandes`).pipe(
       map(demandes => demandes.slice().reverse())  // Reverses the array
     );
-    // return this.http.get<Demande[]>(`${this.host}/admin/demandes`, { headers }).pipe(
-    //   map(demandes => demandes.slice().reverse())  // Reverses the array
-    // );
-  }
+  } // Effects will call this method when Demande Component is loaded 
 
-  // this is used by the student/demande component to post a new Demande
   public saveDemandeAsync(demande: Demande): Observable<Demande> {
-    return timer(4000).pipe(
-      switchMap(() => this.http.post<Demande>(this.host + "/public/demandes", demande))
-    );
-  } // Effect will use this methods when we dispatch an action of type requestDemande
+    return this.http.post<Demande>(this.host + "/public/demandes", demande);
+  } // Effects will use this methods when we dispatch an action of type requestDemande, to save a demande from the student/demande component
   
   public validateDemandeAsync(demande: Demande): Observable<Demande>{
-    // for the purpose of demonstration we will change it here instead of doing it in the backend
-   /* const nowFormatted = formatCurrentDate();
-    const updatedDemande = {
-      ...demande,
-      status: DemandeStatus.APPROVEE,
-      dateTraitement: nowFormatted
-    };*/
-    
-   /* return this.http.put<Demande>(
-      `${this.host}/demandes/${demande.id}`,
-      updatedDemande
-    );*/
-    return this.http.put<Demande>(
-      `${this.host}/admin/demandes/${demande.id}/approve`,{}
-    );
-  }
+    // the backend will take in the demande and change its status from EN_ATTENTE to APPROVED
+    return this.http.put<Demande>(`${this.host}/admin/demandes/${demande.id}/approve`,{});
+  } // Effects will call this method when the admin dispatches an action of type validate Demande
   
   public refuseDemandeAsync(demande: Demande): Observable<Demande>{
+    // the backend will take in the demande and change its status from EN_ATTENTE to DENIED
+    return this.http.put<Demande>(`${this.host}/admin/demandes/${demande.id}/reject`,{});
+  } // Effects will call this method when the admin dispatches an action of type refuse Demande
 
-  /*  const nowFormatted = formatCurrentDate();
+  public downloadDemande(demande: Demande): Observable<Blob> {
+    return this.http.get(`${this.host}/admin/demandes/${demande.id}/pdf`, {
+      responseType: 'blob'  // Response of type file, so we specify 'blob'
+    });
+  // this method will be used to retrieve a binary Blob file used to download a pdf from the backend
+  // by default HttpClient expects a response of type json
+  // in our case the response type is a binary file
+  // we add responseType: 'blob', next to the Headers object
+  } // Effects will call this method when the admin dispatched an action of type download Demande
+
+}
+
+
+    // json-server code
+
+   /*  const nowFormatted = formatCurrentDate();
   const updatedDemande = {
     ...demande,
     status: DemandeStatus.REFUSEE,
@@ -69,28 +74,20 @@ export class DemandeService {
       `${this.host}/demandes/${demande.id}`,
       updatedDemande
     );*/
-    return this.http.put<Demande>(
-      `${this.host}/admin/demandes/${demande.id}/reject`, {});
-      // return this.http.put<Demande>(
+
+   /* const nowFormatted = formatCurrentDate();
+    const updatedDemande = {
+      ...demande,
+      status: DemandeStatus.APPROVEE,
+      dateTraitement: nowFormatted
+    };*/
+   /* return this.http.put<Demande>(
+      `${this.host}/demandes/${demande.id}`,
+      updatedDemande
+    );*/
+
+          // return this.http.put<Demande>(
       //   `${this.host}/admin/demandes/${demande.id}/reject`, {});
-    
-  }
-  public downloadDemande(demande: Demande): Observable<Blob> {
-    const url = `${this.host}/admin/demandes/${demande.id}/pdf`;  // Construct the URL dynamically using the demande ID
-    
-    // Replace with actual token retrieval logic, for example:
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoiQURNSU4iLCJpYXQiOjE3MzQwMzc1ODEsImV4cCI6MTczNDEyMzk4MX0.oxT9N7nmykCWUZAH5KVYRnyPNnONi2zRN8bt_I2ipc4';//testing purpose dont forget to remove it!!!!
-
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);  // Add token to the headers
-
-    return this.http.get(url, {
-      headers,  // Include headers with the Authorization token
-      responseType: 'blob',  // Response of type file, so we specify 'blob'
-    });
-  }
-
-
-}
 
 /*
 function formatCurrentDate(): string {

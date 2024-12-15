@@ -34,8 +34,7 @@ export class AuthEffects {
                     payload: {
                         userClaims : {
                             'username': (decodedToken as any).sub,
-                            'roles' :  (decodedToken as any).scope,
-                            
+                            'roles' :  (decodedToken as any).scope,  
                         },
                         'jwt': access_token
                     },
@@ -64,8 +63,6 @@ export class AuthEffects {
         })
       ),
       { dispatch: false } // No new action is dispatched after this effect
-    )
-
-   
+    )  
   }
 }
