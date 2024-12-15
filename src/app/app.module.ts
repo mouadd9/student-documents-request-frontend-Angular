@@ -15,7 +15,7 @@ import { DemandesComponent } from './components/admin/demandes/demandes.componen
 import { DemandesListComponent } from './components/admin/demandes/demandes-list/demandes-list.component';
 import { DemandesNavBarComponent } from './components/admin/demandes/demandes-nav-bar/demandes-nav-bar.component';
 import { provideRouter, RouterModule } from '@angular/router';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -29,7 +29,7 @@ import { HistoriqueListComponent } from './components/admin/historique/historiqu
 import { HistoriqueNavBarComponent } from './components/admin/historique/historique-nav-bar/historique-nav-bar.component';
 
 import { NgChartsModule} from 'ng2-charts';
-import { AuthInterceptor } from './interceptors/auth-interceptor';
+import { loggingInterceptor } from './interceptors/auth-interceptor';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
@@ -75,13 +75,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
   ],
   providers: [
-    provideHttpClient(), // this provides the httpClient service that will be injected to our services
-    provideRouter(routes), // this provides routes for the RouterModule
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true, // Allows multiple interceptors to work together
-    },
+    provideHttpClient(withInterceptors([loggingInterceptor])),// Add the functional interceptor), // this provides the httpClient service that will be injected to our services
+    provideRouter(routes) // this provides routes for the RouterModule
+  
   ],
   bootstrap: [AppComponent]
 })
