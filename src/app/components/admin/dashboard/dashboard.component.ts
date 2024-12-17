@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { selectStatisticsState } from '../../../store/statistics-feature/statistics.selectors';
 import { statisticsActions } from '../../../store/statistics-feature/statistics.actions';
 import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
+import { STATE } from '../../../store/state';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,7 @@ import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  public STATE = STATE;
   public statisticsState$: Observable<statisticsState>;
 
   // these are the properties that will be given to the charts 
@@ -63,53 +65,61 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(statisticsActions.fetchStatistic());
-
     this.statisticsState$.subscribe({
       next: (stats) => {
         if (stats && stats.statistics) {
           const { statistics } = stats;
-
-          // Update Monthly Chart
+    
+          // Update Monthly Chart Data by reassigning new objects:
           if (statistics.monthlyLabels && statistics.monthlyData) {
-            this.monthlyChartData.labels = statistics.monthlyLabels;
-            this.monthlyChartData.datasets = Object.keys(statistics.monthlyData).map((category, index) => {
-              const colors = ['#3b82f6', '#fbbf24', '#10b981', '#f59e0b'];
-              return {
+            const colors = ['#3b82f6', '#fbbf24', '#10b981', '#f59e0b'];
+            this.monthlyChartData = {
+              labels: [...statistics.monthlyLabels],
+              datasets: Object.keys(statistics.monthlyData).map((category, index) => ({
                 label: category,
-                data: statistics.monthlyData[category],
+                data: [...statistics.monthlyData[category]],
                 backgroundColor: colors[index % colors.length]
-              };
-            });
+              }))
+            };
           }
-
+    
           // Update Status Chart
           if (
             statistics.approvedDemandes !== null &&
             statistics.pendingDemandes !== null &&
             statistics.rejectedDemandes !== null
           ) {
-            this.statusChartData.datasets[0].data = [
-              statistics.approvedDemandes,
-              statistics.pendingDemandes,
-              statistics.rejectedDemandes
-            ];
+            this.statusChartData = {
+              labels: ["Approuvées", "En attente", "Rejetées"],
+              datasets: [
+                {
+                  data: [
+                    statistics.approvedDemandes,
+                    statistics.pendingDemandes,
+                    statistics.rejectedDemandes
+                  ],
+                  backgroundColor: ["#28a745", "#ffc107", "#dc3545"]
+                }
+              ]
+            };
           }
-
+    
           // Update Weekly Chart
           if (statistics.weeklyLabels && statistics.weeklyData) {
-            this.weeklyChartData.labels = statistics.weeklyLabels;
-            this.weeklyChartData.datasets = Object.keys(statistics.weeklyData).map((category, index) => {
-              const borderColors = ['#10b981', '#f59e0b', '#3b82f6', '#fbbf24'];
-              return {
+            const borderColors = ['#10b981', '#f59e0b', '#3b82f6', '#fbbf24'];
+            this.weeklyChartData = {
+              labels: [...statistics.weeklyLabels],
+              datasets: Object.keys(statistics.weeklyData).map((category, index) => ({
                 label: category,
-                data: statistics.weeklyData[category],
+                data: [...statistics.weeklyData[category]],
                 borderColor: borderColors[index % borderColors.length],
                 fill: false
-              };
-            });
+              }))
+            };
           }
         }
       }
     });
+    
   }
 }

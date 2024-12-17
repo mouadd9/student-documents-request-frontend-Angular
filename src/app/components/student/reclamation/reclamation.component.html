@@ -20,7 +20,8 @@
                   <label for="numApogee">Numéro apogée</label>
                   <input type="text" formControlName="numApogee" placeholder="apogee">
                   <div class="form-message" *ngIf="reclamationForm.get('numApogee')?.hasError('required') && (reclamationForm.get('numApogee')?.touched || reclamationForm.get('numApogee')?.dirty)">apogée is required.</div>
-                </div>
+                  <div class="form-message" *ngIf="reclamationForm.get('numApogee')?.hasError('pattern') && (reclamationForm.get('numApogee')?.touched || reclamationForm.get('numApogee')?.dirty)">Numéro apogée must only contain numbers.</div>
+              </div>
 
               <!-- CIN Input -->
               <div class="form-group-input" [ngClass]="{'error': state.state === STATE.error}">
@@ -48,8 +49,8 @@
                       alt="Admin Icon"
                       class="icon-danger" />
                   </div>
-                Invalid identifiers.
-            </div>
+                  {{state.errorMessage}}
+               </div>
 
               <button [ngClass]="{'loading': state.state === STATE.loading, 'loaded': state.state === STATE.loaded, 'disabeled-btn': (state.state === STATE.initial) && reclamationForm.invalid  , 'btn': (state.state === STATE.initial) || (state.state === STATE.error)}" type="submit" [disabled]=" state.state === STATE.loading || state.state === STATE.loaded">
                 <div *ngIf="(state.state === STATE.initial) || (state.state === STATE.error)">Envoyer la réclamation</div>
