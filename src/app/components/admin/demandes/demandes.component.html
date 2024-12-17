@@ -1,7 +1,7 @@
 <div class="container">
   <!-- Navigation Bar -->
   <section class="section">
-  <app-demandes-nav-bar (categoryChanged)="onCategoryChanged($event)"></app-demandes-nav-bar>
+  <app-demandes-nav-bar (searchChanged)="onSearchChanged($event)" (categoryChanged)="onCategoryChanged($event)"></app-demandes-nav-bar>
   <!-- Demand List -->
   <!-- we will pass the Observable we collected in this component to app-demandes-list -->
   <!-- [ the @input property in the child referenced here ] = "the property we want to pass from the parent" -->

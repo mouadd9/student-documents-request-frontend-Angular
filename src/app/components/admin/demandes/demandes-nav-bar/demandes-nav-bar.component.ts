@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { TypeDocument } from '../../../../models/enums/document-type';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-demandes-nav-bar',
@@ -13,6 +14,7 @@ import { TypeDocument } from '../../../../models/enums/document-type';
 export class DemandesNavBarComponent {
   
   @Output() categoryChanged = new EventEmitter<TypeDocument | null>();
+  @Output() searchChanged = new EventEmitter<string>();
 
   onCategoryChange(event: Event): void {
     const selectedValue = (event.target as HTMLSelectElement).value;
@@ -32,6 +34,12 @@ export class DemandesNavBarComponent {
     }
 
     this.categoryChanged.emit(selectedCategory);
+    }
+
+    onSearch(event: Event): void {
+      const value = (event.target as HTMLInputElement).value;
+      // console.log(value);
+      this.searchChanged.emit(value);
     }
   }
 
