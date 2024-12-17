@@ -5,7 +5,7 @@ import { STATE } from '../../../store/state';
 import { DemandeActions } from '../../../store/demandes-feature/demandes.actions';
 import { Store } from '@ngrx/store';
 import { TypeDocument } from '../../../models/enums/document-type';
-import { selectDataState, selectErrorMessage, selectNonPendingDemandes, selectNonPendingDemandesByStatus, selectNonPendingDemandesByType, selectNonPendingDemandesByTypeAndStatus, selectSortedNonPendingDemandes } from '../../../store/demandes-feature/demandes.selectors';
+import { selectDataState, selectErrorMessage, selectNonPendingDemandes, selectNonPendingDemandesBySearchTerm, selectNonPendingDemandesByStatus, selectNonPendingDemandesByStatusAndSearchTerm, selectNonPendingDemandesByType, selectNonPendingDemandesByTypeAndSearchTerm, selectNonPendingDemandesByTypeAndStatus, selectNonPendingDemandesByTypeStatusAndSearchTerm, selectSortedNonPendingDemandes } from '../../../store/demandes-feature/demandes.selectors';
 import { DemandeStatus } from '../../../models/enums/document-status';
 
 @Component({
@@ -18,6 +18,7 @@ export class HistoriqueComponent implements OnInit {
 
   public category!: TypeDocument | null;
   public status!: DemandeStatus | null;
+  public searchTerm!: string | null;
 
   public demandes$!: Observable<Demande[]>;
   public state$: Observable<STATE>;
@@ -40,15 +41,50 @@ export class HistoriqueComponent implements OnInit {
   }
 
   private initializeCombinedObservable(): void {
-     if (this.category && this.status) {
-      this.demandes$ = this.store.select(selectNonPendingDemandesByTypeAndStatus(this.category, this.status));
-     } else if (this.category) {
-      this.demandes$ = this.store.select(selectNonPendingDemandesByType(this.category));
-     } else if (this.status) {
-      this.demandes$ = this.store.select(selectNonPendingDemandesByStatus(this.status))
-     } else {
-      this.demandes$ = this.store.select(selectSortedNonPendingDemandes)
-     }
+
+   // Determine which selector to use based on active filters
+   if (this.category && this.status && this.searchTerm) {
+    // All three filters are active
+    this.demandes$ = this.store.select(
+      selectNonPendingDemandesByTypeStatusAndSearchTerm(this.category, this.status, this.searchTerm)
+    );
+  } else if (this.category && this.status) {
+    // Category and Status are active
+    this.demandes$ = this.store.select(
+      selectNonPendingDemandesByTypeAndStatus(this.category, this.status)
+    );
+  } else if (this.category && this.searchTerm) {
+    // Category and Search Term are active
+    this.demandes$ = this.store.select(
+      selectNonPendingDemandesByTypeAndSearchTerm(this.category, this.searchTerm)
+    );
+  } else if (this.status && this.searchTerm) {
+    // Status and Search Term are active
+    this.demandes$ = this.store.select(
+      selectNonPendingDemandesByStatusAndSearchTerm(this.status, this.searchTerm)
+    );
+  } else if (this.category) {
+    // Only Category is active
+    this.demandes$ = this.store.select(
+      selectNonPendingDemandesByType(this.category)
+    );
+  } else if (this.status) {
+    // Only Status is active
+    this.demandes$ = this.store.select(
+      selectNonPendingDemandesByStatus(this.status)
+    );
+  } else if (this.searchTerm) {
+    // Only Search Term is active
+    this.demandes$ = this.store.select(
+      selectNonPendingDemandesBySearchTerm(this.searchTerm)
+    );
+  } else {
+    // No filters are active, show all sorted non-pending demandes
+    this.demandes$ = this.store.select(selectSortedNonPendingDemandes);
+  }
+
+
+
     this.combined$ = combineLatest([this.demandes$, this.state$, this.errorMessage$]).pipe(
       map(([demandes, state, errorMessage]) => ({
         demandes,
@@ -69,27 +105,10 @@ export class HistoriqueComponent implements OnInit {
     this.status = status;
     this.initializeCombinedObservable();
   }
-  onSearchChanged(searchTerm: String):void{
-    // this.combined$=this.store.select(selectDemandeBySearchKeyState(searchTerm));
-    // const searchTerm = (event.target as HTMLInputElement).value;
-    this.combined$ = combineLatest([
-      this.store.select(selectSortedNonPendingDemandes), // Observable<Demande[]>
-      this.store.select(selectDataState), // Observable<STATE>
-      this.store.select(selectErrorMessage), // Observable<string>
-    ]).pipe(
-      map(([demandes, state, errorMessage]) => ({
-        demandes: demandes.filter(
-          (demande) =>
-            demande.numApogee?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            (demande.email && demande.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
-            demande.etudiant?.nom?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            demande.typeDocument.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            demande.status?.toLowerCase().includes(searchTerm.toLowerCase())
-        ),
-        state,
-        errorMessage,
-      }))
-    );
+  public onSearchChanged(searchTerm: string):void{
+    this.store.dispatch(DemandeActions.fetchDemandes());
+    this.searchTerm = searchTerm;
+    this.initializeCombinedObservable();
   }
 
 }

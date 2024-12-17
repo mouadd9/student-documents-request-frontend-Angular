@@ -125,6 +125,72 @@ export const selectNonPendingDemandesByStatus = (type: DemandeStatus) =>
     demandes.filter((demande) => demande.status === type)
   ); // used to select sorted non pending demandes by status 
 
+
+  export const selectNonPendingDemandesBySearchTerm = (searchTerm: string) =>
+    createSelector(selectSortedNonPendingDemandes, (demandes) =>
+      demandes.filter(
+        (demande) => 
+          (demande.email && demande.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.etudiant?.nom && demande.etudiant.nom.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.typeDocument && demande.typeDocument.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.status && demande.status.toLowerCase().includes(searchTerm.toLowerCase()))
+      )
+    ); // used to select non-pending demandes by SearchTerm
+
+  
+  // Selector for filtering non-pending demandes by Type, Status, and Search Term
+  export const selectNonPendingDemandesByTypeStatusAndSearchTerm = (
+    type: TypeDocument,
+    status: DemandeStatus,
+    searchTerm: string
+  ) =>
+    createSelector(selectSortedNonPendingDemandes, (demandes) =>
+      demandes.filter((demande) => {
+        const matchesType = demande.typeDocument === type;
+        const matchesStatus = demande.status === status;
+        const matchesSearchTerm =
+          (demande.email && demande.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.etudiant?.nom && demande.etudiant.nom.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.typeDocument && demande.typeDocument.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.status && demande.status.toLowerCase().includes(searchTerm.toLowerCase()));
+        return matchesType && matchesStatus && matchesSearchTerm;
+      })
+    );
+    
+  // Selector for filtering non-pending demandes by Type and Search Term
+  export const selectNonPendingDemandesByTypeAndSearchTerm = (
+    type: TypeDocument,
+    searchTerm: string
+  ) =>
+    createSelector(selectSortedNonPendingDemandes, (demandes) =>
+      demandes.filter((demande) => {
+        const matchesType = demande.typeDocument === type;
+        const matchesSearchTerm =
+          (demande.email && demande.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.etudiant?.nom && demande.etudiant.nom.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.typeDocument && demande.typeDocument.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.status && demande.status.toLowerCase().includes(searchTerm.toLowerCase()));
+        return matchesType && matchesSearchTerm;
+      })
+    );
+  
+  // Selector for filtering non-pending demandes by Status and Search Term
+  export const selectNonPendingDemandesByStatusAndSearchTerm = (
+    status: DemandeStatus,
+    searchTerm: string
+  ) =>
+    createSelector(selectSortedNonPendingDemandes, (demandes) =>
+      demandes.filter((demande) => {
+        const matchesStatus = demande.status === status;
+        const matchesSearchTerm =
+          (demande.email && demande.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.etudiant?.nom && demande.etudiant.nom.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.typeDocument && demande.typeDocument.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (demande.status && demande.status.toLowerCase().includes(searchTerm.toLowerCase()));
+        return matchesStatus && matchesSearchTerm;
+      })
+    );
+
 export const selectNonPendingDemandesByTypeAndStatus = ( type: TypeDocument, status: DemandeStatus ) =>
   createSelector(selectSortedNonPendingDemandes, (demandes) =>
     demandes.filter(
