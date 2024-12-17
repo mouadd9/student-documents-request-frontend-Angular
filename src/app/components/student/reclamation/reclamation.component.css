@@ -215,7 +215,7 @@
     background-color: #057431;
     border: none;
     border-radius: 0.375rem;
-    cursor: pointer;
+    cursor:default;
     display: inline-flex;
     align-items: center;
     justify-content: center;
