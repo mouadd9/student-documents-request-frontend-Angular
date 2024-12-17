@@ -43,7 +43,7 @@
           <ng-container *ngIf="state.demandes && state.demandes.length > 0; else noDemandes">
             <ng-container *ngFor="let demande of state.demandes">
               <tr>
-                <td>{{ demande.dateCreation | date:'dd/MM/yyyy hh:mm a' }}</td>
+                <td>{{ demande.dateCreation }}</td>
                 <td>{{ demande.etudiant?.nom }}</td>
                 <td>{{ demande.etudiant?.email }}</td>
                 <td>{{ demande.typeDocument }}</td>
