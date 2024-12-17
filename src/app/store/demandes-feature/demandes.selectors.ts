@@ -125,3 +125,17 @@ function parseDate(dateString: string): number {
 }
 
 
+//  export const selectDemandeBySearchKeyState =(searchTerm: String)=> createSelector(
+//     selectSortedNonPendingDemandes,
+
+//         (demandes) => {
+//           demandes.filter((demande)=>
+         
+//             demande.numApogee?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+//             (demande.email && demande.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+//             demande.etudiant?.nom?.toLowerCase().includes(searchTerm.toLowerCase())||
+//             demande.typeDocument.toLowerCase().includes(searchTerm.toLowerCase())||
+//             demande.status?.toLowerCase().includes(searchTerm.toLowerCase())
+        
+//       )}
+//       )

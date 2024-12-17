@@ -1,7 +1,7 @@
 <div class="container">
   <!-- Navigation Bar -->
   <section class="section">
-    <app-reclamations-nav-bar></app-reclamations-nav-bar>
+    <app-reclamations-nav-bar (searchChanged)="onSearchChanged($event)"></app-reclamations-nav-bar>
   </section>
   <!-- Demand List -->
   <app-reclamations-list

@@ -69,5 +69,27 @@ export class HistoriqueComponent implements OnInit {
     this.status = status;
     this.initializeCombinedObservable();
   }
+  onSearchChanged(searchTerm: String):void{
+    // this.combined$=this.store.select(selectDemandeBySearchKeyState(searchTerm));
+    // const searchTerm = (event.target as HTMLInputElement).value;
+    this.combined$ = combineLatest([
+      this.store.select(selectSortedNonPendingDemandes), // Observable<Demande[]>
+      this.store.select(selectDataState), // Observable<STATE>
+      this.store.select(selectErrorMessage), // Observable<string>
+    ]).pipe(
+      map(([demandes, state, errorMessage]) => ({
+        demandes: demandes.filter(
+          (demande) =>
+            demande.numApogee?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (demande.email && demande.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            demande.etudiant?.nom?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            demande.typeDocument.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            demande.status?.toLowerCase().includes(searchTerm.toLowerCase())
+        ),
+        state,
+        errorMessage,
+      }))
+    );
+  }
 
 }

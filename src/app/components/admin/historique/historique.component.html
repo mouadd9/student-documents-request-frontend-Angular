@@ -1,6 +1,6 @@
 <div class="container">
     <section class="section">
-      <app-historique-nav-bar (categoryChanged)="this.onChangedCategory($event)" (statusChanged)="this.onChangedStatus($event)"></app-historique-nav-bar>
+      <app-historique-nav-bar (searchedChanged)="onSearchChanged($event)" (categoryChanged)="this.onChangedCategory($event)" (statusChanged)="this.onChangedStatus($event)"></app-historique-nav-bar>
       <app-historique-list [demandeState$]="combined$"></app-historique-list>
     </section>
 </div>
