@@ -11,7 +11,6 @@ import { DemandeStatus } from '../../../../models/enums/document-status';
 export class HistoriqueNavBarComponent {
   @Output() categoryChanged = new EventEmitter<TypeDocument | null>();
   @Output() statusChanged = new EventEmitter<DemandeStatus | null>();
-  @Output() searchChanged=  new EventEmitter<string>();
   @Output() searchedChanged = new EventEmitter<string>();
 
   onCategoryChange(event: Event){
@@ -55,7 +54,6 @@ export class HistoriqueNavBarComponent {
   }
   onSearch(event: Event):void{
     const value = (event.target as HTMLInputElement).value;
-        // console.log(value);
     this.searchedChanged.emit(value);
   }
 
