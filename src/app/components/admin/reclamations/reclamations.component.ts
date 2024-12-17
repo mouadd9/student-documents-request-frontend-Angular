@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { selectPendingReclamationsState, selectReclamationsBySearchKeyState, selectReclamationState } from '../../../store/reclamations-feature/reclamations.selectors';
 import { reclamationState } from '../../../store/reclamations-feature/reclamations.state';
 import { reclamationActions } from '../../../store/reclamations-feature/reclamations.actions';
@@ -15,10 +15,7 @@ import { reclamationActions } from '../../../store/reclamations-feature/reclamat
 export class ReclamationsComponent {
 
   reclamationsState$!: Observable<reclamationState>; // this observable is passed to a child element
-  
- 
-  // private searchTermSubject = new BehaviorSubject<string>('');
-  // searchTerm$ = this.searchTermSubject.asObservable();
+
 
   constructor(private store: Store) {}
 
