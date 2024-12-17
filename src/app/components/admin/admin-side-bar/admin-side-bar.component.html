@@ -1,16 +1,21 @@
 <div class="sidebar">
-  <div class="sidebar-header">
-    <h2>Tableau de bord</h2>
-  </div>
+
   <div class="sidebar-content">
     <ul class="sidebar-menu">
+      <li style="margin-left:12px; margin-top:45px; margin-bottom:5px; font-weight:600; font-size:15px;">
+DASHBOARD      </li>
         <li>
             <button class="sidebar-menu-button" routerLink="/admin/dashboard" routerLinkActive="active">
               <img src="../assets/icons/bar-chart.svg" alt="Statistiques Icon" class="icon-svg">
-              <span>Dashboard</span>
+              <span>Statistiques</span>
             </button>
           </li>
+
+          <li style="margin-left:12px; margin-top:25px; margin-bottom:5px; font-weight:600; font-size:15px;">
+            ADMINISTRATION
+          </li>
       <li>
+        
         <button class="sidebar-menu-button" routerLink="/admin/demandes" routerLinkActive="active">
           <img src="../assets/icons/file-text.svg" alt="Demandes Icon" class="icon-svg">
           <span>Demandes</span>
@@ -33,7 +38,7 @@
   <div class="sidebar-footer">
     <button class="btn destructive" (click)="onLogout()">
       <img src="../assets/icons/logout_white.svg" alt="Déconnexion Icon" class="icon-svg">
-      Déconnexion
+      Se Déconnecter
     </button>
   </div>
 </div>

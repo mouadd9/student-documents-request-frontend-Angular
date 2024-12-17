@@ -9,6 +9,8 @@
   height: 100vh; 
 }
 
+
+
 .sidebar-header {
   display: flex;
   align-items: center;
@@ -32,14 +34,14 @@
 }
 
 .sidebar-menu li {
-  margin: 0.5rem 0rem;
+  margin: 0rem 0rem;
 }
 
 .sidebar-menu-button {
   width: 100%;
   background: none;
   border: none;
-  padding: 1rem 1rem;
+  padding: 0.82rem 1rem;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -50,7 +52,8 @@
 
 .sidebar-menu-button:hover,
 .sidebar-menu-button.active {
-  background-color: #f0f0f0;
+  background-color: #fffde2c3;
+  
 }
 
 .icon-svg {

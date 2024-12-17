@@ -21,6 +21,7 @@
                     <label for="apogeNumber">Numéro apogée</label>
                     <input type="text" formControlName="numApogee" placeholder="Numéro apogée">
                     <div class="form-message" *ngIf="demandeForm.get('numApogee')?.hasError('required') && (demandeForm.get('numApogee')?.touched || demandeForm.get('numApogee')?.dirty)">Numéro apogée is required.</div>
+                    <div class="form-message" *ngIf="demandeForm.get('numApogee')?.hasError('pattern') && (demandeForm.get('numApogee')?.touched || demandeForm.get('numApogee')?.dirty)"> Numéro apogée must only contain numbers.</div>
                 </div>
 
                 <!-- CIN Input -->
@@ -47,8 +48,7 @@
                           alt="Admin Icon"
                           class="icon-danger" />
                       </div>
-                    Identifiants invalides.
-                    {{state.errorMessage|json}}
+                    {{state.errorMessage}}
                 </div>
 
                 <!-- Submit Button -->

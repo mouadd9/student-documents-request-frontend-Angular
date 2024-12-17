@@ -4,6 +4,7 @@ import { catchError, delay, map, mergeMap, Observable, of } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { DemandeActions } from './demandes.actions';
 import { DemandeService } from '../../services/demande.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 // - the effects encounters a specific action
 // - the effects does an async operation using a method in our service
@@ -67,8 +68,9 @@ export class DemandesEffects {
             map((demande) =>
               DemandeActions.saveDemandeSuccess({ payload: demande })
             ),
-            catchError((err) =>
-              of(DemandeActions.saveDemandeError({ payload: err.message }))
+            catchError((err : HttpErrorResponse) => {
+              return of(DemandeActions.saveDemandeError({ payload: err.error.message }))
+            }
             )
           )
         )
@@ -100,7 +102,7 @@ export class DemandesEffects {
               })
             ),
             catchError((err) =>
-              of(DemandeActions.validateDemandeError({ payload: err.message }))
+              of(DemandeActions.validateDemandeError({ payload: err.error.message }))
             )
           )
         )

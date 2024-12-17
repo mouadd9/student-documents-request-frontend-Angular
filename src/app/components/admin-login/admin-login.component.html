@@ -27,7 +27,7 @@
                 alt="Admin Icon"
                 class="icon-danger" />
           </div>
-          Identifiants invalides.
+          {{state.errorMessage}}        
         </div>
 
         <button  [ngClass]="{'loading': state.state === STATE.loading, 'loaded': state.state === STATE.loaded, 'disabeled-btn': (state.state === STATE.initial) && authForm.invalid  , 'btn': (state.state === STATE.initial) || (state.state === STATE.error)}" type="submit" [disabled]=" state.state === STATE.loading || state.state === STATE.loaded"

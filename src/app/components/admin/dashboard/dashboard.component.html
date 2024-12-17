@@ -1,6 +1,6 @@
 <div class="container">
     <section class="section">
-      <h1>Statistiques</h1>
+      <h1>Statistiques Globales</h1>
   <ng-container *ngIf="statisticsState$ | async as statState" >
       <div class="stats-cards">
         <div class="card" >
@@ -9,7 +9,9 @@
               <img src="/assets/icons/sand_timer.svg" alt="Demandes Approuvées Icon" class="icon-svg-bg" />
               <h3>Demandes en Attente</h3>
             </div>
-            <p class="stat-value">{{statState.statistics.pendingDemandes}}</p>
+            <p class="stat-value" *ngIf="statState.state !== STATE.loading">{{statState.statistics.pendingDemandes}}</p>
+            <div *ngIf="statState.state === STATE.loading" class="spinner" ></div>
+
           </div>
         </div>
 
@@ -19,7 +21,8 @@
               <img src="/assets/icons/sand_timer.svg" alt="Demandes Approuvées Icon" class="icon-svg-bg" />
               <h3>Réclamations en Attente</h3>
             </div>
-            <p class="stat-value">{{statState.statistics.pendingReclamations}}</p>
+            <p class="stat-value" *ngIf="statState.state !== STATE.loading">{{statState.statistics.pendingReclamations}}</p>
+            <div *ngIf="statState.state === STATE.loading" class="spinner" ></div>
           </div>
         </div>
   
@@ -29,7 +32,9 @@
               <img src="/assets/icons/avg.svg" alt="Temps Moyen de Traitement Icon" class="icon-svg-bg" />
               <h3>Temps Moyen de Traitement de Réclamation</h3>
             </div>
-            <p class="stat-value">{{statState.statistics.averageReclamationsProcessingTimeDays}} jours</p>
+            <p class="stat-value" *ngIf="statState.state !== STATE.loading">{{statState.statistics.averageReclamationsProcessingTimeDays}} jours</p>
+            <div *ngIf="statState.state === STATE.loading" class="spinner" ></div>
+
           </div>
         </div>
         <div class="card">
@@ -38,7 +43,9 @@
               <img src="/assets/icons/avg.svg" alt="Temps Moyen de Traitement Icon" class="icon-svg-bg" />
               <h3>Temps Moyen de Traitement de Demandes</h3>
             </div>
-            <p class="stat-value">{{statState.statistics.averageDemandesProcessingTimeDays}} jours</p>
+            <p class="stat-value" *ngIf="statState.state !== STATE.loading">{{statState.statistics.averageDemandesProcessingTimeDays}} jours</p>
+            <div *ngIf="statState.state === STATE.loading" class="spinner" ></div>
+
           </div>
         </div>
   </div>
@@ -46,7 +53,7 @@
         <div class="charts-inline">
           <!-- Monthly Overview (Bar Chart) -->
           <div class="chart-card">
-            <h3>Aperçu Mensuel</h3>
+            <h3>Statistiques Mensuelles</h3>
             <div style="height: 300px;">
               <canvas baseChart
                       [data]="monthlyChartData"
@@ -70,7 +77,7 @@
   
           <!-- Tendances Hebdomadaires (Line Chart) -->
           <div class="chart-card">
-            <h3>Tendances Hebdomadaires</h3>
+            <h3>Statistiques Hebdomadaires</h3>
             <div style="height: 300px;">
               <canvas baseChart
                       [data]="weeklyChartData"

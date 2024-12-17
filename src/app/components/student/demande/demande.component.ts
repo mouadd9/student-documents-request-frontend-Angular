@@ -46,7 +46,7 @@ export class DemandeComponent implements OnInit{
     this.demandeForm = this.formBuilder.group({ 
           email: ['', [Validators.required, Validators.email]],
           cin: ['', Validators.required],
-          numApogee: ['', Validators.required],
+          numApogee: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
           typeDocument: ['', Validators.required]
     })
 

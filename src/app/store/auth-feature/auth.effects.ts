@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { authActions } from './auth.actions';
 import { jwtDecode } from "jwt-decode";
 import { Router } from '@angular/router';
+import { HttpStatusCode } from '@angular/common/http';
 
 
 
@@ -41,8 +42,13 @@ export class AuthEffects {
                   });
                 }
               ),
-              catchError((err) =>
-                of(authActions.authenticateError({ payload: err.message }))
+              catchError((err) => {
+                if (err.error.status === HttpStatusCode.Forbidden) {
+                  return of(authActions.authenticateError({ payload: "Identifiants invalides." }))
+                } else {
+                  return of(authActions.authenticateError({ payload: err.message }));
+                }
+              }
               )
             );
           })

@@ -35,7 +35,7 @@ export class reclamationsEffects {
                     (action) => {
                           return this.reclamationService.saveReclamationAsync(action.payload).pipe(
                             map((reclamation) => reclamationActions.saveReclamationSuccess({payload: reclamation})),
-                            catchError((err) => of(reclamationActions.saveReclamationError({payload: err.message})))
+                            catchError((err) => of(reclamationActions.saveReclamationError({ payload: err.error.message })))
                           )
                     }
 
