@@ -19,4 +19,9 @@ export class ReclamationsNavBarComponent {
   //   const selectElement = event.target as HTMLSelectElement;
   //   this.categoryChanged.emit(selectElement.value); // Emit the selected category
   // }
+  onSearch(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    // console.log(value);
+    this.searchChanged.emit(value);
+  }
 }

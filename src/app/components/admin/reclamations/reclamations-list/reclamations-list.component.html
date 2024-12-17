@@ -39,12 +39,13 @@
           </tr>
         </thead>
         <tbody>
+          
         <ng-container *ngIf="state.reclamations && state.reclamations.length > 0; else noReclamations">
           <ng-container *ngFor="let reclamation of state.reclamations">
             <!-- Main row -->
             <tr>
-              
-              <td>{{reclamation.dateCreation | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+              <!-- pas la peine de mettre ce format date:'dd/MM/yyyy HH:mm:ss', c'est deja fait dans le backend -->
+              <td>{{reclamation.dateCreation }}</td>
               <td>{{reclamation.etudiant?.nom}}</td>
               <td>{{reclamation.etudiant?.email}}</td>
               <td>{{reclamation.sujet}}</td>

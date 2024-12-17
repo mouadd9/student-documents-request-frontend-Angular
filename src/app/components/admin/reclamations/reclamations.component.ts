@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { selectPendingReclamationsState, selectReclamationState } from '../../../store/reclamations-feature/reclamations.selectors';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { selectPendingReclamationsState, selectReclamationsBySearchKeyState, selectReclamationState } from '../../../store/reclamations-feature/reclamations.selectors';
 import { reclamationState } from '../../../store/reclamations-feature/reclamations.state';
 import { reclamationActions } from '../../../store/reclamations-feature/reclamations.actions';
 
@@ -15,6 +15,10 @@ import { reclamationActions } from '../../../store/reclamations-feature/reclamat
 export class ReclamationsComponent {
 
   reclamationsState$!: Observable<reclamationState>; // this observable is passed to a child element
+  
+ 
+  // private searchTermSubject = new BehaviorSubject<string>('');
+  // searchTerm$ = this.searchTermSubject.asObservable();
 
   constructor(private store: Store) {}
 
@@ -25,4 +29,10 @@ export class ReclamationsComponent {
     // here we dispatch an action that will lead to a change in state, and will get us new state
     this.store.dispatch(reclamationActions.fetchReclamation());
   }
+
+  onSearchChanged(searchTerm: string): void {
+    this.reclamationsState$=this.store.select(selectReclamationsBySearchKeyState(searchTerm));
+    // this.searchTermSubject.next(searchTerm);
+  }
+
 }
