@@ -3,7 +3,7 @@
 
 import { Injectable } from "@angular/core"
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, map, mergeMap, Observable, of } from "rxjs"
+import { catchError, delay, map, mergeMap, Observable, of } from "rxjs"
 import { Action } from "@ngrx/store";
 import { reclamationActions } from "./reclamations.actions";
 import { ReclamationService } from "../../services/reclamation.service";
@@ -46,6 +46,8 @@ export class reclamationsEffects {
         this.saveReclamationSuccessEffect$ = createEffect(() => 
             this.actions$.pipe(
                 ofType(reclamationActions.saveReclamationSuccess),
+                        delay(3000),
+                
                 mergeMap(
                     () => {
                         return of(reclamationActions.resetReclamation()); // for each action we will return an observable
