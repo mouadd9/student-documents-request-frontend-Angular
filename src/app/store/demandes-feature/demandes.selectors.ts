@@ -52,7 +52,29 @@ export const selectDemandesByType = (type: TypeDocument) =>
     demandes.filter((demande) => demande.typeDocument === type)
   ); // used to select pending demandes by type
 
+  // i added a selector that selects demands by search Term
+export const selectDemandesBySearchTerm = (searchTerm: string) =>
+  createSelector(selectPendingDemandes, (demandes) =>
+    demandes.filter(
+      (demande) => 
+        (demande.email && demande.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        demande.etudiant?.nom?.toLowerCase().includes(searchTerm.toLowerCase())||
+        demande.typeDocument.toLowerCase().includes(searchTerm.toLowerCase())||
+        demande.status?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
 
+  // i added a combined selector that selects demandes by Type and search term
+export const selectDemandesByTypeAndSearchTerm = ( type: TypeDocument, searchTerm: string ) =>
+  createSelector(selectPendingDemandes, (demandes) =>
+    demandes.filter(
+      (demande) => 
+        ((demande.email && demande.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        demande.etudiant?.nom?.toLowerCase().includes(searchTerm.toLowerCase())||
+        demande.typeDocument.toLowerCase().includes(searchTerm.toLowerCase())||
+        demande.status?.toLowerCase().includes(searchTerm.toLowerCase()) ) && demande.typeDocument === type
+    )
+  );
 
 // ------------------- Selectors used in the Historique Component (we only show pending demands) :
 export const selectNonPendingDemandes = createSelector(
