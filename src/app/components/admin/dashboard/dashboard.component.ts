@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { statisticsState } from '../../../store/statistics-feature/statistics.state';
-import { Store } from '@ngrx/store';
-import { selectStatisticsState } from '../../../store/statistics-feature/statistics.selectors';
-import { statisticsActions } from '../../../store/statistics-feature/statistics.actions';
-import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
-import { STATE } from '../../../store/state';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {statisticsState} from '../../../store/statistics-feature/statistics.state';
+import {Store} from '@ngrx/store';
+import {selectStatisticsState} from '../../../store/statistics-feature/statistics.selectors';
+import {statisticsActions} from '../../../store/statistics-feature/statistics.actions';
+import {ChartConfiguration, ChartOptions, ChartType} from 'chart.js';
+import {STATE} from '../../../store/state';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   public STATE = STATE;
   public statisticsState$: Observable<statisticsState>;
 
-  // these are the properties that will be given to the charts 
+  // these are the properties that will be given to the charts
 
   public monthlyChartType: ChartType = 'bar';
   public statusChartType: ChartType = 'pie';
@@ -24,19 +24,19 @@ export class DashboardComponent implements OnInit {
   public monthlyChartData: ChartConfiguration<'bar'>['data'] = {
     labels: [],
     datasets: [
-      { label: "Attestations", data: [], backgroundColor: "#3b82f6" },
-      { label: "Relevés de notes", data: [], backgroundColor: "#fbbf24" }
+      {label: "Attestations", data: [], backgroundColor: "#3b82f6"},
+      {label: "Relevés de notes", data: [], backgroundColor: "#fbbf24"}
     ]
   };
   public monthlyChartOptions: ChartOptions<'bar'> = {
     responsive: true,
     maintainAspectRatio: false,
-    scales: { y: { beginAtZero: true } }
+    scales: {y: {beginAtZero: true}}
   };
   public statusChartData: ChartConfiguration<'pie'>['data'] = {
     labels: ["Approuvées", "En attente", "Rejetées"],
     datasets: [
-      { data: [0, 0, 0], backgroundColor: ["#28a745", "#ffc107", "#dc3545"] }
+      {data: [0, 0, 0], backgroundColor: ["#28a745", "#ffc107", "#dc3545"]}
     ]
   };
   public statusChartOptions: ChartOptions<'pie'> = {
@@ -46,19 +46,17 @@ export class DashboardComponent implements OnInit {
   public weeklyChartData: ChartConfiguration<'line'>['data'] = {
     labels: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
     datasets: [
-      { label: "Demandes", data: [0,0,0,0,0,0,0], borderColor: "#10b981", fill: false },
-      { label: "Réclamations", data: [0,0,0,0,0,0,0], borderColor: "#f59e0b", fill: false }
+      {label: "Demandes", data: [0, 0, 0, 0, 0, 0, 0], borderColor: "#10b981", fill: false},
+      {label: "Réclamations", data: [0, 0, 0, 0, 0, 0, 0], borderColor: "#f59e0b", fill: false}
     ]
   };
   public weeklyChartOptions: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,
-    scales: { y: { beginAtZero: true } }
+    scales: {y: {beginAtZero: true}}
   };
 
 
-
-  
   constructor(private store: Store) {
     this.statisticsState$ = this.store.select(selectStatisticsState);
   }
@@ -68,8 +66,8 @@ export class DashboardComponent implements OnInit {
     this.statisticsState$.subscribe({
       next: (stats) => {
         if (stats && stats.statistics) {
-          const { statistics } = stats;
-    
+          const {statistics} = stats;
+
           // Update Monthly Chart Data by reassigning new objects:
           if (statistics.monthlyLabels && statistics.monthlyData) {
             const colors = ['#3b82f6', '#fbbf24', '#10b981', '#f59e0b'];
@@ -82,7 +80,7 @@ export class DashboardComponent implements OnInit {
               }))
             };
           }
-    
+
           // Update Status Chart
           if (
             statistics.approvedDemandes !== null &&
@@ -103,7 +101,7 @@ export class DashboardComponent implements OnInit {
               ]
             };
           }
-    
+
           // Update Weekly Chart
           if (statistics.weeklyLabels && statistics.weeklyData) {
             const borderColors = ['#10b981', '#f59e0b', '#3b82f6', '#fbbf24'];
@@ -120,6 +118,5 @@ export class DashboardComponent implements OnInit {
         }
       }
     });
-    
   }
 }
