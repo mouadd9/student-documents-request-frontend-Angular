@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { STATE } from '../../../../store/state';
-import { Demande } from '../../../../models/demande';
-import { Store } from '@ngrx/store';
-import { DemandeActions } from '../../../../store/demandes-feature/demandes.actions';
+import {Component, Input} from '@angular/core';
+import {Observable} from 'rxjs';
+import {STATE} from '../../../../store/state';
+import {Demande} from '../../../../models/demande';
+import {Store} from '@ngrx/store';
+import {DemandeActions} from '../../../../store/demandes-feature/demandes.actions';
 import Swal from 'sweetalert2';  // for the popUps
 
 @Component({
@@ -16,24 +16,25 @@ import Swal from 'sweetalert2';  // for the popUps
 
 // this component will Subscribe to the combined$ Observable in its template
 export class DemandesListComponent {
-  
+
   // we use @Input to declare a property that will receive data from the parent component.
-  // in our case demandeState$ (located in demandes-list) will receive an Observable<demandeState>; from (demandeComponent) 
+  // in our case demandeState$ (located in demandes-list) will receive an Observable<demandeState>; from (demandeComponent)
   // this variable will be subscribed to in this template using <ng-container></ng-container>
   @Input() demandeState$!: Observable<{
     demandes: Demande[];
     state: STATE;
     errorMessage: string;
-  }> ;
+  }>;
 
   public STATE = STATE;
 
-  constructor(private store:Store){}
+  constructor(private store: Store) {
+  }
 
-  // before we used to have two buttons 
+  // before we used to have two buttons
   // each button emits a click event that triggers a function that dispatched an action
 
-  // now we use sweetalert2 , when we click action button 
+  // now we use sweetalert2 , when we click action button
   // a modal is shown with three buttons to either approve, deny or download
 
   onAction(demande: Demande): void {
@@ -46,7 +47,7 @@ export class DemandesListComponent {
         <button id="rejectButton" class="swal2-deny swal2-styled btn reject">Refuser</button>
         <button id="downloadButton" class="swal2-cancel swal2-styled">Télécharger</button>
       `,
-      
+
       showConfirmButton: false, // Pas de bouton par défaut
       didOpen: () => { // when the modal is shown we create three event listeners
         document.getElementById('approveButton')?.addEventListener('click', () => {
@@ -65,7 +66,7 @@ export class DemandesListComponent {
     });
   }
 
-  onApprove(demande: Demande): void { 
+  onApprove(demande: Demande): void {
     Swal.fire({
       title: 'Confirmer',
       text: 'Voulez-vous approuver cette demande?',
@@ -73,10 +74,10 @@ export class DemandesListComponent {
       showCancelButton: true,
       confirmButtonText: 'Oui, approuver',
       cancelButtonText: 'Annuler'
-    }).then((result) => { // if we select approve 
-       if (result.isConfirmed) {
-         this.store.dispatch(DemandeActions.validateDemande({payload:demande}))
-       }
+    }).then((result) => { // if we select approve
+      if (result.isConfirmed) {
+        this.store.dispatch(DemandeActions.validateDemande({payload: demande}))
+      }
     });
   }
 
@@ -89,9 +90,9 @@ export class DemandesListComponent {
       confirmButtonText: 'Oui, rejeter',
       cancelButtonText: 'Annuler'
     }).then((result) => {
-       if (result.isConfirmed) {
-         this.store.dispatch(DemandeActions.refuseDemande({payload:demande}))
-       }
+      if (result.isConfirmed) {
+        this.store.dispatch(DemandeActions.refuseDemande({payload: demande}))
+      }
     });
   }
 
@@ -105,19 +106,20 @@ export class DemandesListComponent {
       cancelButtonText: 'Annuler'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.store.dispatch(DemandeActions.downloadDemand({payload:demande}));
+        this.store.dispatch(DemandeActions.downloadDemand({payload: demande}));
       }
     })
   }
 
-  onRetry(){
+  onRetry() {
     this.store.dispatch(DemandeActions.fetchDemandes());
   }
-  
+
 }
 
+
 /*
-Un rappel : 
+Un rappel :
 the @Input decorator is used to pass data from a parent component to a child component.
 1 - We use @Input to declare a property that will receive data from the parent component.
 2 - Bind to the child component's @Input property using property binding ([]) in the parent component's template.

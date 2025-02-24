@@ -36,6 +36,7 @@
             <th>Email</th>
             <th>Document</th>
             <th>Statut</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -52,6 +53,14 @@
                     <div class="status-badge status-approved" *ngSwitchCase="this.DemandeStatus.APPROVEE">Approuvée</div>
                     <div class="status-badge status-rejected" *ngSwitchCase="this.DemandeStatus.REFUSEE">Refusée</div>
                   </span>
+                </td>
+                <td>
+                  <button class="btn download" (click)="downloadDemande(demande)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zm-8 4a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg>
+                    Télécharger
+                  </button>
                 </td>
               </tr>
             </ng-container>
